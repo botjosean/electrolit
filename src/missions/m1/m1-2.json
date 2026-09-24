@@ -1,0 +1,432 @@
+{
+  "id": "m1-2",
+  "module": "m1",
+  "title": "m1.m2.title",
+  "desc": "m1.m2.desc",
+  "env": "garage",
+  "parSeconds": 200,
+  "characters": {
+    "foreman": {
+      "pos": [
+        -1.45,
+        0,
+        -0.75
+      ]
+    },
+    "instructor": {
+      "pos": [
+        1.45,
+        0,
+        -0.7
+      ]
+    }
+  },
+  "camera": {
+    "pos": [
+      0,
+      1.72,
+      1.2
+    ],
+    "target": [
+      0,
+      0.92,
+      0.0
+    ],
+    "w": 1.95
+  },
+  "props": [
+    {
+      "id": "bench",
+      "kind": "workbench",
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "params": {
+        "w": 2.0,
+        "d": 0.8
+      }
+    },
+    {
+      "id": "peg",
+      "kind": "pegboard",
+      "pos": [
+        0,
+        0.9,
+        -0.43
+      ],
+      "params": {
+        "w": 2.0,
+        "h": 0.9
+      }
+    },
+    {
+      "id": "roll14",
+      "kind": "nm-roll",
+      "pos": [
+        -0.55,
+        0.9,
+        -0.18
+      ],
+      "label": "props.roll14",
+      "params": {
+        "color": "#f4f4f0",
+        "text": "14-2"
+      }
+    },
+    {
+      "id": "roll12",
+      "kind": "nm-roll",
+      "pos": [
+        0.0,
+        0.9,
+        -0.18
+      ],
+      "label": "props.roll12",
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2"
+      }
+    },
+    {
+      "id": "roll10",
+      "kind": "nm-roll",
+      "pos": [
+        0.55,
+        0.9,
+        -0.18
+      ],
+      "label": "props.roll10",
+      "params": {
+        "color": "#f07a10",
+        "text": "10-2"
+      }
+    },
+    {
+      "id": "pad12",
+      "kind": "zone-pad",
+      "pos": [
+        -0.55,
+        0.9,
+        0.23
+      ],
+      "params": {
+        "flat": true,
+        "w": 0.44,
+        "d": 0.3,
+        "color": "#5b6573",
+        "textKey": "props.sign.awg12",
+        "dropY": 0.012
+      }
+    },
+    {
+      "id": "pad10",
+      "kind": "zone-pad",
+      "pos": [
+        0.0,
+        0.9,
+        0.23
+      ],
+      "params": {
+        "flat": true,
+        "w": 0.44,
+        "d": 0.3,
+        "color": "#5b6573",
+        "textKey": "props.sign.awg10",
+        "dropY": 0.012
+      }
+    },
+    {
+      "id": "pad14",
+      "kind": "zone-pad",
+      "pos": [
+        0.55,
+        0.9,
+        0.23
+      ],
+      "params": {
+        "flat": true,
+        "w": 0.44,
+        "d": 0.3,
+        "color": "#5b6573",
+        "textKey": "props.sign.awg14",
+        "dropY": 0.012
+      }
+    },
+    {
+      "id": "nmcable",
+      "kind": "nm-cable",
+      "pos": [
+        -0.1,
+        0.9,
+        0.05
+      ],
+      "scale": 1.5,
+      "hidden": true,
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2 W/G    TYPE NM-B    600V"
+      }
+    },
+    {
+      "id": "spoolBlack",
+      "kind": "thhn-spool",
+      "pos": [
+        -0.5,
+        0.9,
+        -0.1
+      ],
+      "label": "props.spoolBlack",
+      "hidden": true,
+      "params": {
+        "color": "#151515",
+        "text": "THHN 12"
+      }
+    },
+    {
+      "id": "spoolWhite",
+      "kind": "thhn-spool",
+      "pos": [
+        0.0,
+        0.9,
+        -0.1
+      ],
+      "label": "props.spoolWhite",
+      "hidden": true,
+      "params": {
+        "color": "#eeeeee",
+        "text": "THHN 12"
+      }
+    },
+    {
+      "id": "spoolGreen",
+      "kind": "thhn-spool",
+      "pos": [
+        0.5,
+        0.9,
+        -0.1
+      ],
+      "label": "props.spoolGreen",
+      "hidden": true,
+      "params": {
+        "color": "#1a8f2a",
+        "text": "THHN 12"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m1.m2.s1"
+    },
+    {
+      "id": "s2",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m1.m2.s2",
+      "options": [
+        {
+          "text": "m1.m2.s2a",
+          "feedback": "m1.m2.s2aFb"
+        },
+        {
+          "text": "m1.m2.s2b",
+          "feedback": "m1.m2.s2bFb"
+        },
+        {
+          "text": "m1.m2.s2c",
+          "correct": true,
+          "feedback": "m1.m2.s2cFb"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m1.m2.s3"
+    },
+    {
+      "id": "s4",
+      "type": "drag-connect",
+      "speaker": "instructor",
+      "style": "move",
+      "text": "m1.m2.s4",
+      "pairs": {
+        "roll14": "pad14",
+        "roll12": "pad12",
+        "roll10": "pad10"
+      },
+      "wrong": {
+        "roll14>pad12": "m1.m2.w1412",
+        "roll14>pad10": "m1.m2.w1410",
+        "roll12>pad14": "m1.m2.w1214",
+        "roll12>pad10": "m1.m2.w1210",
+        "roll10>pad14": "m1.m2.w1014",
+        "roll10>pad12": "m1.m2.w1012"
+      },
+      "success": "m1.m2.s4ok"
+    },
+    {
+      "id": "s5",
+      "type": "click",
+      "speaker": "foreman",
+      "order": "grab_12_2",
+      "text": "m1.m2.s5",
+      "targets": [
+        "roll12"
+      ],
+      "wrong": {
+        "roll14": "m1.m2.w5_14",
+        "roll10": "m1.m2.w5_10"
+      },
+      "success": "m1.m2.s5ok"
+    },
+    {
+      "id": "s6",
+      "type": "inspect",
+      "speaker": "instructor",
+      "mode": "learn",
+      "target": "nmcable",
+      "show": [
+        "nmcable"
+      ],
+      "hide": [
+        "roll14",
+        "roll12",
+        "roll10",
+        "pad14",
+        "pad12",
+        "pad10"
+      ],
+      "camera": {
+        "pos": [
+          0.05,
+          1.45,
+          0.72
+        ],
+        "target": [
+          0.05,
+          0.9,
+          0.02
+        ],
+        "w": 1.2
+      },
+      "text": "m1.m2.s6",
+      "points": [
+        {
+          "id": "size",
+          "pos": [
+            -0.26,
+            0.05,
+            0.0
+          ],
+          "label": "m1.m2.pSize",
+          "info": "m1.m2.pSizeInfo"
+        },
+        {
+          "id": "type",
+          "pos": [
+            0.0,
+            0.05,
+            0.0
+          ],
+          "label": "m1.m2.pType",
+          "info": "m1.m2.pTypeInfo"
+        },
+        {
+          "id": "volt",
+          "pos": [
+            0.25,
+            0.05,
+            0.0
+          ],
+          "label": "m1.m2.pVolt",
+          "info": "m1.m2.pVoltInfo"
+        },
+        {
+          "id": "wires",
+          "pos": [
+            0.54,
+            0.05,
+            0.0
+          ],
+          "label": "m1.m2.pWires",
+          "info": "m1.m2.pWiresInfo"
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "show": [
+        "spoolBlack",
+        "spoolWhite",
+        "spoolGreen"
+      ],
+      "hide": [
+        "nmcable"
+      ],
+      "camera": {
+        "pos": [
+          0,
+          1.72,
+          1.2
+        ],
+        "target": [
+          0,
+          0.92,
+          0.0
+        ],
+        "w": 1.95
+      },
+      "text": "m1.m2.s7"
+    },
+    {
+      "id": "s8",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m1.m2.s8",
+      "options": [
+        {
+          "text": "m1.m2.s8a",
+          "correct": true,
+          "feedback": "m1.m2.s8aFb"
+        },
+        {
+          "text": "m1.m2.s8b",
+          "feedback": "m1.m2.s8bFb"
+        },
+        {
+          "text": "m1.m2.s8c",
+          "feedback": "m1.m2.s8cFb"
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m1.m2.s9",
+      "options": [
+        {
+          "text": "m1.m2.s9a",
+          "feedback": "m1.m2.s9aFb"
+        },
+        {
+          "text": "m1.m2.s9b",
+          "correct": true,
+          "feedback": "m1.m2.s9bFb"
+        },
+        {
+          "text": "m1.m2.s9c",
+          "feedback": "m1.m2.s9cFb"
+        }
+      ]
+    }
+  ]
+}

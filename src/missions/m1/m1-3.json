@@ -1,0 +1,409 @@
+{
+  "id": "m1-3",
+  "module": "m1",
+  "title": "m1.m3.title",
+  "desc": "m1.m3.desc",
+  "env": "garage",
+  "parSeconds": 170,
+  "characters": {
+    "foreman": {
+      "pos": [
+        -1.45,
+        0,
+        -0.75
+      ]
+    },
+    "instructor": {
+      "pos": [
+        1.45,
+        0,
+        -0.7
+      ]
+    }
+  },
+  "camera": {
+    "pos": [
+      0,
+      1.72,
+      1.2
+    ],
+    "target": [
+      0,
+      0.92,
+      0.0
+    ],
+    "w": 1.95
+  },
+  "props": [
+    {
+      "id": "bench",
+      "kind": "workbench",
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "params": {
+        "w": 2.0,
+        "d": 0.8
+      }
+    },
+    {
+      "id": "peg",
+      "kind": "pegboard",
+      "pos": [
+        0,
+        0.9,
+        -0.43
+      ],
+      "params": {
+        "w": 2.0,
+        "h": 0.9
+      }
+    },
+    {
+      "id": "black",
+      "kind": "thhn-spool",
+      "pos": [
+        -0.8,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolBlack",
+      "params": {
+        "color": "#151515"
+      }
+    },
+    {
+      "id": "white",
+      "kind": "thhn-spool",
+      "pos": [
+        -0.4,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolWhite",
+      "params": {
+        "color": "#eeeeee"
+      }
+    },
+    {
+      "id": "green",
+      "kind": "thhn-spool",
+      "pos": [
+        0.0,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolGreen",
+      "params": {
+        "color": "#1a8f2a"
+      }
+    },
+    {
+      "id": "red",
+      "kind": "thhn-spool",
+      "pos": [
+        0.4,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolRed",
+      "params": {
+        "color": "#c21d1d"
+      }
+    },
+    {
+      "id": "bare",
+      "kind": "thhn-spool",
+      "pos": [
+        0.8,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolBare",
+      "params": {
+        "color": "#c87533",
+        "bare": true
+      }
+    },
+    {
+      "id": "brown",
+      "kind": "thhn-spool",
+      "pos": [
+        -0.6,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolBrown",
+      "hidden": true,
+      "params": {
+        "color": "#6b3f1c"
+      }
+    },
+    {
+      "id": "blue",
+      "kind": "thhn-spool",
+      "pos": [
+        -0.2,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolBlue",
+      "hidden": true,
+      "params": {
+        "color": "#1d4fbf"
+      }
+    },
+    {
+      "id": "gray",
+      "kind": "thhn-spool",
+      "pos": [
+        0.2,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolGray",
+      "hidden": true,
+      "params": {
+        "color": "#8a8f96"
+      }
+    },
+    {
+      "id": "yellow",
+      "kind": "thhn-spool",
+      "pos": [
+        0.6,
+        0.9,
+        -0.2
+      ],
+      "scale": 0.8,
+      "label": "props.spoolYellow",
+      "hidden": true,
+      "params": {
+        "color": "#e8c21a"
+      }
+    },
+    {
+      "id": "hot",
+      "kind": "zone-pad",
+      "pos": [
+        -0.55,
+        0.9,
+        0.2
+      ],
+      "params": {
+        "flat": true,
+        "w": 0.5,
+        "d": 0.3,
+        "color": "#b3261e",
+        "textKey": "props.sign.hot",
+        "dropY": 0.012,
+        "spread": 0.17
+      }
+    },
+    {
+      "id": "neutral",
+      "kind": "zone-pad",
+      "pos": [
+        0.0,
+        0.9,
+        0.2
+      ],
+      "params": {
+        "flat": true,
+        "w": 0.5,
+        "d": 0.3,
+        "color": "#9aa3ab",
+        "textKey": "props.sign.neutral",
+        "dropY": 0.012,
+        "spread": 0.17
+      }
+    },
+    {
+      "id": "ground",
+      "kind": "zone-pad",
+      "pos": [
+        0.55,
+        0.9,
+        0.2
+      ],
+      "params": {
+        "flat": true,
+        "w": 0.5,
+        "d": 0.3,
+        "color": "#1a8f2a",
+        "textKey": "props.sign.ground",
+        "dropY": 0.012,
+        "spread": 0.17
+      }
+    },
+    {
+      "id": "v208",
+      "kind": "zone-pad",
+      "pos": [
+        -0.35,
+        0.9,
+        0.2
+      ],
+      "hidden": true,
+      "params": {
+        "flat": true,
+        "w": 0.6,
+        "d": 0.3,
+        "color": "#1d4fbf",
+        "textKey": "props.sign.v208",
+        "dropY": 0.012,
+        "spread": 0.17
+      }
+    },
+    {
+      "id": "v480",
+      "kind": "zone-pad",
+      "pos": [
+        0.35,
+        0.9,
+        0.2
+      ],
+      "hidden": true,
+      "params": {
+        "flat": true,
+        "w": 0.6,
+        "d": 0.3,
+        "color": "#e07a10",
+        "textKey": "props.sign.v480",
+        "dropY": 0.012,
+        "spread": 0.17
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m1.m3.s1"
+    },
+    {
+      "id": "s2",
+      "type": "drag-connect",
+      "speaker": "instructor",
+      "style": "move",
+      "text": "m1.m3.s2",
+      "pairs": {
+        "black": "hot",
+        "red": "hot",
+        "white": "neutral",
+        "green": "ground",
+        "bare": "ground"
+      },
+      "wrong": {
+        "white>hot": "m1.m3.wWhiteHot",
+        "green>hot": "m1.m3.wGreenHot",
+        "green>neutral": "m1.m3.wGreenN",
+        "bare>hot": "m1.m3.wBareHot",
+        "bare>neutral": "m1.m3.wBareN",
+        "black>neutral": "m1.m3.wBlackN",
+        "red>neutral": "m1.m3.wRedN",
+        "black>ground": "m1.m3.wBlackG",
+        "red>ground": "m1.m3.wRedG",
+        "white>ground": "m1.m3.wWhiteG"
+      },
+      "success": "m1.m3.s2ok"
+    },
+    {
+      "id": "s3",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m1.m3.s3",
+      "options": [
+        {
+          "text": "m1.m3.s3a",
+          "feedback": "m1.m3.s3aFb"
+        },
+        {
+          "text": "m1.m3.s3b",
+          "correct": true,
+          "feedback": "m1.m3.s3bFb"
+        },
+        {
+          "text": "m1.m3.s3c",
+          "feedback": "m1.m3.s3cFb"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "hide": [
+        "black",
+        "red",
+        "white",
+        "green",
+        "bare",
+        "hot",
+        "neutral",
+        "ground"
+      ],
+      "show": [
+        "brown",
+        "blue",
+        "gray",
+        "yellow",
+        "v208",
+        "v480"
+      ],
+      "text": "m1.m3.s4"
+    },
+    {
+      "id": "s5",
+      "type": "drag-connect",
+      "speaker": "instructor",
+      "style": "move",
+      "text": "m1.m3.s5",
+      "pairs": {
+        "blue": "v208",
+        "brown": "v480",
+        "yellow": "v480",
+        "gray": "v480"
+      },
+      "wrong": {
+        "blue>v480": "m1.m3.wBlue",
+        "brown>v208": "m1.m3.wBrown",
+        "yellow>v208": "m1.m3.wYellow",
+        "gray>v208": "m1.m3.wGray"
+      },
+      "success": "m1.m3.s5ok"
+    },
+    {
+      "id": "s6",
+      "type": "choose-option",
+      "speaker": "foreman",
+      "text": "m1.m3.s6",
+      "options": [
+        {
+          "text": "m1.m3.s6a",
+          "feedback": "m1.m3.s6aFb"
+        },
+        {
+          "text": "m1.m3.s6b",
+          "correct": true,
+          "feedback": "m1.m3.s6bFb"
+        },
+        {
+          "text": "m1.m3.s6c",
+          "feedback": "m1.m3.s6cFb"
+        }
+      ]
+    }
+  ]
+}

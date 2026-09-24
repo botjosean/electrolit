@@ -36,7 +36,11 @@ export function HoldGauge({ step }: { step: HoldStep }) {
     if (!holding) return;
     setHolding(false);
     cancelAnimationFrame(raf.current);
-    dispatch({ type: 'holdEnd', value: Math.round(valRef.current * 1000) / 1000 });
+    // value at the exact release time (not the last rendered frame → fair on slow phones)
+    const v = Math.min(step.max, (step.max * (performance.now() - startRef.current)) / step.durationMs);
+    valRef.current = v;
+    setHoldValue(v);
+    dispatch({ type: 'holdEnd', value: Math.round(v * 1000) / 1000 });
   };
 
   useEffect(() => {

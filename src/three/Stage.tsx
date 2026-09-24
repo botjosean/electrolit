@@ -80,16 +80,16 @@ function CameraRig() {
       camera.setViewOffset(size.width, size.height, o.x, o.y, size.width, size.height);
     }
     const a = anim.current;
+    const offsetMoving = Math.abs(o.x - tx) > 0.5 || Math.abs(o.y - ty) > 0.5;
+    const settled = !a && !offsetMoving;
+    if (window.__sim && window.__sim.camSettled !== settled) window.__sim.camSettled = settled;
     if (!a || !controls) return;
     a.t = Math.min(1, a.t + dt / 0.9);
     const k = ease(a.t);
     camera.position.lerpVectors(a.fromP, a.toP, k);
     controls.target.lerpVectors(a.fromT, a.toT, k);
     controls.update();
-    if (a.t >= 1) {
-      anim.current = null;
-      window.__sim = { ...(window.__sim ?? {}), camSettled: true };
-    }
+    if (a.t >= 1) anim.current = null;
   });
   return null;
 }
@@ -232,7 +232,23 @@ function DebugBridge() {
       const r = gl.domElement.getBoundingClientRect();
       return { x: r.left + ((v.x + 1) / 2) * r.width, y: r.top + ((1 - v.y) / 2) * r.height, visible: v.z < 1 && Math.abs(v.x) <= 1 && Math.abs(v.y) <= 1 };
     };
-    window.__sim = { ...(window.__sim ?? {}), project };
+    // names of the props under a client pixel, nearest first (diagnostics for e2e)
+    const hitTest = (x: number, y: number) => {
+      const r = gl.domElement.getBoundingClientRect();
+      const ndc = new THREE.Vector2(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1);
+      const rc = new THREE.Raycaster();
+      rc.setFromCamera(ndc, camera);
+      const names: string[] = [];
+      for (const h of rc.intersectObjects(scene.children, true)) {
+        let o: THREE.Object3D | null = h.object;
+        while (o && !o.name) o = o.parent;
+        const n = o ? `${o.name}${h.object.name === 'hitbox' ? '[hit]' : ''}` : '?';
+        if (names[names.length - 1] !== n) names.push(n);
+        if (names.length > 6) break;
+      }
+      return names;
+    };
+    window.__sim = { ...(window.__sim ?? {}), project, hitTest };
   }, [scene, camera, gl]);
   return null;
 }

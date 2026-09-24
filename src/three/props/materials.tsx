@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import * as THREE from 'three';
 import { useMission } from '../../engine/store';
 import { COPPER, DARK_METAL, LabelPlane, METAL, bool, num, str, usePropText, useLabelTexture, type PropProps } from './common';
 
@@ -45,7 +47,11 @@ export function ThhnSpool({ params }: PropProps) {
         ))}
         <mesh castShadow>
           <cylinderGeometry args={[0.1, 0.1, 0.13, 20]} />
-          <meshStandardMaterial color={color} roughness={0.35} />
+          {bool(params, 'bare') ? (
+            <meshStandardMaterial color={COPPER} metalness={0.85} roughness={0.25} />
+          ) : (
+            <meshStandardMaterial color={color} roughness={0.35} />
+          )}
         </mesh>
       </group>
       {text ? <LabelPlane text={text} w={0.12} h={0.07} position={[0.077, 0.13, 0]} rotation={[0, Math.PI / 2, 0]} font={0.5} /> : null}
@@ -184,9 +190,10 @@ export function Clipboard({ params }: PropProps) {
         rotation={[-Math.PI / 2, 0, 0]}
         align="left"
         bold={false}
-        font={0.9}
+        font={0.92}
         fg="#1a1a1a"
         bg="#fbfbf6"
+        px={2400}
       />
       <mesh position={[0, 0.013, -0.15]}>
         <boxGeometry args={[0.09, 0.012, 0.03]} />
@@ -270,33 +277,42 @@ export function ExtensionCord({ params }: PropProps) {
   );
 }
 
-/** Staging area on the floor with a sign. params: color, w, d, textKey|text */
+/** Staging area with a sign. params: color, w, d, textKey|text, flat (label printed on the mat,
+ *  no post — use on benches so nothing blocks the view), post (sign height) */
 export function ZonePad({ params }: PropProps) {
   const w = num(params, 'w', 1.2);
   const d = num(params, 'd', 0.9);
   const color = str(params, 'color', '#2f6fdb');
+  const flat = bool(params, 'flat');
+  const post = num(params, 'post', 0.8);
   const text = usePropText(params);
   return (
     <group>
-      <mesh receiveShadow position={[0, 0.01, 0]}>
-        <boxGeometry args={[w, 0.02, d]} />
-        <meshStandardMaterial color={color} transparent opacity={0.55} roughness={0.9} />
+      <mesh receiveShadow position={[0, 0.005, 0]}>
+        <boxGeometry args={[w, 0.01, d]} />
+        <meshStandardMaterial color={color} transparent opacity={flat ? 0.85 : 0.55} roughness={0.9} />
       </mesh>
-      <mesh position={[0, 0.021, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[Math.min(w, d) * 0.35, Math.min(w, d) * 0.38, 32]} />
-        <meshStandardMaterial color="#ffffff" transparent opacity={0.7} />
-      </mesh>
-      <group position={[0, 0, -d / 2]}>
-        <mesh castShadow position={[0, 0.4, 0]}>
-          <boxGeometry args={[0.03, 0.8, 0.03]} />
-          <meshStandardMaterial color="#555" />
-        </mesh>
-        <mesh castShadow position={[0, 0.85, 0]}>
-          <boxGeometry args={[0.62, 0.26, 0.02]} />
-          <meshStandardMaterial color={color} />
-        </mesh>
-        <LabelPlane text={text} w={0.58} h={0.22} position={[0, 0.85, 0.011]} bg="#ffffff" fg="#111" font={0.45} />
-      </group>
+      {flat ? (
+        <LabelPlane text={text} w={w * 0.9} h={Math.min(d * 0.35, 0.09)} position={[0, 0.011, d / 2 - Math.min(d * 0.35, 0.09) / 2 - 0.01]} rotation={[-Math.PI / 2, 0, 0]} bg="#ffffff" fg="#111" font={0.62} px={1600} />
+      ) : (
+        <>
+          <mesh position={[0, 0.011, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <ringGeometry args={[Math.min(w, d) * 0.35, Math.min(w, d) * 0.38, 32]} />
+            <meshStandardMaterial color="#ffffff" transparent opacity={0.7} />
+          </mesh>
+          <group position={[0, 0, -d / 2]}>
+            <mesh castShadow position={[0, post / 2, 0]}>
+              <boxGeometry args={[0.03, post, 0.03]} />
+              <meshStandardMaterial color="#555" />
+            </mesh>
+            <mesh castShadow position={[0, post + 0.05, 0]}>
+              <boxGeometry args={[0.62, 0.26, 0.02]} />
+              <meshStandardMaterial color={color} />
+            </mesh>
+            <LabelPlane text={text} w={0.58} h={0.22} position={[0, post + 0.05, 0.011]} bg="#ffffff" fg="#111" font={0.45} />
+          </group>
+        </>
+      )}
     </group>
   );
 }
@@ -364,23 +380,35 @@ export function WirePiece({ params }: PropProps) {
 }
 
 function Ruler({ L, vis, y, z }: { L: number; vis: number; y: number; z: number }) {
-  // ruler starts at the wire end (x = L/2) and counts inches toward -X
+  // strip ruler: 0 at the wire end (+X), 1/4" marks going toward -X, readable from the front
   const len = 1.25 * vis;
-  const marks = ['0', '1/4', '1/2', '3/4', '1"'];
-  const tex = useLabelTexture(marks.map((m) => m.padEnd(5)).join(''), len, 0.03, { bg: '#f7e37a', fg: '#222', font: 0.55, bold: true });
+  const tex = useMemo(() => {
+    const W = 512;
+    const H = 96;
+    const c = document.createElement('canvas');
+    c.width = W;
+    c.height = H;
+    const g = c.getContext('2d')!;
+    g.fillStyle = '#f7e37a';
+    g.fillRect(0, 0, W, H);
+    g.textAlign = 'center';
+    g.textBaseline = 'bottom';
+    g.font = '700 30px system-ui, Arial, sans-serif';
+    ['0', '1/4', '1/2', '3/4', '1"'].forEach((lab, i) => {
+      const x = W - (i * 0.25 * vis * W) / len - 2;
+      g.fillStyle = i === 3 ? '#c21d1d' : '#222';
+      g.fillRect(x - 2, 0, 4, i % 2 ? 26 : 38);
+      g.fillText(lab, Math.min(W - 18, Math.max(24, x)), H - 6);
+    });
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }, [len, vis]);
   return (
-    <group position={[L / 2 - len / 2, y, z]}>
-      <mesh rotation={[-Math.PI / 2, 0, Math.PI]}>
-        <planeGeometry args={[len, 0.03]} />
-        <meshStandardMaterial map={tex} />
-      </mesh>
-      {[0, 1, 2, 3, 4].map((i) => (
-        <mesh key={i} position={[len / 2 - i * 0.25 * vis, 0.001, -0.012]}>
-          <boxGeometry args={[0.0015, 0.001, 0.012]} />
-          <meshStandardMaterial color={i === 3 ? '#d42a2a' : '#222'} />
-        </mesh>
-      ))}
-    </group>
+    <mesh position={[L / 2 - len / 2, y, z]} rotation={[-Math.PI / 2, 0, 0]}>
+      <planeGeometry args={[len, 0.03]} />
+      <meshStandardMaterial map={tex} />
+    </mesh>
   );
 }
 

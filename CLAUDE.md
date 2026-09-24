@@ -85,7 +85,8 @@ GitHub Actions workflow that builds and deploys to GitHub Pages on every push to
       safety system, scoring, boss verdict, progress persistence, main menu)
 - [x] Module 0 — Primer día en la obra (4 missions: PPE + cord inspection, tool bag orders,
       material delivery/staging, foreman orders & replies) — e2e desktop + mobile ✔
-- [ ] Module 1 — Herramientas y cable
+- [x] Module 1 — Herramientas y cable (5 missions: identify tools, AWG + NM-B/THHN, color codes
+      incl. 208/480, stripping + nick inspection + continuity, wire-to-breaker + LOTO) — e2e desktop + mobile ✔
 - [ ] Module 2 — Panel residencial 200A
 - [ ] Module 3 — Rough-in de una casa desde el plano
 - [ ] Module 4 — Trim out
@@ -105,8 +106,10 @@ npm install
 npm run dev        # local dev server (http://localhost:5173/electrician-sim-us/)
 npm run build      # typecheck + production build into dist/
 npm test           # vitest: engine logic + content validation (every mission, key, term, prop)
-npm run e2e        # builds must exist (npm run build) — plays EVERY mission step in headless
-                   # Chromium with real mouse clicks/drags on the 3D scene; screenshots → e2e-out/
+npm run e2e        # needs a build first (npm run build). Plays EVERY mission step in headless
+                   # Chromium: desktop with real mouse clicks/drags on the 3D scene, then a phone
+                   # viewport with touch taps; plus failure paths (mistake, hint, term card, ES/EN,
+                   # safety fail, retry). Screenshots → e2e-out/.  Options: --only m1-2,m1-3  --no-shots
 ```
 
 `npm run e2e` uses `playwright-core` pinned to the Chromium in `/opt/pw-browsers`
@@ -222,6 +225,12 @@ and missing `requires` flags.
 - **Layout rule for missions**: keep interactive props from being in front of each other from the
   camera's view (hit boxes are enlarged ×1.15 for touch); the e2e test fails if a prop's center is
   covered by another prop or the HUD.
+- **Taps** are detected as pointerdown + pointerup on the same prop (< 12 px), not R3F `onClick`,
+  which occasionally dropped touch taps.
+- **Hold actions** compute the value at the exact release time (not the last frame), so slow phones
+  aren't penalized.
+- **Content authoring**: mission JSON + i18n JSON are the source of truth (edit them directly). Keys
+  follow `m<module>.m<mission>.<step>`; props labels live in the `props` namespace.
 - **Testing**: vitest validates all content (keys exist in es+en, glossary ids, prop ids, prop kinds,
   step shape, solvability) + engine logic; `scripts/e2e.mjs` plays every mission in headless Chromium
   with real pointer events on the canvas (positions projected from 3D), including failure paths.

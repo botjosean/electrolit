@@ -40,7 +40,7 @@ export function useLabelTexture(text: string, w: number, h: number, opts: LabelO
       ctx.strokeRect(0, 0, cw, ch);
     }
     const lines = text.split('\n');
-    const size = Math.floor((ch * font) / Math.max(1, lines.length * 0.85));
+    const size = Math.floor((ch * font) / (lines.length > 1 ? lines.length * 1.18 : 1));
     ctx.font = `${bold ? '700' : '500'} ${size}px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif`;
     ctx.fillStyle = fg;
     ctx.textAlign = align;

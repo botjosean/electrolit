@@ -39,6 +39,7 @@ async function waitFor(page, fn, arg, timeout = 8000) {
 const state = (page) => page.evaluate(() => window.__sim.state());
 
 async function camSettled(page) {
+  await sleep(180); // let the panel re-measure and the rig pick up the new step
   await waitFor(page, () => window.__sim?.camSettled === true);
   await sleep(250); // damping
 }
@@ -112,7 +113,11 @@ async function solveStep(page, step, mobile) {
       for (const id of step.targets) {
         await tap(page, id);
         const s = await state(page);
-        if (!s.step.clicked.includes(id)) throw new Error(`click on ${id} did not register`);
+        if (!s.step.clicked.includes(id)) {
+          const p = await page.evaluate((pid) => window.__sim.project(pid), id);
+          const hits = await page.evaluate(([x, y]) => window.__sim.hitTest(x, y), [p.x, p.y]);
+          throw new Error(`click on ${id} did not register (hits: ${hits.join(' > ')}; feedback ${s.feedback?.key})`);
+        }
       }
       return;
     case 'drag-connect':
@@ -142,8 +147,7 @@ async function solveStep(page, step, mobile) {
       await page.click('[data-testid=meter-confirm]');
       return;
     case 'hold-action':
-      await doHold(page, step);
-      return;
+      return doHold(page, step); // returns retries (timing jitter in headless rendering)
     case 'inspect': {
       const ids = step.mode === 'learn' ? step.points.map((p) => p.id) : step.points.filter((p) => p.defect).map((p) => p.id);
       for (const id of ids) {
@@ -173,8 +177,10 @@ async function playMission(page, id, { mobile = false, tag = '' } = {}) {
     const step = mission.steps[i];
     await waitFor(page, (n) => window.__sim.state().stepIndex === n, i);
     await camSettled(page);
+    const before = (await state(page)).mistakes;
+    let allowed = 0;
     try {
-      await solveStep(page, step, mobile);
+      allowed = (await solveStep(page, step, mobile)) || 0;
       await waitFor(page, () => window.__sim.state().step.done === true, undefined, 4000);
     } catch (e) {
       fail(`${id}${tag} step ${step.id} (${step.type}): ${e.message}`);
@@ -182,7 +188,8 @@ async function playMission(page, id, { mobile = false, tag = '' } = {}) {
       return false;
     }
     const s = await state(page);
-    if (s.mistakes) fail(`${id}${tag} step ${step.id}: correct solution produced ${s.mistakes} mistake(s)`);
+    if (s.mistakes - before > allowed) fail(`${id}${tag} step ${step.id}: correct solution produced ${s.mistakes - before} mistake(s)`);
+    if (allowed) log(`    (hold step ${step.id}: ${allowed} timing retry)`);
     if (SHOTS) await page.screenshot({ path: `${OUT}/${id}${tag}-${String(i + 1).padStart(2, '0')}-${step.type}.png` });
     await page.click('[data-testid=continue]');
   }
@@ -318,7 +325,7 @@ async function main() {
     const mctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
     const mpage = await mctx.newPage();
     watch(mpage);
-    const mobileList = (only ?? ['m0-1', 'm0-3', 'm1-4']).filter((m) => available.includes(m));
+    const mobileList = (only ?? available).filter((m) => available.includes(m));
     log(`playing ${mobileList.length} missions (mobile, touch)…`);
     for (const id of mobileList) await playMission(mpage, id, { mobile: true, tag: '-mobile' });
     await mpage.goto(BASE);

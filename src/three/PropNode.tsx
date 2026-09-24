@@ -34,6 +34,8 @@ interface MatRec {
   baseI: number;
 }
 
+let tapStart: { id: string; x: number; y: number } | null = null;
+
 export function setControlsEnabled(controls: unknown, v: boolean) {
   if (controls && typeof controls === 'object' && 'enabled' in controls) (controls as { enabled: boolean }).enabled = v;
 }
@@ -109,41 +111,49 @@ export function PropNode({ def }: { def: PropDef }) {
 
   if (!Comp || hidden) return null;
 
-  const onClick = (e: ThreeEvent<MouseEvent>) => {
-    if (role === 'none') return;
-    e.stopPropagation();
-    if (e.delta > 10) return;
+  // Taps are detected from pointerdown + pointerup on the same prop (more reliable on touch
+  // screens than the synthesized click event); drags start on sources and end on targets.
+  const tap = () => {
     const st = useMission.getState();
     if (role === 'click') dispatch({ type: 'click', id: def.id });
     else if (role === 'probe') dispatch({ type: 'probe', id: def.id });
     else if (role === 'source') st.selectSource(def.id);
-    else if (role === 'target') {
-      if (st.step.selectedSource) dispatch({ type: 'connect', src: st.step.selectedSource, tgt: def.id });
-    }
+    else if (role === 'target' && st.step.selectedSource) dispatch({ type: 'connect', src: st.step.selectedSource, tgt: def.id });
   };
   const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
-    if (role !== 'source') return;
+    if (role === 'none') return;
     e.stopPropagation();
-    setControlsEnabled(controls, false);
-    const st = useMission.getState();
-    st.selectSource(def.id);
-    st.setDragging(def.id);
+    tapStart = { id: def.id, x: e.clientX, y: e.clientY };
+    if (role === 'source') {
+      setControlsEnabled(controls, false);
+      const st = useMission.getState();
+      st.selectSource(def.id);
+      st.setDragging(def.id);
+    }
   };
   const onPointerUp = (e: ThreeEvent<PointerEvent>) => {
+    if (role === 'none') return;
     const st = useMission.getState();
-    if (role !== 'target' || !st.dragging) return;
-    e.stopPropagation();
-    const src = st.dragging;
-    st.setDragging(null);
-    setControlsEnabled(controls, true);
-    dispatch({ type: 'connect', src, tgt: def.id });
+    const start = tapStart;
+    tapStart = null;
+    if (role === 'target' && st.dragging) {
+      e.stopPropagation();
+      const src = st.dragging;
+      st.setDragging(null);
+      setControlsEnabled(controls, true);
+      dispatch({ type: 'connect', src, tgt: def.id });
+      return;
+    }
+    if (start && start.id === def.id && Math.hypot(e.clientX - start.x, e.clientY - start.y) < 12) {
+      e.stopPropagation();
+      tap();
+    }
   };
 
   const interactive = role !== 'none';
   return (
     <group ref={outer} name={`prop:${def.id}`} position={def.pos}>
       <group
-        onClick={interactive ? onClick : undefined}
         onPointerDown={interactive ? onPointerDown : undefined}
         onPointerUp={interactive ? onPointerUp : undefined}
         onPointerOver={
