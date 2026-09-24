@@ -1,0 +1,112 @@
+{
+  "back": "Back",
+  "close": "Close",
+  "continue": "Continue",
+  "finish": "Finish",
+  "expand": "Expand",
+  "collapse": "Minimize",
+  "terms": "Terms",
+  "hint": "Hint (−5 points)",
+  "step": "Step {n}/{total}",
+  "steps": "{n} steps",
+  "best": "Best: {n}",
+  "play": "Play",
+  "replay": "Replay",
+  "module": "Module",
+  "notFound": "Mission not found.",
+  "char": {
+    "foreman": {
+      "name": "Big Mike",
+      "role": "Foreman"
+    },
+    "instructor": {
+      "name": "Rosa",
+      "role": "Journeyman · your instructor"
+    }
+  },
+  "term": {
+    "english": "English",
+    "spanish": "Spanish",
+    "what": "What is it?",
+    "listen": "Listen"
+  },
+  "feedback": {
+    "wrong": "That's not it. Look closely and try again.",
+    "order": "Right item, wrong order. What comes first?",
+    "good": "Good!",
+    "done": "Done!"
+  },
+  "click": {
+    "progress": "Found: {n}/{total}"
+  },
+  "drag": {
+    "progress": "Done: {n}/{total}",
+    "tip": "Drag each item to its spot, or tap it and then tap the destination.",
+    "nowTarget": "now tap the destination"
+  },
+  "meter": {
+    "dial": "Dial",
+    "mode": {
+      "VAC": "AC volts",
+      "VDC": "DC volts",
+      "OHM": "Ohms",
+      "CONT": "Continuity"
+    },
+    "red": "Red lead",
+    "black": "Black lead",
+    "tip": "Set the dial and tap two points in the scene to place the leads.",
+    "confirm": "Record reading",
+    "wrongMode": "The dial is not on the right mode for this test.",
+    "wrongPoints": "The leads are not on the right points."
+  },
+  "hold": {
+    "target": "Target",
+    "press": {
+      "strip": "Hold to strip",
+      "torque": "Hold to torque",
+      "bend": "Hold to bend"
+    },
+    "holding": {
+      "strip": "Stripping… release on time!",
+      "torque": "Torquing… release on time!",
+      "bend": "Bending… release on time!"
+    }
+  },
+  "inspect": {
+    "progress": "Checked: {n}/{total} — tap each numbered point.",
+    "findTip": "Tap the points that have a problem (marked: {n}), then press Report.",
+    "marked": "marked as a problem",
+    "unmarked": "not marked",
+    "report": "Report",
+    "falsePositive": "You marked something that's fine. Look again.",
+    "missed": "There's still a problem you haven't found."
+  },
+  "results": {
+    "safetyFail": "Safety failure",
+    "failTitle": "Mission failed",
+    "failRule": "Golden rule: if you didn't test it, it's NOT dead. If it's not locked out, it's NOT safe.",
+    "complete": "Mission complete",
+    "safety": "Safety",
+    "correctness": "Correctness",
+    "speed": "Speed",
+    "total": "Score",
+    "mistakes": "{n} mistakes",
+    "boss": "What the boss would say",
+    "retry": "Retry",
+    "next": "Next mission",
+    "toModule": "Back to module"
+  },
+  "menu": {
+    "tagline": "Real US electrical work — for Spanish speakers",
+    "intro": "Learn electrician work the way it's done on site: your foreman gives orders in English and Rosa, your instructor, explains everything. Tap highlighted words to see their meaning and hear them.",
+    "glossary": "Glossary",
+    "overall": "Progress: {n}/{total} missions",
+    "soon": "Coming soon",
+    "reset": "Reset my progress",
+    "resetConfirm": "Are you sure you want to erase all progress?",
+    "disclaimer": "Educational simulator. Not a substitute for official training, the NEC or OSHA rules. Always work under a licensed electrician."
+  },
+  "glossary": {
+    "search": "Search term…"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "m0": {
+    "title": "Primer día en la obra",
+    "desc": "EPP, bolsa de herramientas, entrega de material y cómo recibir y contestar órdenes del foreman."
+  },
+  "m1": {
+    "title": "Herramientas y cable",
+    "desc": "Identifica herramientas, calibres AWG, NM-B vs THHN, código de colores, pelar cable y cable al breaker (14→15A, 12→20A, 10→30A)."
+  },
+  "m2": {
+    "title": "Panel residencial 200A",
+    "desc": "Baja el main, verifica que está muerto, instala breakers, conecta vivo/neutro/tierra y el puente neutro-tierra solo en el main."
+  },
+  "m3": {
+    "title": "Rough-in desde el plano",
+    "desc": "Monta cajas, barrena studs, home runs, grapas y etiquetas."
+  },
+  "m4": {
+    "title": "Trim out",
+    "desc": "Contactos, switches sencillos y de 3 vías, GFCI/AFCI."
+  },
+  "m5": {
+    "title": "Troubleshooting",
+    "desc": "Lecturas de multímetro, neutro abierto, breaker botado, contacto muerto."
+  },
+  "m6": {
+    "title": "Comercial",
+    "desc": "Doblar EMT (90, offset, saddle), jalar THHN, trifásico 208/120 y 480/277."
+  },
+  "m7": {
+    "title": "Generador + transfer switch",
+    "desc": "Generador y transfer switch automático (ATS)."
+  },
+  "m8": {
+    "title": "Data center",
+    "desc": "Charola, busway, UPS, PDUs y alimentaciones redundantes A/B."
+  },
+  "m9": {
+    "title": "Lectura de planos",
+    "desc": "Símbolos, panel schedules y cálculo básico de carga."
+  },
+  "m10": {
+    "title": "Modo Foreman",
+    "desc": "Lee el plano, saca el material, reparte tareas a tu cuadrilla y revisa su trabajo."
+  }
+}

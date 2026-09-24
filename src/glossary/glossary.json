@@ -1,0 +1,538 @@
+[
+  {
+    "id": "journeyman",
+    "term": "Journeyman",
+    "es": "oficial electricista / electricista con licencia",
+    "explanation_es": "Electricista con licencia y experiencia. Puede trabajar solo y enseñar a los aprendices.",
+    "explanation_en": "Licensed, experienced electrician. Can work alone and teach apprentices."
+  },
+  {
+    "id": "apprentice",
+    "term": "Apprentice",
+    "es": "aprendiz / ayudante",
+    "explanation_es": "El que está aprendiendo el oficio. Trabaja siempre con un journeyman.",
+    "explanation_en": "Someone learning the trade. Always works under a journeyman."
+  },
+  {
+    "id": "foreman",
+    "term": "Foreman",
+    "es": "jefe de cuadrilla / mayordomo",
+    "explanation_es": "El que manda en la obra: reparte el trabajo y revisa que quede bien.",
+    "explanation_en": "The crew boss on site: hands out the work and checks it."
+  },
+  {
+    "id": "ppe",
+    "term": "PPE",
+    "es": "EPP / equipo de protección personal",
+    "explanation_es": "Casco, lentes, chaleco, guantes y botas. Sin PPE no entras a trabajar.",
+    "explanation_en": "Hard hat, glasses, vest, gloves and boots. No PPE, no work.",
+    "say": "P P E"
+  },
+  {
+    "id": "hard_hat",
+    "term": "Hard hat",
+    "es": "casco",
+    "explanation_es": "Protege tu cabeza de golpes y cosas que caen. Se usa todo el tiempo en la obra.",
+    "explanation_en": "Protects your head from bumps and falling objects. Worn at all times on site."
+  },
+  {
+    "id": "safety_glasses",
+    "term": "Safety glasses",
+    "es": "lentes de seguridad",
+    "explanation_es": "Protegen tus ojos de pedazos de cable, polvo y chispas. Siempre puestos.",
+    "explanation_en": "Protect your eyes from wire clippings, dust and sparks. Always on."
+  },
+  {
+    "id": "hi_vis_vest",
+    "term": "Hi-vis vest",
+    "es": "chaleco reflejante",
+    "explanation_es": "Chaleco de color fuerte para que los operadores de máquinas y camiones te vean.",
+    "explanation_en": "Bright vest so equipment and truck drivers can see you.",
+    "say": "high vis vest"
+  },
+  {
+    "id": "work_gloves",
+    "term": "Work gloves",
+    "es": "guantes de trabajo",
+    "explanation_es": "Protegen tus manos de cortadas y astillas. NO sirven para tocar cables con corriente.",
+    "explanation_en": "Protect hands from cuts and splinters. NOT rated for live electrical work."
+  },
+  {
+    "id": "work_boots",
+    "term": "Work boots",
+    "es": "botas de trabajo (de casquillo)",
+    "explanation_es": "Botas con punta dura y suela gruesa: te protegen de clavos y golpes.",
+    "explanation_en": "Hard-toe boots with thick soles: protect you from nails and impacts."
+  },
+  {
+    "id": "extension_cord",
+    "term": "Extension cord",
+    "es": "extensión",
+    "explanation_es": "Cable con clavija y contacto para llevar corriente a tus herramientas. Se revisa antes de usarla.",
+    "explanation_en": "Cord with plug and outlet to power your tools. Inspect it before use."
+  },
+  {
+    "id": "ground_pin",
+    "term": "Ground pin",
+    "es": "pata de tierra",
+    "explanation_es": "La pata redonda de la clavija. Es tu protección si hay una falla. Nunca se quita.",
+    "explanation_en": "The round prong on the plug. It protects you during a fault. Never remove it."
+  },
+  {
+    "id": "tag_out",
+    "term": "Tag out",
+    "es": "etiquetar / sacar de servicio",
+    "explanation_es": "Poner una etiqueta de 'NO USAR' a algo dañado para que nadie lo use.",
+    "explanation_en": "Put a DO NOT USE tag on something damaged so nobody uses it."
+  },
+  {
+    "id": "tool_bag",
+    "term": "Tool bag",
+    "es": "bolsa de herramientas",
+    "explanation_es": "Donde cargas tus herramientas de mano. Un electricista siempre la trae.",
+    "explanation_en": "Where you carry your hand tools. An electrician always has it."
+  },
+  {
+    "id": "lineman_pliers",
+    "term": "Lineman's pliers",
+    "es": "pinzas de electricista",
+    "explanation_es": "Pinzas fuertes de punta plana: cortan, tuercen y jalan cable.",
+    "explanation_en": "Heavy flat-nose pliers: cut, twist and pull wire.",
+    "say": "lineman's pliers"
+  },
+  {
+    "id": "needle_nose",
+    "term": "Needle-nose pliers",
+    "es": "pinzas de punta",
+    "explanation_es": "Pinzas de punta larga y delgada para hacer ganchos en el cable y trabajar en lugares chicos.",
+    "explanation_en": "Long thin-nose pliers to make wire hooks and work in tight spots."
+  },
+  {
+    "id": "dikes",
+    "term": "Dikes",
+    "es": "pinzas de corte diagonal",
+    "explanation_es": "Pinzas de corte (diagonal cutters). Solo sirven para cortar cable y cinchos.",
+    "explanation_en": "Diagonal cutters. Only for cutting wire and zip ties."
+  },
+  {
+    "id": "wire_strippers",
+    "term": "Wire strippers",
+    "es": "peladora de cable",
+    "explanation_es": "Pinzas con hoyitos marcados por calibre para quitar el aislante sin dañar el cobre.",
+    "explanation_en": "Pliers with gauge-marked holes to remove insulation without nicking the copper."
+  },
+  {
+    "id": "flathead",
+    "term": "Flathead",
+    "es": "desarmador plano",
+    "explanation_es": "Desarmador de punta plana.",
+    "explanation_en": "Slotted screwdriver."
+  },
+  {
+    "id": "phillips",
+    "term": "Phillips",
+    "es": "desarmador de cruz",
+    "explanation_es": "Desarmador de punta en cruz.",
+    "explanation_en": "Cross-tip screwdriver."
+  },
+  {
+    "id": "ncvt",
+    "term": "Tick tester",
+    "es": "probador sin contacto",
+    "explanation_es": "Pluma que pita cerca de un cable con voltaje. Es solo una señal rápida: no confirma que está muerto.",
+    "explanation_en": "Pen that beeps near live voltage. Quick check only: it does not prove dead.",
+    "say": "tick tester"
+  },
+  {
+    "id": "multimeter",
+    "term": "Multimeter",
+    "es": "multímetro / meter",
+    "explanation_es": "Aparato con puntas roja y negra para medir voltaje, resistencia y continuidad.",
+    "explanation_en": "Meter with red and black leads to measure voltage, resistance and continuity."
+  },
+  {
+    "id": "tape_measure",
+    "term": "Tape measure",
+    "es": "cinta de medir / flexómetro",
+    "explanation_es": "Para medir alturas de cajas y distancias. En EE.UU. se mide en pulgadas y pies.",
+    "explanation_en": "For box heights and distances. In the US: inches and feet."
+  },
+  {
+    "id": "torpedo_level",
+    "term": "Torpedo level",
+    "es": "nivel de torpedo",
+    "explanation_es": "Nivel chico que cabe en la bolsa. Para que cajas y tubería queden derechas.",
+    "explanation_en": "Small pocket level to keep boxes and conduit straight."
+  },
+  {
+    "id": "fish_tape",
+    "term": "Fish tape",
+    "es": "guía / cinta pasacables",
+    "explanation_es": "Cinta de acero enrollada para pasar cable por tubería o paredes cerradas.",
+    "explanation_en": "Coiled steel tape to pull wire through conduit or closed walls."
+  },
+  {
+    "id": "cable_ripper",
+    "term": "Cable ripper",
+    "es": "pelacables de forro",
+    "explanation_es": "Herramienta chica que abre el forro del cable NM-B sin cortar los cables de adentro.",
+    "explanation_en": "Small tool that slits NM-B jacket without cutting the wires inside."
+  },
+  {
+    "id": "utility_knife",
+    "term": "Utility knife",
+    "es": "cúter / navaja",
+    "explanation_es": "Navaja de uso general. Con cuidado: puede cortar el aislante de los conductores.",
+    "explanation_en": "General purpose knife. Careful: it can nick conductor insulation."
+  },
+  {
+    "id": "delivery_ticket",
+    "term": "Delivery ticket",
+    "es": "ticket / nota de entrega",
+    "explanation_es": "Papel que dice qué material te mandaron. Se revisa antes de firmar.",
+    "explanation_en": "Paper listing the delivered material. Check it before you sign."
+  },
+  {
+    "id": "supply_house",
+    "term": "Supply house",
+    "es": "tienda de material eléctrico",
+    "explanation_es": "El distribuidor que vende y entrega el material eléctrico.",
+    "explanation_en": "The electrical distributor that sells and delivers material."
+  },
+  {
+    "id": "staging",
+    "term": "Staging",
+    "es": "acomodar el material",
+    "explanation_es": "Poner el material ordenado en su área para encontrarlo rápido y que no se dañe.",
+    "explanation_en": "Placing material in its area so it's easy to find and stays undamaged."
+  },
+  {
+    "id": "nm_b",
+    "term": "NM-B",
+    "es": "cable Romex / cable forrado",
+    "explanation_es": "Cable de casa: varios conductores dentro de un forro de plástico. Se usa en paredes de madera secas.",
+    "explanation_en": "House cable: several conductors inside a plastic jacket. Used in dry wood-framed walls.",
+    "say": "N M B"
+  },
+  {
+    "id": "romex",
+    "term": "Romex",
+    "es": "cable NM-B (marca)",
+    "explanation_es": "Marca famosa de cable NM-B. En la obra le dicen Romex a todo el NM-B.",
+    "explanation_en": "Famous NM-B brand. On site, everyone calls NM-B 'Romex'."
+  },
+  {
+    "id": "thhn",
+    "term": "THHN",
+    "es": "cable THHN / cable suelto",
+    "explanation_es": "Conductor individual con aislante y nylon. Va dentro de tubería. Muy usado en comercial.",
+    "explanation_en": "Single insulated conductor with nylon coating. Goes in conduit. Common in commercial work.",
+    "say": "T H H N"
+  },
+  {
+    "id": "conduit",
+    "term": "Conduit",
+    "es": "tubería",
+    "explanation_es": "Tubo que protege los cables. Por dentro se jala el THHN.",
+    "explanation_en": "Pipe that protects wires. THHN gets pulled inside it."
+  },
+  {
+    "id": "emt",
+    "term": "EMT",
+    "es": "tubo conduit metálico delgado",
+    "explanation_es": "Tubería metálica de pared delgada. La más usada en comercial; se dobla con dobladora.",
+    "explanation_en": "Thin-wall metal conduit. Most common in commercial work; bent with a bender.",
+    "say": "E M T"
+  },
+  {
+    "id": "awg",
+    "term": "AWG",
+    "es": "calibre del cable",
+    "explanation_es": "Número del grosor del cable. Entre MÁS grande el número, MÁS delgado el cable.",
+    "explanation_en": "Wire size number. The BIGGER the number, the THINNER the wire.",
+    "say": "A W G"
+  },
+  {
+    "id": "jacket",
+    "term": "Jacket",
+    "es": "forro",
+    "explanation_es": "La cubierta de plástico de afuera del cable NM-B. Su color te dice el calibre.",
+    "explanation_en": "Outer plastic sheath of NM-B. Its color tells you the gauge."
+  },
+  {
+    "id": "conductor",
+    "term": "Conductor",
+    "es": "conductor / hilo",
+    "explanation_es": "Cada alambre de cobre que lleva corriente.",
+    "explanation_en": "Each copper wire that carries current."
+  },
+  {
+    "id": "insulation",
+    "term": "Insulation",
+    "es": "aislante",
+    "explanation_es": "El plástico que cubre cada conductor para que no haga contacto.",
+    "explanation_en": "The plastic covering each conductor so it can't make contact."
+  },
+  {
+    "id": "hot",
+    "term": "Hot",
+    "es": "vivo / fase / caliente",
+    "explanation_es": "El cable que trae el voltaje. Normalmente negro o rojo. Peligroso.",
+    "explanation_en": "The wire carrying voltage. Usually black or red. Dangerous."
+  },
+  {
+    "id": "neutral",
+    "term": "Neutral",
+    "es": "neutro",
+    "explanation_es": "El cable que regresa la corriente. Siempre blanco o gris. También puede dar toque.",
+    "explanation_en": "Carries current back. Always white or gray. It can still shock you."
+  },
+  {
+    "id": "ground",
+    "term": "Ground",
+    "es": "tierra",
+    "explanation_es": "Cable de seguridad, verde o de cobre desnudo. Lleva la corriente de una falla para que el breaker dispare.",
+    "explanation_en": "Safety wire, green or bare copper. Carries fault current so the breaker trips."
+  },
+  {
+    "id": "bare_copper",
+    "term": "Bare copper",
+    "es": "cobre desnudo",
+    "explanation_es": "Conductor sin aislante. En el NM-B es la tierra.",
+    "explanation_en": "Conductor with no insulation. In NM-B it's the ground."
+  },
+  {
+    "id": "breaker",
+    "term": "Breaker",
+    "es": "breque / interruptor termomagnético",
+    "explanation_es": "Corta la corriente si pasa más amperaje del que aguanta el cable.",
+    "explanation_en": "Cuts power if more current flows than the wire can handle."
+  },
+  {
+    "id": "panel",
+    "term": "Panel",
+    "es": "tablero / centro de carga",
+    "explanation_es": "La caja donde llegan los cables de la calle y salen los circuitos con sus breakers.",
+    "explanation_en": "Box where service comes in and circuits go out through breakers."
+  },
+  {
+    "id": "main_breaker",
+    "term": "Main breaker",
+    "es": "breaker principal / main",
+    "explanation_es": "El breaker grande que apaga todo el panel.",
+    "explanation_en": "The big breaker that shuts off the whole panel."
+  },
+  {
+    "id": "kill_the_main",
+    "term": "Kill the main",
+    "es": "bajar el main",
+    "explanation_es": "Apagar el breaker principal para quitar la corriente a todo el panel.",
+    "explanation_en": "Turn off the main breaker to de-energize the whole panel."
+  },
+  {
+    "id": "home_run",
+    "term": "Home run",
+    "es": "home run / cable al panel",
+    "explanation_es": "El cable que va desde el primer punto de un circuito directo hasta el panel.",
+    "explanation_en": "The cable run from the first point of a circuit straight to the panel."
+  },
+  {
+    "id": "make_up",
+    "term": "Make up",
+    "es": "hacer los empalmes",
+    "explanation_es": "Preparar los cables dentro de las cajas: pelar, unir tierras y neutros con wire nuts, dejar listos para poner dispositivos.",
+    "explanation_en": "Prep wires in boxes: strip, splice grounds and neutrals with wire nuts, ready for devices."
+  },
+  {
+    "id": "wire_nut",
+    "term": "Wire nut",
+    "es": "capuchón / conector de rosca",
+    "explanation_es": "Conector de plástico que se enrosca para unir cables.",
+    "explanation_en": "Twist-on plastic connector to splice wires."
+  },
+  {
+    "id": "copy_that",
+    "term": "Copy that",
+    "es": "entendido",
+    "explanation_es": "Así confirmas que entendiste una orden. Repite lo importante: “Copy, kitchen home run.”",
+    "explanation_en": "How you confirm an order. Repeat the key part: “Copy, kitchen home run.”"
+  },
+  {
+    "id": "say_again",
+    "term": "Say that again?",
+    "es": "¿me lo repites?",
+    "explanation_es": "Pide que te repitan. Mucho mejor que adivinar.",
+    "explanation_en": "Ask for a repeat. Much better than guessing."
+  },
+  {
+    "id": "heads_up",
+    "term": "Heads up!",
+    "es": "¡cuidado! / ¡aguas!",
+    "explanation_es": "Aviso de peligro: algo cae o viene algo. Pon atención y muévete.",
+    "explanation_en": "Danger warning: something is falling or coming. Look and move."
+  },
+  {
+    "id": "dead",
+    "term": "Dead",
+    "es": "muerto / sin corriente",
+    "explanation_es": "Sin voltaje. Solo es 'dead' si lo PROBASTE con tu tester.",
+    "explanation_en": "No voltage. It's only 'dead' if you TESTED it."
+  },
+  {
+    "id": "lockout_tagout",
+    "term": "Lockout/tagout",
+    "es": "bloqueo y etiquetado (LOTO)",
+    "explanation_es": "Apagar, ponerle TU candado y TU etiqueta al breaker para que nadie lo prenda mientras trabajas.",
+    "explanation_en": "Turn it off and put YOUR lock and tag on it so nobody turns it on while you work.",
+    "say": "lockout tagout"
+  },
+  {
+    "id": "verify_dead",
+    "term": "Verify dead",
+    "es": "verificar que no hay corriente",
+    "explanation_es": "Probar con el tester en todas las combinaciones antes de tocar. Primero prueba el tester en algo vivo.",
+    "explanation_en": "Test all combinations before touching. Prove your tester on a live source first."
+  },
+  {
+    "id": "continuity",
+    "term": "Continuity",
+    "es": "continuidad",
+    "explanation_es": "El cable está completo por dentro: el multímetro pita. Se mide SIN corriente.",
+    "explanation_en": "The wire is unbroken: the meter beeps. Measured with power OFF."
+  },
+  {
+    "id": "voltage",
+    "term": "Voltage",
+    "es": "voltaje",
+    "explanation_es": "La 'presión' eléctrica. En casas de EE.UU.: 120V y 240V.",
+    "explanation_en": "Electrical 'pressure'. US homes: 120V and 240V."
+  },
+  {
+    "id": "amps",
+    "term": "Amps",
+    "es": "amperes / amperaje",
+    "explanation_es": "Cuánta corriente pasa. El breaker se mide en amperes (15A, 20A, 30A).",
+    "explanation_en": "How much current flows. Breakers are rated in amps (15A, 20A, 30A)."
+  },
+  {
+    "id": "circuit",
+    "term": "Circuit",
+    "es": "circuito",
+    "explanation_es": "Un camino de corriente desde un breaker hasta los contactos o luces y de regreso.",
+    "explanation_en": "A path from a breaker to outlets or lights and back."
+  },
+  {
+    "id": "single_gang_box",
+    "term": "Single-gang box",
+    "es": "caja sencilla",
+    "explanation_es": "Caja para un solo contacto o switch. Las azules de plástico son para casa.",
+    "explanation_en": "Box for one device. Blue plastic ones are for houses."
+  },
+  {
+    "id": "strip",
+    "term": "Strip",
+    "es": "pelar",
+    "explanation_es": "Quitar el aislante de la punta del cable.",
+    "explanation_en": "Remove insulation from the wire end."
+  },
+  {
+    "id": "nick",
+    "term": "Nick",
+    "es": "mordida / raspón en el cobre",
+    "explanation_es": "Cortada en el cobre al pelar mal. El cable se debilita y se calienta. Se corta y se vuelve a pelar.",
+    "explanation_en": "Cut in the copper from bad stripping. Weakens and heats the wire. Cut it off and re-strip."
+  },
+  {
+    "id": "solid",
+    "term": "Solid",
+    "es": "sólido",
+    "explanation_es": "Cable de un solo alambre (no hilos). El NM-B de casa es sólido.",
+    "explanation_en": "Single-strand wire. House NM-B is solid."
+  },
+  {
+    "id": "stranded",
+    "term": "Stranded",
+    "es": "de hilos / multifilar",
+    "explanation_es": "Cable hecho de muchos hilos delgados. Más flexible. Común en THHN.",
+    "explanation_en": "Wire made of many fine strands. More flexible. Common in THHN."
+  },
+  {
+    "id": "re_identify",
+    "term": "Re-identify",
+    "es": "re-identificar / marcar con cinta",
+    "explanation_es": "Poner cinta de color a un cable blanco para marcarlo como vivo (hot).",
+    "explanation_en": "Wrapping colored tape on a white wire to mark it as hot."
+  },
+  {
+    "id": "switch_loop",
+    "term": "Switch loop",
+    "es": "vuelta del switch",
+    "explanation_es": "Cable que baja del foco al switch. El blanco se marca con cinta negra porque lleva vivo.",
+    "explanation_en": "Cable from the light down to the switch. The white is taped black because it carries hot."
+  },
+  {
+    "id": "three_phase",
+    "term": "3-phase",
+    "es": "trifásico",
+    "explanation_es": "Sistema de 3 fases vivas. En comercial: 208Y/120V o 480Y/277V.",
+    "explanation_en": "System with 3 hot phases. Commercial: 208Y/120V or 480Y/277V.",
+    "say": "three phase"
+  },
+  {
+    "id": "boy",
+    "term": "BOY",
+    "es": "café-naranja-amarillo",
+    "explanation_es": "Truco para recordar los colores de 480V: Brown, Orange, Yellow.",
+    "explanation_en": "Memory trick for 480V colors: Brown, Orange, Yellow.",
+    "say": "B O Y"
+  },
+  {
+    "id": "overload",
+    "term": "Overload",
+    "es": "sobrecarga",
+    "explanation_es": "Más carga de la que aguanta el circuito. El breaker se bota para proteger el cable.",
+    "explanation_en": "More load than the circuit can take. The breaker trips to protect the wire."
+  },
+  {
+    "id": "trip",
+    "term": "Trip",
+    "es": "botarse / dispararse",
+    "explanation_es": "Cuando el breaker se apaga solo por sobrecarga o falla.",
+    "explanation_en": "When a breaker shuts off by itself from overload or fault."
+  },
+  {
+    "id": "bus",
+    "term": "Bus bar",
+    "es": "barra del panel / bus",
+    "explanation_es": "Barras de metal dentro del panel donde se conectan los breakers. Siguen vivas aunque apagues un breaker.",
+    "explanation_en": "Metal bars in the panel where breakers attach. Still live even if one breaker is off."
+  },
+  {
+    "id": "multimeter_leads",
+    "term": "Test leads",
+    "es": "puntas del multímetro",
+    "explanation_es": "Cables rojo y negro del multímetro. Se sujetan del mango, nunca de la punta de metal.",
+    "explanation_en": "Red and black meter leads. Hold the grips, never the metal tips."
+  },
+  {
+    "id": "strip_gauge",
+    "term": "Strip gauge",
+    "es": "guía de pelado",
+    "explanation_es": "Marca en el dispositivo o breaker que te dice cuánto pelar.",
+    "explanation_en": "Mark on a device or breaker showing how much to strip."
+  },
+  {
+    "id": "coil",
+    "term": "Roll / coil",
+    "es": "rollo",
+    "explanation_es": "Como viene el cable NM-B: 250 pies en un rollo.",
+    "explanation_en": "How NM-B comes: 250 ft in a coil."
+  },
+  {
+    "id": "spool",
+    "term": "Spool / reel",
+    "es": "carrete",
+    "explanation_es": "Carrete de THHN. Se monta en un rack para jalar cable.",
+    "explanation_en": "THHN reel. Mounted on a rack to pull wire."
+  }
+]

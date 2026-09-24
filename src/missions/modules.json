@@ -1,0 +1,106 @@
+[
+  {
+    "id": "m0",
+    "number": 0,
+    "title": "modules.m0.title",
+    "desc": "modules.m0.desc",
+    "icon": "🦺",
+    "available": true,
+    "missions": [
+      "m0-1",
+      "m0-2",
+      "m0-3",
+      "m0-4"
+    ]
+  },
+  {
+    "id": "m1",
+    "number": 1,
+    "title": "modules.m1.title",
+    "desc": "modules.m1.desc",
+    "icon": "🧰",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m2",
+    "number": 2,
+    "title": "modules.m2.title",
+    "desc": "modules.m2.desc",
+    "icon": "🔌",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m3",
+    "number": 3,
+    "title": "modules.m3.title",
+    "desc": "modules.m3.desc",
+    "icon": "🏠",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m4",
+    "number": 4,
+    "title": "modules.m4.title",
+    "desc": "modules.m4.desc",
+    "icon": "💡",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m5",
+    "number": 5,
+    "title": "modules.m5.title",
+    "desc": "modules.m5.desc",
+    "icon": "🔍",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m6",
+    "number": 6,
+    "title": "modules.m6.title",
+    "desc": "modules.m6.desc",
+    "icon": "🏢",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m7",
+    "number": 7,
+    "title": "modules.m7.title",
+    "desc": "modules.m7.desc",
+    "icon": "⚡",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m8",
+    "number": 8,
+    "title": "modules.m8.title",
+    "desc": "modules.m8.desc",
+    "icon": "🖥️",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m9",
+    "number": 9,
+    "title": "modules.m9.title",
+    "desc": "modules.m9.desc",
+    "icon": "📐",
+    "available": false,
+    "missions": []
+  },
+  {
+    "id": "m10",
+    "number": 10,
+    "title": "modules.m10.title",
+    "desc": "modules.m10.desc",
+    "icon": "👷",
+    "available": false,
+    "missions": []
+  }
+]

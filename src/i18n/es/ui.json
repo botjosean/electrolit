@@ -1,0 +1,112 @@
+{
+  "back": "Volver",
+  "close": "Cerrar",
+  "continue": "Continuar",
+  "finish": "Terminar",
+  "expand": "Mostrar",
+  "collapse": "Minimizar",
+  "terms": "Términos",
+  "hint": "Pista (−5 puntos)",
+  "step": "Paso {n}/{total}",
+  "steps": "{n} pasos",
+  "best": "Mejor: {n}",
+  "play": "Jugar",
+  "replay": "Repetir",
+  "module": "Módulo",
+  "notFound": "No encontramos esa misión.",
+  "char": {
+    "foreman": {
+      "name": "Big Mike",
+      "role": "Foreman · habla inglés"
+    },
+    "instructor": {
+      "name": "Rosa",
+      "role": "Journeyman · tu instructora"
+    }
+  },
+  "term": {
+    "english": "En inglés",
+    "spanish": "En español",
+    "what": "¿Qué es?",
+    "listen": "Escuchar"
+  },
+  "feedback": {
+    "wrong": "Eso no es. Fíjate bien y vuelve a intentar.",
+    "order": "Buen objeto, pero no en ese orden. ¿Qué va primero?",
+    "good": "¡Bien!",
+    "done": "¡Listo!"
+  },
+  "click": {
+    "progress": "Encontrados: {n}/{total}"
+  },
+  "drag": {
+    "progress": "Listos: {n}/{total}",
+    "tip": "Arrastra cada objeto a su lugar, o tócalo y luego toca su destino.",
+    "nowTarget": "ahora toca el destino"
+  },
+  "meter": {
+    "dial": "Selector",
+    "mode": {
+      "VAC": "Volts AC",
+      "VDC": "Volts DC",
+      "OHM": "Ohms",
+      "CONT": "Continuidad"
+    },
+    "red": "Punta roja",
+    "black": "Punta negra",
+    "tip": "Gira el selector y toca dos puntos en la escena para poner las puntas.",
+    "confirm": "Registrar lectura",
+    "wrongMode": "El selector no está en el modo correcto para esta prueba.",
+    "wrongPoints": "Las puntas no están en los puntos correctos."
+  },
+  "hold": {
+    "target": "Objetivo",
+    "press": {
+      "strip": "Mantén presionado para pelar",
+      "torque": "Mantén presionado para apretar",
+      "bend": "Mantén presionado para doblar"
+    },
+    "holding": {
+      "strip": "Pelando… ¡suelta a tiempo!",
+      "torque": "Apretando… ¡suelta a tiempo!",
+      "bend": "Doblando… ¡suelta a tiempo!"
+    }
+  },
+  "inspect": {
+    "progress": "Revisados: {n}/{total} — toca cada punto numerado.",
+    "findTip": "Toca los puntos que tengan un problema (marcados: {n}) y luego pulsa Reportar.",
+    "marked": "marcado como problema",
+    "unmarked": "sin marcar",
+    "report": "Reportar",
+    "falsePositive": "Marcaste algo que está bien. Revisa otra vez.",
+    "missed": "Todavía falta un problema por encontrar."
+  },
+  "results": {
+    "safetyFail": "Falla de seguridad",
+    "failTitle": "Misión fallida",
+    "failRule": "Regla de oro: si no lo probaste, NO está muerto. Si no tiene candado, NO es seguro.",
+    "complete": "Misión completada",
+    "safety": "Seguridad",
+    "correctness": "Precisión",
+    "speed": "Velocidad",
+    "total": "Puntos",
+    "mistakes": "{n} errores",
+    "boss": "Lo que diría el jefe",
+    "retry": "Reintentar",
+    "next": "Siguiente misión",
+    "toModule": "Volver al módulo"
+  },
+  "menu": {
+    "tagline": "Trabajo eléctrico real en EE.UU. — en español",
+    "intro": "Aprende el trabajo de electricista como se hace en la obra: con tu foreman dando órdenes en inglés y Rosa, tu instructora, explicándote todo en español. Toca las palabras resaltadas para ver qué significan y escuchar cómo se dicen.",
+    "glossary": "Glosario",
+    "overall": "Progreso: {n}/{total} misiones",
+    "soon": "Próximamente",
+    "reset": "Borrar mi progreso",
+    "resetConfirm": "¿Seguro que quieres borrar todo tu progreso?",
+    "disclaimer": "Simulador educativo. No sustituye la capacitación oficial, el NEC ni las reglas de OSHA. Trabaja siempre bajo supervisión de un electricista con licencia."
+  },
+  "glossary": {
+    "search": "Buscar término…"
+  }
+}

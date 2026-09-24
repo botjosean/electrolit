@@ -1,0 +1,46 @@
+{
+  "m0": {
+    "title": "First day on the job site",
+    "desc": "PPE, tool bag, material delivery, and how to take and answer the foreman's orders."
+  },
+  "m1": {
+    "title": "Tools and wire",
+    "desc": "Identify tools, AWG sizes, NM-B vs THHN, color codes, stripping, and wire-to-breaker sizing (14→15A, 12→20A, 10→30A)."
+  },
+  "m2": {
+    "title": "200A residential panel",
+    "desc": "Kill the main, verify dead, install breakers, land hot/neutral/ground, neutral-ground bond only at the main."
+  },
+  "m3": {
+    "title": "Rough-in from the plan",
+    "desc": "Mount boxes, drill studs, home runs, staple cable, label."
+  },
+  "m4": {
+    "title": "Trim out",
+    "desc": "Receptacles, single-pole and 3-way switches, GFCI/AFCI."
+  },
+  "m5": {
+    "title": "Troubleshooting",
+    "desc": "Multimeter readings, open neutral, tripped breaker, dead outlet."
+  },
+  "m6": {
+    "title": "Commercial",
+    "desc": "EMT bending (90, offset, saddle), pulling THHN, 3-phase 208/120 and 480/277."
+  },
+  "m7": {
+    "title": "Generator + transfer switch",
+    "desc": "Generator and automatic transfer switch (ATS)."
+  },
+  "m8": {
+    "title": "Data center",
+    "desc": "Cable tray, busway, UPS, PDUs, redundant A/B feeds."
+  },
+  "m9": {
+    "title": "Reading plans",
+    "desc": "Symbols, panel schedules and basic load calculation."
+  },
+  "m10": {
+    "title": "Foreman mode",
+    "desc": "Read the plan, do the takeoff, assign tasks to your crew and inspect their work."
+  }
+}

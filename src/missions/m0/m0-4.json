@@ -1,0 +1,233 @@
+{
+  "id": "m0-4",
+  "module": "m0",
+  "title": "m0.m4.title",
+  "desc": "m0.m4.desc",
+  "env": "yard",
+  "parSeconds": 180,
+  "characters": {
+    "foreman": {
+      "pos": [
+        -0.6,
+        0,
+        -0.4
+      ]
+    },
+    "instructor": {
+      "pos": [
+        0.9,
+        0,
+        -0.1
+      ]
+    }
+  },
+  "camera": {
+    "pos": [
+      0.3,
+      1.7,
+      2.6
+    ],
+    "target": [
+      -0.1,
+      1.2,
+      -0.3
+    ],
+    "w": 2.6
+  },
+  "props": [
+    {
+      "id": "van",
+      "kind": "pickup",
+      "pos": [
+        3.4,
+        0,
+        -2.2
+      ],
+      "rot": [
+        0,
+        -0.6,
+        0
+      ],
+      "params": {
+        "color": "#f0f0f0"
+      }
+    },
+    {
+      "id": "horse",
+      "kind": "sawhorse",
+      "pos": [
+        -2.2,
+        0,
+        0.4
+      ],
+      "rot": [
+        0,
+        0.5,
+        0
+      ]
+    },
+    {
+      "id": "roll",
+      "kind": "nm-roll",
+      "pos": [
+        -2.2,
+        0.76,
+        0.4
+      ],
+      "params": {
+        "color": "#f2d024"
+      }
+    },
+    {
+      "id": "bag",
+      "kind": "tool-bag",
+      "pos": [
+        1.8,
+        0,
+        0.6
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m0.m4.s1"
+    },
+    {
+      "id": "s2",
+      "type": "choose-option",
+      "speaker": "foreman",
+      "order": "run_home_run",
+      "text": "m0.m4.s2",
+      "options": [
+        {
+          "text": "m0.m4.s2a",
+          "correct": true
+        },
+        {
+          "text": "m0.m4.s2b",
+          "feedback": "m0.m4.s2bFb"
+        },
+        {
+          "text": "m0.m4.s2c",
+          "feedback": "m0.m4.s2cFb"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m0.m4.s3",
+      "options": [
+        {
+          "text": "m0.m4.s3a",
+          "correct": true,
+          "feedback": "m0.m4.s3aFb"
+        },
+        {
+          "text": "m0.m4.s3b",
+          "feedback": "m0.m4.s3bFb"
+        },
+        {
+          "text": "m0.m4.s3c",
+          "feedback": "m0.m4.s3cFb"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "type": "choose-option",
+      "speaker": "foreman",
+      "order": "make_up_boxes",
+      "text": "m0.m4.s4",
+      "options": [
+        {
+          "text": "m0.m4.s4a",
+          "correct": true
+        },
+        {
+          "text": "m0.m4.s4b",
+          "feedback": "m0.m4.s4bFb"
+        },
+        {
+          "text": "m0.m4.s4c",
+          "feedback": "m0.m4.s4cFb"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "type": "choose-option",
+      "speaker": "foreman",
+      "order": "garbled",
+      "text": "m0.m4.s5",
+      "options": [
+        {
+          "text": "m0.m4.s5a",
+          "correct": true,
+          "feedback": "m0.m4.s5aFb"
+        },
+        {
+          "text": "m0.m4.s5b",
+          "feedback": "m0.m4.s5bFb"
+        },
+        {
+          "text": "m0.m4.s5c",
+          "feedback": "m0.m4.s5cFb"
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "type": "choose-option",
+      "speaker": "foreman",
+      "order": "is_it_hot",
+      "text": "m0.m4.s6",
+      "options": [
+        {
+          "text": "m0.m4.s6a",
+          "correct": true,
+          "feedback": "m0.m4.s6aFb"
+        },
+        {
+          "text": "m0.m4.s6b",
+          "unsafe": "m0.m4.failAssume"
+        },
+        {
+          "text": "m0.m4.s6c",
+          "feedback": "m0.m4.s6cFb"
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "type": "choose-option",
+      "speaker": "foreman",
+      "order": "kill_main",
+      "text": "m0.m4.s7",
+      "options": [
+        {
+          "text": "m0.m4.s7a",
+          "correct": true
+        },
+        {
+          "text": "m0.m4.s7b",
+          "feedback": "m0.m4.s7bFb"
+        },
+        {
+          "text": "m0.m4.s7c",
+          "feedback": "m0.m4.s7cFb"
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m0.m4.s8"
+    }
+  ]
+}

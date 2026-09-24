@@ -1,0 +1,152 @@
+[
+  {
+    "id": "suit_up",
+    "en": "Suit up. No PPE, no work.",
+    "es": "Ponte tu equipo. Sin EPP no se trabaja."
+  },
+  {
+    "id": "is_that_cord_good",
+    "en": "Is that cord any good?",
+    "es": "¿Sirve esa extensión?"
+  },
+  {
+    "id": "hand_me_linemans",
+    "en": "Hand me the lineman's.",
+    "es": "Pásame las pinzas de electricista."
+  },
+  {
+    "id": "grab_strippers",
+    "en": "Grab your strippers.",
+    "es": "Agarra tu peladora."
+  },
+  {
+    "id": "need_flathead",
+    "en": "I need a flathead.",
+    "es": "Necesito un desarmador plano."
+  },
+  {
+    "id": "wheres_tester",
+    "en": "Where's your tick tester?",
+    "es": "¿Dónde está tu probador sin contacto?"
+  },
+  {
+    "id": "toss_tape",
+    "en": "Toss me your tape.",
+    "es": "Aviéntame tu cinta de medir."
+  },
+  {
+    "id": "materials_here",
+    "en": "Material's here. Check it against the ticket.",
+    "es": "Llegó el material. Revísalo contra el ticket."
+  },
+  {
+    "id": "good_catch",
+    "en": "Good catch. Write it on the ticket before you sign.",
+    "es": "Bien visto. Anótalo en el ticket antes de firmar."
+  },
+  {
+    "id": "stage_it",
+    "en": "Stage it by area. Keep the breakers dry.",
+    "es": "Acomódalo por área. Los breakers, secos."
+  },
+  {
+    "id": "run_home_run",
+    "en": "Run a home run from the kitchen to the panel.",
+    "es": "Tira un home run de la cocina al panel."
+  },
+  {
+    "id": "make_up_boxes",
+    "en": "Make up the boxes in the living room.",
+    "es": "Haz los empalmes de las cajas de la sala."
+  },
+  {
+    "id": "garbled",
+    "en": "Grab me the... *(noise)* ...from the van.",
+    "es": "Tráeme el... (no se entiende) ...de la camioneta."
+  },
+  {
+    "id": "is_it_hot",
+    "en": "Is that circuit hot?",
+    "es": "¿Ese circuito tiene corriente?"
+  },
+  {
+    "id": "kill_main",
+    "en": "Kill the main.",
+    "es": "Baja el breaker principal."
+  },
+  {
+    "id": "grab_12_2",
+    "en": "Grab me a roll of twelve-two.",
+    "es": "Pásame un rollo de 12/2."
+  },
+  {
+    "id": "swap_breaker",
+    "en": "Swap that breaker out.",
+    "es": "Cambia ese breaker."
+  },
+  {
+    "id": "boss_great_1",
+    "en": "Nice work. You can come back tomorrow.",
+    "es": "Buen trabajo. Puedes regresar mañana."
+  },
+  {
+    "id": "boss_great_2",
+    "en": "That's how it's done. Clean and safe.",
+    "es": "Así se hace. Limpio y seguro."
+  },
+  {
+    "id": "boss_great_3",
+    "en": "Good hand. I'll put you with the crew.",
+    "es": "Buena mano. Te voy a poner con la cuadrilla."
+  },
+  {
+    "id": "boss_ok_1",
+    "en": "Not bad. Keep your eyes open and you'll get there.",
+    "es": "Nada mal. Pon atención y vas a llegar."
+  },
+  {
+    "id": "boss_ok_2",
+    "en": "It works. Next time, do it cleaner.",
+    "es": "Funciona. La próxima, más limpio."
+  },
+  {
+    "id": "boss_ok_3",
+    "en": "Alright. Ask if you're not sure — don't guess.",
+    "es": "Está bien. Si no estás seguro, pregunta; no adivines."
+  },
+  {
+    "id": "boss_slow_1",
+    "en": "It's right, but we're not getting paid by the hour here. Pick it up.",
+    "es": "Está bien hecho, pero aquí no se cobra por hora. Apúrale."
+  },
+  {
+    "id": "boss_slow_2",
+    "en": "Good work, slow hands. Speed comes with practice.",
+    "es": "Buen trabajo, manos lentas. La velocidad llega con práctica."
+  },
+  {
+    "id": "boss_sloppy_1",
+    "en": "Too many mistakes. Slow down and think before you grab.",
+    "es": "Demasiados errores. Más calma y piensa antes de agarrar."
+  },
+  {
+    "id": "boss_sloppy_2",
+    "en": "I'd have to redo half of that. Practice and come back.",
+    "es": "La mitad lo tendría que rehacer. Practica y regresa."
+  },
+  {
+    "id": "boss_fail_1",
+    "en": "Stop. Go home and think about what just happened.",
+    "es": "Alto. Vete a casa y piensa en lo que acaba de pasar."
+  },
+  {
+    "id": "boss_fail_2",
+    "en": "You don't get a second chance with electricity. Never again.",
+    "es": "Con la electricidad no hay segunda oportunidad. Nunca más."
+  },
+  {
+    "id": "boss_fail_3",
+    "en": "That's how people get hurt. Not on my job.",
+    "es": "Así es como se lastima la gente. En mi obra, no."
+  }
+]
