@@ -3,7 +3,10 @@ import { getPhrase } from '../../engine/glossary';
 import { useT } from '../../engine/i18n';
 import { dragSources, termIds } from '../../engine/logic';
 import { RichText } from '../../engine/richText';
-import { speakEnglish } from '../../engine/speech';
+import { getPhrase as phraseOf } from '../../engine/glossary';
+import { speakEnglish, speakSequence, stopSpeech } from '../../engine/speech';
+import { getVideoTopic } from '../../engine/videos';
+import { VideoLinks } from './VideoLinks';
 import { useMission, useSettings } from '../../engine/store';
 import { useUi } from '../../engine/ui';
 import type { ChooseOptionStep, InspectStep, Speaker, Step } from '../../engine/types';
@@ -156,6 +159,34 @@ function StepControls({ step }: { step: Step }) {
   }
 }
 
+function StepHelp({ step, demoPlaying, videoId }: { step: Step; demoPlaying: boolean; videoId?: string }) {
+  const done = useMission((s) => s.step.done);
+  const useHint = useMission((s) => s.useHint);
+  const t = useT();
+  const topic = videoId ? getVideoTopic(videoId) : undefined;
+  const canDemo = step.type !== 'dialogue' && !done;
+  if (!canDemo && !topic) return null;
+  return (
+    <div className="step-help">
+      {canDemo ? (
+        <button
+          type="button"
+          className="btn small demo-btn"
+          data-testid="demo-btn"
+          disabled={demoPlaying}
+          onClick={() => {
+            useHint(); // costs the same as a hint (once per step)
+            useUi.getState().setDemo(Date.now());
+          }}
+        >
+          👀 {t('ui.demo.button')}
+        </button>
+      ) : null}
+      {topic ? <VideoLinks en={topic.en} es={topic.es} compact /> : null}
+    </div>
+  );
+}
+
 export function Feedback() {
   const feedback = useMission((s) => s.feedback);
   const t = useT();
@@ -178,6 +209,10 @@ export function StepPanel() {
   const showTerms = useSettings((s) => s.showTerms);
   const setShowTerms = useSettings((s) => s.setShowTerms);
   const setFocus = useUi((s) => s.setInspectFocus);
+  const voice = useSettings((s) => s.voice);
+  const lang = useSettings((s) => s.lang);
+  const demo = useUi((s) => s.demo);
+  const status = useMission((s) => s.status);
   const [collapsed, setCollapsed] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const t = useT();
@@ -185,7 +220,22 @@ export function StepPanel() {
   useEffect(() => {
     setCollapsed(false);
     setFocus(null);
+    useUi.getState().setDemo(null);
   }, [stepIndex, setFocus]);
+
+  // Rosa reads each step aloud when the voice is on (the foreman's order is spoken in English first)
+  const readAloud = () => {
+    const m = useMission.getState().mission;
+    const s = m?.steps[useMission.getState().stepIndex];
+    if (!s) return;
+    const order = s.order ? phraseOf(s.order) : undefined;
+    speakSequence([...(order ? [{ text: order.en, lang: 'en' as const }] : []), { text: t(s.text), lang }]);
+  };
+  useEffect(() => {
+    if (voice && status === 'playing') readAloud();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepIndex, voice, lang]);
+  useEffect(() => () => stopSpeech(), []);
 
   // report the area the panel covers so the 3D view can recenter in the free space.
   // Measured on step change / resize only, so feedback messages don't make the scene jump.
@@ -231,6 +281,9 @@ export function StepPanel() {
         {step.order ? <OrderBox id={step.order} /> : null}
         <div className="bubble">
           <RichText text={text} />
+          <button type="button" className="bubble-speak" onClick={readAloud} aria-label={t('ui.readAloud')} title={t('ui.readAloud')} data-testid="read-aloud">
+            🔊
+          </button>
         </div>
         {terms.length ? (
           <div className="terms">
@@ -242,6 +295,7 @@ export function StepPanel() {
         ) : null}
         <Feedback />
         <StepControls step={step} />
+        <StepHelp step={step} demoPlaying={demo != null} videoId={step.video ?? mission.video} />
         {done ? (
           <button type="button" className="btn primary continue" data-testid="continue" onClick={next}>
             {isLast ? t('ui.finish') : t('ui.continue')} →

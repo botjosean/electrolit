@@ -1191,3 +1191,216 @@ h3 {
 .loading {
   color: var(--muted);
 }
+
+/* ---------- read aloud, help row, videos ---------- */
+.bubble {
+  position: relative;
+  padding-right: 44px;
+}
+.bubble-speak {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #ddd6c4;
+  background: #efeadb;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.voice-btn.on {
+  background: #1d3b5c;
+  border-color: var(--blue);
+}
+.step-help {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.btn.small {
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+.demo-btn {
+  background: #22344a;
+  border-color: #3b5878;
+}
+.video-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 13.5px;
+}
+.video-links a {
+  color: #ff8b8b;
+  font-weight: 650;
+  text-decoration: none;
+}
+.video-links a:hover {
+  text-decoration: underline;
+}
+.video-links a.video-alt {
+  color: var(--muted);
+  font-weight: 500;
+}
+.video-icon {
+  width: 22px;
+  height: 16px;
+  border-radius: 4px;
+  background: #e62117;
+  color: #fff;
+  font-size: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.term-card .video-links a {
+  color: #c21d1d;
+}
+.term-card .video-links a.video-alt {
+  color: #7a6f55;
+}
+
+/* ---------- "show me how" demo ---------- */
+.demo-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+.demo-trail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.demo-trail line {
+  stroke: #38d9ff;
+  stroke-width: 5;
+  stroke-dasharray: 10 8;
+  stroke-linecap: round;
+  animation: dash 0.6s linear infinite;
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+.demo-hand {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 0.7s cubic-bezier(0.45, 0, 0.25, 1);
+  pointer-events: none;
+}
+.demo-emoji {
+  position: absolute;
+  left: -10px;
+  top: -2px;
+  font-size: 42px;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.5));
+  transition: transform 0.15s;
+}
+.demo-hand.press .demo-emoji {
+  transform: translateY(6px) scale(0.9);
+}
+.demo-ring {
+  position: absolute;
+  left: -22px;
+  top: -22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 216, 74, 0.9);
+  opacity: 0;
+}
+.demo-hand.press .demo-ring {
+  animation: ring 0.6s ease-out infinite;
+}
+@keyframes ring {
+  from {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.demo-caption {
+  position: absolute;
+  top: calc(max(8px, env(safe-area-inset-top)) + 62px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 22, 26, 0.92);
+  border: 1px solid var(--yellow);
+  color: #fff;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.demo-skip {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* ---------- curated channels ---------- */
+.channels {
+  margin-top: 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.channels h2 {
+  font-size: 16px;
+}
+.channels-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 4px 0 10px;
+}
+.channels ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.channels a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+}
+.channels a:hover strong {
+  text-decoration: underline;
+}
+.channel-lang {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 5px;
+}
+.channel-desc {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 2px 0 0 30px;
+  line-height: 1.35;
+}

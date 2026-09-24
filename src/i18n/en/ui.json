@@ -94,7 +94,10 @@
     "boss": "What the boss would say",
     "retry": "Retry",
     "next": "Next mission",
-    "toModule": "Back to module"
+    "toModule": "Back to module",
+    "share": "Challenge a friend",
+    "copied": "Link copied!",
+    "shareText": "I scored {score} {stars} on “{title}” in Electrician Sim US. Can you beat me? 👷⚡"
   },
   "menu": {
     "tagline": "Real US electrical work — for Spanish speakers",
@@ -108,5 +111,37 @@
   },
   "glossary": {
     "search": "Search term…"
+  },
+  "channels": {
+    "title": "📺 Also learn from these YouTube channels",
+    "note": "Real electricians' channels.",
+    "electrician_u": "A Texas master electrician: field work, theory and tools. Best place to start.",
+    "mike_holt": "The NEC code master. For when you go for your license.",
+    "engineering_mindset": "Whiteboard-style animations of how electricity works.",
+    "neccicans": "In Spanish, for Latino electricians working under the NEC."
+  },
+  "readAloud": "Listen",
+  "voice": "Voice: read every step aloud",
+  "video": {
+    "watch": "Watch real videos of how it's done",
+    "english": "(English)"
+  },
+  "demo": {
+    "button": "Show me how",
+    "intro": "Watch how it's done.",
+    "watch": "Watch…",
+    "tapHere": "Tap here",
+    "dragHere": "Drag from here… to here",
+    "thisOne": "This is the right one",
+    "dial": "First set the dial here",
+    "red": "Red lead here",
+    "black": "Black lead here",
+    "record": "Then record the reading",
+    "hold": "Press and hold…",
+    "release": "Release in the green zone!",
+    "problem": "There's a problem here",
+    "report": "Then report it",
+    "yourTurn": "Now you do it!",
+    "skip": "tap to skip"
   }
 }

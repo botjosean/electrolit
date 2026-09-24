@@ -247,7 +247,8 @@
       "id": "s3",
       "type": "dialogue",
       "speaker": "instructor",
-      "text": "m1.m2.s3"
+      "text": "m1.m2.s3",
+      "video": "nm_vs_thhn"
     },
     {
       "id": "s4",
@@ -357,7 +358,8 @@
           "label": "m1.m2.pWires",
           "info": "m1.m2.pWiresInfo"
         }
-      ]
+      ],
+      "video": "nm_vs_thhn"
     },
     {
       "id": "s7",
@@ -384,7 +386,8 @@
         ],
         "w": 1.95
       },
-      "text": "m1.m2.s7"
+      "text": "m1.m2.s7",
+      "video": "nm_vs_thhn"
     },
     {
       "id": "s8",
@@ -405,7 +408,8 @@
           "text": "m1.m2.s8c",
           "feedback": "m1.m2.s8cFb"
         }
-      ]
+      ],
+      "video": "nm_vs_thhn"
     },
     {
       "id": "s9",
@@ -426,7 +430,9 @@
           "text": "m1.m2.s9c",
           "feedback": "m1.m2.s9cFb"
         }
-      ]
+      ],
+      "video": "nm_vs_thhn"
     }
-  ]
+  ],
+  "video": "awg_sizes"
 }

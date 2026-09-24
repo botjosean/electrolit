@@ -1,0 +1,26 @@
+[
+  {
+    "id": "electrician_u",
+    "name": "Electrician U",
+    "url": "https://www.youtube.com/@ElectricianU",
+    "lang": "en"
+  },
+  {
+    "id": "mike_holt",
+    "name": "Mike Holt (NEC)",
+    "url": "https://www.youtube.com/@MikeHoltNEC",
+    "lang": "en"
+  },
+  {
+    "id": "engineering_mindset",
+    "name": "The Engineering Mindset",
+    "url": "https://www.youtube.com/c/Theengineeringmindset",
+    "lang": "en"
+  },
+  {
+    "id": "neccicans",
+    "name": "NECCICANS — NEC y electricidad para latinos en USA",
+    "url": "https://www.youtube.com/@SIMAN-ENGINEERING",
+    "lang": "es"
+  }
+]

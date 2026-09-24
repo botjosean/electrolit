@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { nextMissionId } from '../../engine/content';
 import { useT } from '../../engine/i18n';
 import { RichText } from '../../engine/richText';
@@ -31,7 +32,21 @@ export function Results({ onRetry }: { onRetry: () => void }) {
   const result = useMission((s) => s.result);
   const mission = useMission((s) => s.mission);
   const t = useT();
+  const [copied, setCopied] = useState(false);
   if (!result || !mission) return null;
+  const share = async () => {
+    const url = `${location.origin}${location.pathname}#/mission/${mission.id}`;
+    const text = t('ui.results.shareText', { title: t(mission.title), score: result.scores.total, stars: '★'.repeat(result.scores.stars) });
+    try {
+      if (navigator.share) await navigator.share({ title: 'Electrician Sim US', text, url });
+      else {
+        await navigator.clipboard.writeText(`${text} ${url}`);
+        setCopied(true);
+      }
+    } catch {
+      /* user cancelled */
+    }
+  };
   const next = nextMissionId(mission.id);
   const { scores } = result;
   return (
@@ -82,6 +97,11 @@ export function Results({ onRetry }: { onRetry: () => void }) {
           {!result.failed && next ? (
             <button type="button" className="btn primary" onClick={() => go(`/mission/${next}`)} data-testid="next-mission">
               {t('ui.results.next')} →
+            </button>
+          ) : null}
+          {!result.failed ? (
+            <button type="button" className="btn" onClick={share} data-testid="share">
+              📣 {copied ? t('ui.results.copied') : t('ui.results.share')}
             </button>
           ) : null}
           <button type="button" className="btn" onClick={() => go(`/module/${mission.module}`)} data-testid="to-module">

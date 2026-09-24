@@ -331,7 +331,8 @@
           "text": "m0.m2.s7c",
           "feedback": "m0.m2.s7cFb"
         }
-      ]
+      ],
+      "video": "ncvt_use"
     },
     {
       "id": "s8",
@@ -339,5 +340,6 @@
       "speaker": "instructor",
       "text": "m0.m2.s8"
     }
-  ]
+  ],
+  "video": "electrician_tools"
 }

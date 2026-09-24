@@ -94,7 +94,10 @@
     "boss": "Lo que diría el jefe",
     "retry": "Reintentar",
     "next": "Siguiente misión",
-    "toModule": "Volver al módulo"
+    "toModule": "Volver al módulo",
+    "share": "Retar a un amigo",
+    "copied": "¡Link copiado!",
+    "shareText": "Saqué {score} puntos {stars} en “{title}” en Electrician Sim US. ¿Me ganas? 👷⚡"
   },
   "menu": {
     "tagline": "Trabajo eléctrico real en EE.UU. — en español",
@@ -108,5 +111,37 @@
   },
   "glossary": {
     "search": "Buscar término…"
+  },
+  "channels": {
+    "title": "📺 Aprende también con estos canales de YouTube",
+    "note": "Canales de electricistas reales. La mayoría en inglés: activa los subtítulos traducidos al español.",
+    "electrician_u": "Un master electrician de Texas: trabajo de campo, teoría y herramientas. El mejor para empezar.",
+    "mike_holt": "El maestro del código NEC. Para cuando quieras sacar tu licencia.",
+    "engineering_mindset": "Animaciones tipo pizarra que explican cómo funciona la electricidad.",
+    "neccicans": "En español, para electricistas latinos que trabajan con el NEC en EE.UU."
+  },
+  "readAloud": "Escuchar a Rosa",
+  "voice": "Voz: Rosa lee cada paso en voz alta",
+  "video": {
+    "watch": "Ver videos reales de cómo se hace",
+    "english": "(en inglés, hay más)"
+  },
+  "demo": {
+    "button": "Muéstrame cómo",
+    "intro": "Mira cómo se hace.",
+    "watch": "Mira…",
+    "tapHere": "Toca aquí",
+    "dragHere": "Arrastra de aquí… hasta aquí",
+    "thisOne": "Esta es la buena",
+    "dial": "Primero gira el selector aquí",
+    "red": "Punta roja aquí",
+    "black": "Punta negra aquí",
+    "record": "Y registras la lectura",
+    "hold": "Mantén presionado…",
+    "release": "¡Suelta en la zona verde!",
+    "problem": "Aquí hay un problema",
+    "report": "Y reportas",
+    "yourTurn": "¡Ahora hazlo tú!",
+    "skip": "toca para saltar"
   }
 }

@@ -3,6 +3,8 @@ import { useT } from '../../engine/i18n';
 import { speakEnglish, speechSupported } from '../../engine/speech';
 import { useSettings } from '../../engine/store';
 import { useUi } from '../../engine/ui';
+import { termQueries } from '../../engine/videos';
+import { VideoLinks } from './VideoLinks';
 
 export function TermCard() {
   const id = useUi((s) => s.termCard);
@@ -37,6 +39,7 @@ export function TermCard() {
           <div className="term-card-kicker">{t('ui.term.what')}</div>
           <p>{lang === 'es' ? term.explanation_es : term.explanation_en}</p>
         </div>
+        <VideoLinks {...termQueries(term)} />
       </div>
     </div>
   );

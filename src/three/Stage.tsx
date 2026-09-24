@@ -9,6 +9,7 @@ import { Characters } from './Characters';
 import { Environment } from './env/Environments';
 import { PropNode, propWorldCenter, setControlsEnabled } from './PropNode';
 import { Projector } from './Projector';
+import { screenApi } from './screen';
 
 declare global {
   interface Window {
@@ -248,7 +249,11 @@ function DebugBridge() {
       }
       return names;
     };
+    screenApi.project = project;
     window.__sim = { ...(window.__sim ?? {}), project, hitTest };
+    return () => {
+      if (screenApi.project === project) screenApi.project = null;
+    };
   }, [scene, camera, gl]);
   return null;
 }

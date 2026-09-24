@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useT } from '../../engine/i18n';
-import { now, useMission } from '../../engine/store';
+import { stopSpeech } from '../../engine/speech';
+import { now, useMission, useSettings } from '../../engine/store';
 import { go } from '../router';
 import { LangToggle } from '../LangToggle';
 
@@ -27,6 +28,8 @@ export function TopBar() {
   const useHint = useMission((s) => s.useHint);
   const hintActive = useMission((s) => s.hintActive);
   const done = useMission((s) => s.step.done);
+  const voice = useSettings((s) => s.voice);
+  const setVoice = useSettings((s) => s.setVoice);
   const t = useT();
   if (!mission) return null;
   const step = mission.steps[stepIndex];
@@ -52,6 +55,20 @@ export function TopBar() {
         data-testid="hint"
       >
         💡
+      </button>
+      <button
+        type="button"
+        className={`icon-btn voice-btn ${voice ? 'on' : ''}`}
+        onClick={() => {
+          if (voice) stopSpeech();
+          setVoice(!voice);
+        }}
+        aria-pressed={voice}
+        title={t('ui.voice')}
+        aria-label={t('ui.voice')}
+        data-testid="voice"
+      >
+        {voice ? '🔊' : '🔈'}
       </button>
       <LangToggle />
       <div className="step-progress" style={{ width: `${(100 * stepIndex) / mission.steps.length}%` }} />

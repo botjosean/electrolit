@@ -3,6 +3,7 @@ import { getMission } from '../engine/content';
 import { useT } from '../engine/i18n';
 import { useMission } from '../engine/store';
 import { Stage } from '../three/Stage';
+import { DemoLayer } from './hud/Demo';
 import { Overlay } from './hud/Overlay';
 import { Results } from './hud/Results';
 import { StepPanel } from './hud/StepPanel';
@@ -43,6 +44,7 @@ export function MissionScreen({ id }: { id: string }) {
       <TopBar />
       {status === 'playing' ? <StepPanel /> : null}
       {status === 'failed' || status === 'done' ? <Results onRetry={() => setAttempt((a) => a + 1)} /> : null}
+      <DemoLayer />
     </div>
   );
 }

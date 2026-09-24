@@ -416,7 +416,8 @@
       ],
       "wrongMode": "m1.m4.wMode",
       "wrongPoints": "m1.m4.wPoints",
-      "success": "m1.m4.s6ok"
+      "success": "m1.m4.s6ok",
+      "video": "continuity_test"
     },
     {
       "id": "s7",
@@ -424,5 +425,6 @@
       "speaker": "instructor",
       "text": "m1.m4.s7"
     }
-  ]
+  ],
+  "video": "strip_wire"
 }

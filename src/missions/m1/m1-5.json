@@ -233,7 +233,8 @@
           "correct": true,
           "feedback": "m1.m5.s4cFb"
         }
-      ]
+      ],
+      "video": "lockout_tagout"
     },
     {
       "id": "s5",
@@ -262,5 +263,6 @@
       "speaker": "instructor",
       "text": "m1.m5.s6"
     }
-  ]
+  ],
+  "video": "wire_breaker_size"
 }

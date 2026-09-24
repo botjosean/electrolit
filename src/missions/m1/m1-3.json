@@ -362,7 +362,8 @@
         "v208",
         "v480"
       ],
-      "text": "m1.m3.s4"
+      "text": "m1.m3.s4",
+      "video": "three_phase_colors"
     },
     {
       "id": "s5",
@@ -382,7 +383,8 @@
         "yellow>v208": "m1.m3.wYellow",
         "gray>v208": "m1.m3.wGray"
       },
-      "success": "m1.m3.s5ok"
+      "success": "m1.m3.s5ok",
+      "video": "three_phase_colors"
     },
     {
       "id": "s6",
@@ -403,7 +405,9 @@
           "text": "m1.m3.s6c",
           "feedback": "m1.m3.s6cFb"
         }
-      ]
+      ],
+      "video": "three_phase_colors"
     }
-  ]
+  ],
+  "video": "color_code"
 }

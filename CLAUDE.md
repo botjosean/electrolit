@@ -19,7 +19,25 @@ speakers. It must feel like a realistic job site with an instructor guiding you 
   missions are data (JSON + i18n), and step types, safety, scoring, glossary, instructor and progress
   are reusable. Nothing electrical is hard-coded in `src/engine/`.
 - Future platform ideas (not in scope yet): course catalog per trade, completion certificates,
-  accounts/cloud progress, paid access, creator tools to author missions without code.
+  accounts/cloud progress, creator tools to author missions without code. **Free for learners.**
+- **Learn from what exists, don't reinvent it**: research in `docs/RESEARCH.md` (Platzi, Coursera,
+  Duolingo, Khan Academy, Hotmart; simulation-training evidence; YouTube channels; multiplayer options).
+- Teaching loop for every step: **show** ("👀 Muéstrame cómo" demo + narration) → **practice**
+  (the step) → **without help** (future "Modo Foreman") + a link to **real videos** of pros doing it.
+
+### Roadmap (after the modules, from docs/RESEARCH.md)
+- [x] Real-life video links per step and per term (YouTube searches in ES + EN) + curated channels
+- [x] "Muéstrame cómo": animated demo of the correct step, narrated (worked example)
+- [x] Voice: Rosa reads steps aloud (Web Speech, es-US); foreman orders spoken in English
+- [x] "Retar a un amigo": share score + mission link
+- [ ] PWA / offline for phones with limited data
+- [ ] Mastery levels per skill (separate from effort XP), daily 2-min "turno" + streak
+- [ ] Free verifiable certificates per path (practical capstone mission, QR/link)
+- [ ] More "spot the violation" hazard rounds; faded "Modo Foreman" checks without help
+- [ ] Supabase: accounts, progress sync, leaderboards, then 2–8 player co-op crews (room code)
+- [ ] Better voice: pre-rendered Kokoro TTS (Apache-2.0) instead of device voices
+- Not doing: Roblox rewrite (maybe later as a marketing funnel only), WoW/Tibia server emulators
+  (wrong genre + legal risk), AI video generators for technique (they fail at hands and details)
 
 ## 1. Full specification
 
@@ -231,6 +249,12 @@ and missing `requires` flags.
   aren't penalized.
 - **Content authoring**: mission JSON + i18n JSON are the source of truth (edit them directly). Keys
   follow `m<module>.m<mission>.<step>`; props labels live in the `props` namespace.
+- **Video links** are YouTube *search* URLs (`src/glossary/videos.json`, `video` on mission/step),
+  never hard-coded video ids, so they can't go dead. Terms get automatic "<term> electrician" searches.
+- **Demo ("Muéstrame cómo")** plays an animated hand over the real UI/3D positions and narrates the
+  step; it never performs the action (the learner repeats it). It shares the hint cost (−5 once per step).
+- **Voice**: Web Speech narration, es-US voice for Rosa, en-US for foreman orders; off by default
+  (toggle 🔈 in the top bar, persisted); 🔊 on each bubble reads it on demand.
 - **Testing**: vitest validates all content (keys exist in es+en, glossary ids, prop ids, prop kinds,
   step shape, solvability) + engine logic; `scripts/e2e.mjs` plays every mission in headless Chromium
   with real pointer events on the canvas (positions projected from 3D), including failure paths.

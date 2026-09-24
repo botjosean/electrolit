@@ -280,6 +280,20 @@ async function main() {
       s = await state(page);
       if (s.hints !== 1) fail('hint not counted');
       if (SHOTS) await page.screenshot({ path: `${OUT}/zz-hint.png` });
+      // "show me how" demo: animated hand, doesn't act for you, free after a hint on the same step
+      const clickedBefore = (await state(page)).step.clicked.length;
+      await page.click('[data-testid=demo-btn]');
+      await page.waitForSelector('[data-testid=demo] .demo-hand', { state: 'attached' });
+      await sleep(1600);
+      if (SHOTS) await page.screenshot({ path: `${OUT}/zz-demo.png` });
+      await page.waitForSelector('[data-testid=demo]', { state: 'detached', timeout: 20000 });
+      s = await state(page);
+      if (s.step.clicked.length !== clickedBefore) fail('demo performed the action instead of only showing it');
+      if (s.hints !== 1) fail(`demo after hint should be free (hints=${s.hints})`);
+      // real-life video links
+      const href = await page.getAttribute('.step-help [data-video=es]', 'href');
+      if (!href?.startsWith('https://www.youtube.com/results?search_query=')) fail(`video link wrong: ${href}`);
+      await page.click('[data-testid=read-aloud]');
       // term card + language
       await page.click('.bubble .term');
       await page.waitForSelector('[data-testid=term-card]');
@@ -317,7 +331,21 @@ async function main() {
       await page.waitForSelector('[data-testid=step-panel][data-step=s1]');
       s = await state(page);
       if (s.status !== 'playing' || s.mistakes !== 0) fail('retry did not reset the mission');
-      log('  ✓ mistakes, hint, term card, ES/EN, inspect false-positive, safety fail, retry');
+      log('  ✓ mistakes, hint, demo, videos, read-aloud, term card, ES/EN, inspect false-positive, safety fail, retry');
+      // hold demo animates the gauge and the 3D wire, then resets
+      await page.goto(`${BASE}#/mission/m1-4`);
+      await page.waitForSelector('[data-testid=step-panel]');
+      await page.click('[data-testid=continue]');
+      await page.click('[data-option="0"]');
+      await page.click('[data-testid=continue]');
+      await camSettled(page);
+      await page.click('[data-testid=demo-btn]');
+      await waitFor(page, () => window.__sim.state().step.holdValue > 0.5, undefined, 8000);
+      if (SHOTS) await page.screenshot({ path: `${OUT}/zz-demo-hold.png` });
+      await page.waitForSelector('[data-testid=demo]', { state: 'detached', timeout: 20000 });
+      s = await state(page);
+      if (s.step.done || s.step.holdValue !== 0) fail('hold demo should reset and not complete the step');
+      log('  ✓ hold demo');
     }
     await ctx.close();
 

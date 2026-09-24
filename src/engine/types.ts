@@ -51,6 +51,8 @@ interface BaseStep {
   flags?: string[];
   /** flags that must be set before this step is attempted (else safety fail) */
   requires?: Requirement[];
+  /** video topic id (glossary/videos.json) for the "see it in real life" link */
+  video?: string;
   /** props revealed / hidden when the step starts */
   show?: string[];
   hide?: string[];
@@ -167,6 +169,8 @@ export interface Mission {
   steps: Step[];
   /** optional initial camera */
   camera?: CameraShot;
+  /** default video topic for the mission's steps */
+  video?: string;
 }
 
 export interface ModuleDef {

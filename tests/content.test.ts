@@ -5,6 +5,7 @@ import { allKeys, lookup } from '../src/engine/i18n';
 import { applyAction, emptyStepState, missionKeys, termIds, type Action, type StepState } from '../src/engine/logic';
 import type { Mission, Step } from '../src/engine/types';
 import { propRegistry } from '../src/three/props';
+import { getVideoTopic, videoTopics } from '../src/engine/videos';
 
 const langs = ['es', 'en'] as const;
 const moods = { great: 3, ok: 3, slow: 2, sloppy: 2, fail: 3 };
@@ -98,6 +99,16 @@ describe('i18n', () => {
   });
 });
 
+describe('videos', () => {
+  it('topics have unique ids and both queries', () => {
+    expect(new Set(videoTopics.map((v) => v.id)).size).toBe(videoTopics.length);
+    for (const v of videoTopics) {
+      expect(v.en.length, v.id).toBeGreaterThan(8);
+      expect(v.es.length, v.id).toBeGreaterThan(8);
+    }
+  });
+});
+
 describe('glossary', () => {
   it('entries are complete and unique', () => {
     const ids = new Set<string>();
@@ -129,6 +140,11 @@ describe.each(Object.values(missions).map((m) => [m.id, m] as [string, Mission])
       for (const r of propRefs(s)) expect(ids.has(r), `${s.id} → prop ${r}`).toBe(true);
       if (s.order) expect(getPhrase(s.order), `${s.id} order ${s.order}`).toBeTruthy();
     }
+  });
+  it('video topics exist (mission default + per step)', () => {
+    if (m.video) expect(getVideoTopic(m.video), m.video).toBeTruthy();
+    for (const s of m.steps) if (s.video) expect(getVideoTopic(s.video), `${s.id} ${s.video}`).toBeTruthy();
+    expect(m.video, 'every mission links real-life videos').toBeTruthy();
   });
   it('choose-option steps have exactly one correct answer', () => {
     for (const s of m.steps) if (s.type === 'choose-option') expect(s.options.filter((o) => o.correct).length, s.id).toBe(1);

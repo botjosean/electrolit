@@ -1,6 +1,7 @@
 import { modules } from '../engine/content';
 import { useT } from '../engine/i18n';
 import { useProgress } from '../engine/store';
+import { Channels } from './Channels';
 import { LangToggle } from './LangToggle';
 import { go } from './router';
 
@@ -78,6 +79,7 @@ export function MainMenu() {
           );
         })}
       </ol>
+      <Channels />
       <footer className="menu-foot">
         <button
           type="button"

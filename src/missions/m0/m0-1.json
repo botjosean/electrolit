@@ -220,7 +220,8 @@
         ],
         "w": 0.85
       },
-      "text": "m0.m1.s5"
+      "text": "m0.m1.s5",
+      "video": "cord_inspection"
     },
     {
       "id": "s6",
@@ -274,7 +275,8 @@
         }
       ],
       "missed": "m0.m1.s6missed",
-      "success": "m0.m1.s6ok"
+      "success": "m0.m1.s6ok",
+      "video": "cord_inspection"
     },
     {
       "id": "s7",
@@ -296,7 +298,8 @@
           "text": "m0.m1.s7c",
           "feedback": "m0.m1.s7cFb"
         }
-      ]
+      ],
+      "video": "cord_inspection"
     },
     {
       "id": "s8",
@@ -304,5 +307,6 @@
       "speaker": "instructor",
       "text": "m0.m1.s8"
     }
-  ]
+  ],
+  "video": "ppe_jobsite"
 }

@@ -13,6 +13,9 @@ export interface WireLink {
 interface SettingsState {
   lang: Lang;
   showTerms: boolean;
+  /** Rosa reads every step aloud */
+  voice: boolean;
+  setVoice: (v: boolean) => void;
   setLang: (l: Lang) => void;
   toggleLang: () => void;
   setShowTerms: (v: boolean) => void;
@@ -31,6 +34,8 @@ export const useSettings = create<SettingsState>()(
     (set, get) => ({
       lang: 'es',
       showTerms: true,
+      voice: false,
+      setVoice: (voice) => set({ voice }),
       setLang: (lang) => set({ lang }),
       toggleLang: () => set({ lang: get().lang === 'es' ? 'en' : 'es' }),
       setShowTerms: (showTerms) => set({ showTerms }),
