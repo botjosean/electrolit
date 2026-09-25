@@ -4,6 +4,7 @@ import { speakEnglish, speechSupported } from '../../engine/speech';
 import { useSettings } from '../../engine/store';
 import { useUi } from '../../engine/ui';
 import { termQueries } from '../../engine/videos';
+import { View3DButton } from '../ObjectViewer';
 import { VideoLinks } from './VideoLinks';
 
 export function TermCard() {
@@ -39,6 +40,7 @@ export function TermCard() {
           <div className="term-card-kicker">{t('ui.term.what')}</div>
           <p>{lang === 'es' ? term.explanation_es : term.explanation_en}</p>
         </div>
+        <View3DButton termId={term.id} className="btn view3d-card" />
         <VideoLinks {...termQueries(term)} />
       </div>
     </div>

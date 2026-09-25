@@ -346,6 +346,39 @@ async function main() {
       s = await state(page);
       if (s.step.done || s.step.holdValue !== 0) fail('hold demo should reset and not complete the step');
       log('  ✓ hold demo');
+
+      // readable even when the host injects a dark default text color on <body> (artifact viewer)
+      await page.addStyleTag({ content: 'body{color:#111 !important;background:#fafafa}' });
+      const titleColor = await page.evaluate(() => getComputedStyle(document.querySelector('.topbar-mission')).color);
+      const nameColor = await page.evaluate(() => getComputedStyle(document.querySelector('.panel-name')).color);
+      const light = (c) => {
+        const [r, g, b] = c.match(/\d+/g).map(Number);
+        return r + g + b > 450;
+      };
+      if (!light(titleColor) || !light(nameColor)) fail(`HUD text not readable on host defaults (${titleColor}, ${nameColor})`);
+
+      // 3D close-up viewer: from an identified object's label, and from a term card
+      await page.goto(`${BASE}#/mission/m0-2`);
+      await page.waitForSelector('[data-testid=step-panel]');
+      await page.click('[data-testid=continue]');
+      await camSettled(page);
+      await clickProp(page, 'lineman');
+      await page.waitForSelector('[data-label=lineman]');
+      await sleep(300);
+      await clickProp(page, 'lineman'); // tapping an identified object opens the close-up viewer
+      await page.waitForSelector('[data-testid=viewer] canvas');
+      await sleep(1500);
+      if (SHOTS) await page.screenshot({ path: `${OUT}/zz-viewer.png` });
+      const viewerTitle = await page.textContent('[data-testid=viewer] h2');
+      if (!/Lineman/.test(viewerTitle ?? '')) fail(`viewer title wrong: ${viewerTitle}`);
+      await page.click('[data-testid=viewer-close]');
+      await page.waitForSelector('[data-testid=viewer]', { state: 'detached' });
+      await page.click('.bubble .term');
+      await page.click('[data-testid=term-card] .view3d-btn');
+      await page.waitForSelector('[data-testid=viewer] canvas');
+      await page.keyboard.press('Escape');
+      await page.waitForSelector('[data-testid=viewer]', { state: 'detached' });
+      log('  ✓ readable HUD on host defaults, 3D viewer from label + term card');
     }
     await ctx.close();
 

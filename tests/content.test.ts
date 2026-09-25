@@ -118,6 +118,8 @@ describe('glossary', () => {
       for (const f of ['term', 'es', 'explanation_es', 'explanation_en'] as const) expect(g[f], `${g.id}.${f}`).toBeTruthy();
       expect(g.explanation_es.length, `${g.id} explanation too long`).toBeLessThan(170);
     }
+    for (const g of glossary) if (g.model) expect(propRegistry[g.model.kind], `${g.id} model ${g.model.kind}`).toBeTruthy();
+    expect(glossary.filter((g) => g.model).length).toBeGreaterThan(20);
     const pids = new Set(phrases.map((p) => p.id));
     expect(pids.size).toBe(phrases.length);
   });

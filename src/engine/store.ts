@@ -210,7 +210,7 @@ export const useMission = create<RuntimeState>()((set, get) => {
       if (step.type === 'click' && action.type === 'click' && out.state.clicked.length > st.clicked.length) {
         patch.identified = [...get().identified, action.id];
         if (step.hideOnClick) patch.hidden = { ...get().hidden, [action.id]: true };
-        if (!out.completed && !out.mistakes.length) patch.feedback = fb('good', 'ui.feedback.good');
+        if (!out.completed && !out.mistakes.length) patch.feedback = fb('good', 'ui.feedback.found');
       }
       if (step.type === 'drag-connect' && action.type === 'connect' && out.state.connections[action.src] === action.tgt && st.connections[action.src] !== action.tgt) {
         const src = mission.props.find((p) => p.id === action.src);

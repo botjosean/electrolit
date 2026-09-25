@@ -34,8 +34,16 @@ body,
   background: var(--bg);
 }
 
+#root {
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
 body {
   overscroll-behavior: none;
+  /* explicit: hosts (e.g. the artifact viewer) may inject a light default text color on body */
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 16px;
 }
 
 button {
@@ -78,6 +86,7 @@ h3 {
 .icon-btn {
   border: 1px solid var(--line);
   background: var(--card);
+  color: var(--text);
   border-radius: 10px;
   min-width: 40px;
   height: 40px;
@@ -1404,4 +1413,111 @@ h3 {
   font-size: 13px;
   margin: 2px 0 0 30px;
   line-height: 1.35;
+}
+
+.back-btn {
+  border-color: #6b7684;
+  font-weight: 800;
+  font-size: 20px;
+}
+.scene-lost {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 25;
+  background: var(--yellow);
+  color: #111;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: var(--shadow);
+  max-width: calc(100% - 32px);
+}
+
+/* ---------- 3D object viewer ---------- */
+.viewer-backdrop {
+  z-index: 110;
+}
+.viewer {
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100% - 16px);
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+}
+.viewer-stage {
+  position: relative;
+  height: min(52vh, 380px);
+  flex: none;
+  touch-action: none;
+}
+.viewer-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.viewer-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #c9d1d9;
+  pointer-events: none;
+}
+.viewer-info {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  line-height: 1.45;
+}
+.viewer-info p {
+  margin: 0;
+}
+.viewer-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.viewer-title h2,
+.viewer-info h2 {
+  font-size: 24px;
+}
+.viewer-es {
+  color: var(--yellow);
+  font-weight: 700;
+}
+.view3d-btn {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+.btn.view3d-card {
+  background: #1b1f24;
+  color: #fff;
+  border-color: #1b1f24;
+  align-self: flex-start;
+}
+.prop-label {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+@media (max-width: 600px) {
+  .prop-label {
+    font-size: 11px;
+    padding: 2px 5px;
+  }
+}
+.prop-label-3d {
+  font-size: 11px;
 }

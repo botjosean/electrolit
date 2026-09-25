@@ -34,8 +34,8 @@ function PropLabels() {
         const p = mission.props.find((x) => x.id === id);
         if (!p?.label || hidden[id]) return null;
         return (
-          <div key={id} ref={trackAnchor} data-prop={id} className="anchor prop-label">
-            <RichText text={t(p.label)} interactive={false} />
+          <div key={id} ref={trackAnchor} data-prop={id} data-label={id} className="anchor prop-label">
+            <RichText text={t(p.label)} interactive={false} short /> <span className="prop-label-3d">🔍</span>
           </div>
         );
       })}

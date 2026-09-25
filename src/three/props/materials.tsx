@@ -203,44 +203,69 @@ export function Clipboard({ params }: PropProps) {
   );
 }
 
-/** Orange extension cord. params.damaged → cut jacket + missing ground pin. */
+/** Orange extension cord: one continuous cable (female end → two coiled loops → lead → plug).
+ *  params.damaged → a cut in the jacket showing the conductors + missing ground pin. */
 export function ExtensionCord({ params }: PropProps) {
   const damaged = bool(params, 'damaged');
   const color = '#f07a10';
+  const R = 0.012;
+  const { main, lead } = useMemo(() => {
+    const v = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
+    const pts: THREE.Vector3[] = [v(-0.235, R, 0.13), v(-0.17, R, 0.125), v(-0.11, R, 0.08)];
+    // two stacked loops around (0.02, 0), radius 0.1
+    // enter at 153°, wind clockwise ~2.3 turns, leave at 32° toward the plug
+    const a0 = Math.PI * 0.85;
+    const a1 = Math.PI * 0.18 - Math.PI * 4;
+    const n = 60;
+    for (let i = 0; i <= n; i++) {
+      const a = a0 + ((a1 - a0) * i) / n;
+      const y = R + (i / n) * 0.022;
+      pts.push(v(0.02 + Math.cos(a) * 0.1, y, Math.sin(a) * 0.1));
+    }
+    pts.push(v(0.14, R, 0.1), v(0.19, R, 0.13));
+    const cut = damaged ? 0.237 : 0.33;
+    pts.push(v(cut, R, 0.13));
+    const main = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, false, 'centripetal'), 260, R, 10, false);
+    const lead = damaged ? new THREE.TubeGeometry(new THREE.LineCurve3(v(0.263, R, 0.13), v(0.33, R, 0.13)), 4, R, 10, false) : null;
+    return { main, lead };
+  }, [damaged]);
   return (
     <group>
-      <mesh castShadow position={[0, 0.013, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.12, 0.012, 8, 24]} />
-        <meshStandardMaterial color={color} roughness={0.6} />
+      <mesh castShadow geometry={main}>
+        <meshStandardMaterial color={color} roughness={0.55} />
       </mesh>
-      <mesh castShadow position={[0.12, 0.024, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.1, 0.012, 8, 24]} />
-        <meshStandardMaterial color={color} roughness={0.6} />
-      </mesh>
-      {/* straight lead to plug */}
-      <mesh castShadow position={[0.25, 0.012, 0.13]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.012, 0.012, 0.16, 8]} />
-        <meshStandardMaterial color={color} roughness={0.6} />
-      </mesh>
+      {lead ? (
+        <mesh castShadow geometry={lead}>
+          <meshStandardMaterial color={color} roughness={0.55} />
+        </mesh>
+      ) : null}
       {damaged ? (
-        <group position={[0.25, 0.012, 0.13]}>
-          <mesh rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.0125, 0.0125, 0.025, 8]} />
-            <meshStandardMaterial color="#2a2a2a" />
-          </mesh>
-          {[-0.005, 0, 0.005].map((z, i) => (
-            <mesh key={z} position={[0, 0.004, z]} rotation={[0, 0, Math.PI / 2]}>
-              <cylinderGeometry args={[0.003, 0.003, 0.03, 6]} />
-              <meshStandardMaterial color={['#111', '#eee', '#1a8f2a'][i]} />
+        <group position={[0.25, R, 0.13]}>
+          {/* torn jacket edges */}
+          {[-0.012, 0.012].map((x) => (
+            <mesh key={x} position={[x, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+              <cylinderGeometry args={[R * 1.08, R * 1.08, 0.003, 10]} />
+              <meshStandardMaterial color="#b45309" roughness={0.9} />
             </mesh>
           ))}
-          <mesh position={[0, 0.009, 0]} rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.0015, 0.0015, 0.02, 6]} />
-            <meshStandardMaterial color={COPPER} metalness={0.8} roughness={0.3} />
+          {/* the three insulated conductors (black, white, green) with bare copper showing */}
+          {[
+            ['#111', -0.0055],
+            ['#eee', 0],
+            ['#1a8f2a', 0.0055],
+          ].map(([c, z]) => (
+            <mesh key={String(z)} position={[0, 0, Number(z)]} rotation={[0, 0, Math.PI / 2]}>
+              <cylinderGeometry args={[0.0038, 0.0038, 0.026, 8]} />
+              <meshStandardMaterial color={String(c)} roughness={0.5} />
+            </mesh>
+          ))}
+          <mesh position={[0.002, 0.004, 0]} rotation={[0, 0, Math.PI / 2]}>
+            <cylinderGeometry args={[0.0022, 0.0022, 0.012, 8]} />
+            <meshStandardMaterial color={COPPER} metalness={0.85} roughness={0.25} />
           </mesh>
         </group>
       ) : null}
-      {/* male plug */}
+      {/* male plug: body + two flat blades + round ground pin (missing when damaged) */}
       <group position={[0.35, 0.018, 0.13]}>
         <mesh castShadow>
           <boxGeometry args={[0.045, 0.036, 0.036]} />
@@ -253,9 +278,9 @@ export function ExtensionCord({ params }: PropProps) {
           </mesh>
         ))}
         {damaged ? (
-          <mesh position={[0.024, -0.009, 0]}>
-            <cylinderGeometry args={[0.0035, 0.0035, 0.002, 8]} />
-            <meshStandardMaterial color="#555" />
+          <mesh position={[0.0235, -0.009, 0]} rotation={[0, 0, Math.PI / 2]}>
+            <cylinderGeometry args={[0.0035, 0.0035, 0.002, 10]} />
+            <meshStandardMaterial color="#3a2a1a" />
           </mesh>
         ) : (
           <mesh position={[0.035, -0.009, 0]} rotation={[0, 0, Math.PI / 2]}>
@@ -264,15 +289,23 @@ export function ExtensionCord({ params }: PropProps) {
           </mesh>
         )}
       </group>
-      {/* female end */}
-      <mesh castShadow position={[-0.18, 0.012, 0.1]} rotation={[0, 0.4, Math.PI / 2]}>
-        <cylinderGeometry args={[0.012, 0.012, 0.12, 8]} />
-        <meshStandardMaterial color={color} roughness={0.6} />
-      </mesh>
-      <mesh castShadow position={[-0.25, 0.022, 0.13]}>
-        <boxGeometry args={[0.05, 0.044, 0.05]} />
-        <meshStandardMaterial color={color} roughness={0.6} />
-      </mesh>
+      {/* female end: body with three slots */}
+      <group position={[-0.26, 0.022, 0.13]}>
+        <mesh castShadow>
+          <boxGeometry args={[0.05, 0.044, 0.05]} />
+          <meshStandardMaterial color={color} roughness={0.6} />
+        </mesh>
+        {[
+          [-0.008, 0.006],
+          [0.008, 0.006],
+          [0, -0.01],
+        ].map(([z, y]) => (
+          <mesh key={`${z}${y}`} position={[-0.0252, y, z]}>
+            <boxGeometry args={[0.001, z === 0 ? 0.006 : 0.009, z === 0 ? 0.006 : 0.003]} />
+            <meshStandardMaterial color="#222" />
+          </mesh>
+        ))}
+      </group>
     </group>
   );
 }

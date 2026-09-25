@@ -4,6 +4,7 @@ import { useT } from '../engine/i18n';
 import { speakEnglish } from '../engine/speech';
 import { useSettings } from '../engine/store';
 import { LangToggle } from './LangToggle';
+import { View3DButton } from './ObjectViewer';
 import { go } from './router';
 
 export function GlossaryScreen() {
@@ -37,6 +38,7 @@ export function GlossaryScreen() {
             <div>
               <strong>{g.term}</strong> <span className="term-line-es">({g.es})</span>
               <div className="term-line-exp">{lang === 'es' ? g.explanation_es : g.explanation_en}</div>
+              <View3DButton termId={g.id} />
             </div>
           </li>
         ))}

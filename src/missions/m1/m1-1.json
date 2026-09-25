@@ -25,14 +25,14 @@
     "pos": [
       0,
       1.75,
-      1.3
+      1.2
     ],
     "target": [
-      0,
+      0.02,
       1.0,
-      -0.05
+      -0.02
     ],
-    "w": 1.95
+    "w": 1.45
   },
   "props": [
     {
@@ -65,97 +65,97 @@
       "id": "lineman",
       "kind": "lineman-pliers",
       "pos": [
-        -0.66,
+        -0.4,
         0.9,
-        -0.12
+        -0.18
       ],
-      "scale": 1.3,
+      "scale": 1.55,
       "label": "props.lineman"
     },
     {
       "id": "needle",
       "kind": "needle-nose",
       "pos": [
-        -0.22,
+        0.05,
         0.9,
-        -0.12
+        -0.18
       ],
-      "scale": 1.3,
+      "scale": 1.55,
       "label": "props.needle"
     },
     {
       "id": "dikes",
       "kind": "dikes",
       "pos": [
-        0.22,
+        0.5,
         0.9,
-        -0.12
+        -0.18
       ],
-      "scale": 1.3,
+      "scale": 1.55,
       "label": "props.dikes"
     },
     {
       "id": "strippers",
       "kind": "strippers",
       "pos": [
-        0.66,
+        -0.4,
         0.9,
-        -0.12
+        0.04
       ],
-      "scale": 1.3,
+      "scale": 1.55,
       "label": "props.strippers"
     },
     {
       "id": "ripper",
       "kind": "cable-ripper",
       "pos": [
-        -0.66,
+        0.05,
         0.9,
-        0.2
+        0.04
       ],
-      "scale": 1.3,
+      "scale": 1.55,
       "label": "props.ripper"
+    },
+    {
+      "id": "flat",
+      "kind": "screwdriver",
+      "pos": [
+        0.5,
+        0.9,
+        0.04
+      ],
+      "scale": 1.55,
+      "label": "props.flat",
+      "params": {
+        "tip": "flat"
+      }
     },
     {
       "id": "ncvt",
       "kind": "ncvt",
       "pos": [
-        -0.22,
+        -0.4,
         0.9,
-        0.2
+        0.26
       ],
-      "scale": 1.3,
+      "scale": 1.55,
       "label": "props.ncvt"
     },
     {
       "id": "meter",
       "kind": "multimeter",
       "pos": [
-        0.22,
+        0.1,
         0.9,
-        0.18
+        0.25
       ],
       "rot": [
         0,
         1.5707963267948966,
         0
       ],
-      "scale": 1.3,
+      "scale": 1.55,
       "label": "props.multimeter"
-    },
-    {
-      "id": "flat",
-      "kind": "screwdriver",
-      "pos": [
-        0.66,
-        0.9,
-        0.2
-      ],
-      "scale": 1.3,
-      "label": "props.flat",
-      "params": {
-        "tip": "flat"
-      }
     },
     {
       "id": "fishtape",
@@ -194,9 +194,9 @@
         "dikes",
         "strippers",
         "ripper",
+        "flat",
         "ncvt",
         "meter",
-        "flat",
         "fishtape"
       ],
       "wrong": {
@@ -217,9 +217,9 @@
         "needle",
         "strippers",
         "ripper",
+        "flat",
         "ncvt",
         "meter",
-        "flat",
         "fishtape"
       ],
       "wrong": {
@@ -240,9 +240,9 @@
         "needle",
         "dikes",
         "ripper",
+        "flat",
         "ncvt",
         "meter",
-        "flat",
         "fishtape"
       ]
     },
@@ -259,9 +259,9 @@
         "needle",
         "dikes",
         "strippers",
+        "flat",
         "ncvt",
         "meter",
-        "flat",
         "fishtape"
       ],
       "success": "m1.m1.s5ok"
@@ -280,8 +280,8 @@
         "dikes",
         "strippers",
         "ripper",
-        "meter",
         "flat",
+        "meter",
         "fishtape"
       ],
       "wrong": {
@@ -302,8 +302,8 @@
         "dikes",
         "strippers",
         "ripper",
-        "ncvt",
         "flat",
+        "ncvt",
         "fishtape"
       ],
       "wrong": {
@@ -324,9 +324,9 @@
         "dikes",
         "strippers",
         "ripper",
+        "flat",
         "ncvt",
-        "meter",
-        "flat"
+        "meter"
       ],
       "success": "m1.m1.s8ok"
     },

@@ -1,99 +1,160 @@
+import { useMemo } from 'react';
+import * as THREE from 'three';
 import { DARK_METAL, METAL, str, type PropProps } from './common';
 
 // All hand tools lie flat on a surface, long axis along +X, origin at bottom center.
 
-function Handles({ len, c1, c2, spread = 0.02, x0 = 0 }: { len: number; c1: string; c2: string; spread?: number; x0?: number }) {
-  const ang = Math.atan2(spread, len);
+// ---- pliers family: curved dipped handles (tubes) + extruded steel heads, lying flat ----
+
+const STEEL = { color: '#5d646c', metalness: 0.75, roughness: 0.32 } as const;
+
+/** Extrudes a 2D outline (x = along the tool, y = across) into a flat part of `thick` height. */
+function useFlatPart(outline: [number, number][], thick: number) {
+  return useMemo(() => {
+    const sh = new THREE.Shape();
+    outline.forEach(([x, y], i) => (i ? sh.lineTo(x, y) : sh.moveTo(x, y)));
+    sh.closePath();
+    const g = new THREE.ExtrudeGeometry(sh, { depth: thick, bevelEnabled: true, bevelThickness: 0.0015, bevelSize: 0.0012, bevelSegments: 1 });
+    g.rotateX(-Math.PI / 2);
+    g.translate(0, 0.004, 0);
+    return g;
+  }, [outline, thick]);
+}
+
+/** Two curved handles from the pivot (x=0) back to -len, spreading to ±spread. */
+function PliersHandles({ len, spread, c1, c2, r = 0.0085 }: { len: number; spread: number; c1: string; c2: string; r?: number }) {
+  const geos = useMemo(
+    () =>
+      [1, -1].map((side) => {
+        const curve = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(-0.004, 0.011, side * 0.006),
+          new THREE.Vector3(-len * 0.3, 0.011, side * spread * 0.55),
+          new THREE.Vector3(-len * 0.7, 0.011, side * spread * 0.9),
+          new THREE.Vector3(-len, 0.011, side * spread),
+        ]);
+        return new THREE.TubeGeometry(curve, 24, r, 10, false);
+      }),
+    [len, spread, r],
+  );
   return (
     <>
-      {[
-        [c1, 1],
-        [c2, -1],
-      ].map(([c, s]) => (
-        <mesh
-          key={String(s)}
-          castShadow
-          position={[x0 - len / 2, 0.012, (Number(s) * spread) / 2]}
-          rotation={[0, Number(s) * ang, Math.PI / 2]}
-        >
-          <capsuleGeometry args={[0.011, len, 3, 8]} />
-          <meshStandardMaterial color={String(c)} roughness={0.7} />
-        </mesh>
+      {geos.map((g, i) => (
+        <group key={i}>
+          <mesh castShadow geometry={g}>
+            <meshStandardMaterial color={i ? c2 : c1} roughness={0.55} />
+          </mesh>
+          <mesh castShadow position={[-len, 0.011, (i ? -1 : 1) * spread]}>
+            <sphereGeometry args={[r, 10, 8]} />
+            <meshStandardMaterial color={i ? c2 : c1} roughness={0.55} />
+          </mesh>
+        </group>
       ))}
     </>
   );
 }
 
+function Pivot({ x = 0 }: { x?: number }) {
+  return (
+    <mesh position={[x, 0.021, 0]}>
+      <cylinderGeometry args={[0.0075, 0.0075, 0.004, 14]} />
+      <meshStandardMaterial color="#c9ced3" metalness={0.9} roughness={0.2} />
+    </mesh>
+  );
+}
+
+const LINEMAN_HEAD: [number, number][] = [
+  [-0.012, 0.016], [0.03, 0.018], [0.058, 0.015], [0.066, 0.01], [0.066, -0.01], [0.058, -0.015], [0.03, -0.018], [-0.012, -0.016],
+];
+const NEEDLE_HEAD: [number, number][] = [
+  [-0.01, 0.014], [0.02, 0.012], [0.06, 0.006], [0.098, 0.0025], [0.1, 0], [0.098, -0.0025], [0.06, -0.006], [0.02, -0.012], [-0.01, -0.014],
+];
+const DIKES_HEAD: [number, number][] = [
+  [-0.01, 0.017], [0.022, 0.02], [0.04, 0.012], [0.046, 0.0], [0.04, -0.012], [0.022, -0.02], [-0.01, -0.017],
+];
+const STRIPPER_HEAD: [number, number][] = [
+  [-0.01, 0.012], [0.1, 0.009], [0.112, 0.004], [0.112, -0.004], [0.1, -0.009], [-0.01, -0.012],
+];
+
 export function LinemanPliers() {
+  const head = useFlatPart(LINEMAN_HEAD, 0.014);
   return (
     <group>
-      <Handles len={0.14} c1="#1d4fbf" c2="#e0b400" spread={0.035} x0={-0.01} />
-      <mesh castShadow position={[0.045, 0.012, 0]}>
-        <boxGeometry args={[0.07, 0.018, 0.038]} />
-        <meshStandardMaterial color={DARK_METAL} metalness={0.7} roughness={0.35} />
+      <PliersHandles len={0.165} spread={0.026} c1="#1d4fbf" c2="#e0b400" />
+      <mesh castShadow geometry={head}>
+        <meshStandardMaterial {...STEEL} />
       </mesh>
-      <mesh castShadow position={[0.09, 0.012, 0]}>
-        <boxGeometry args={[0.03, 0.016, 0.034]} />
-        <meshStandardMaterial color={METAL} metalness={0.8} roughness={0.3} />
+      {/* jaw line + side cutter */}
+      <mesh position={[0.035, 0.0195, 0]}>
+        <boxGeometry args={[0.062, 0.001, 0.0018]} />
+        <meshStandardMaterial color="#1b1e22" />
       </mesh>
-      <mesh position={[0.02, 0.024, 0]}>
-        <cylinderGeometry args={[0.009, 0.009, 0.004, 10]} />
-        <meshStandardMaterial color="#ccc" metalness={0.9} />
+      <mesh position={[0.016, 0.0195, 0]} rotation={[0, 0.7, 0]}>
+        <boxGeometry args={[0.018, 0.001, 0.003]} />
+        <meshStandardMaterial color="#1b1e22" />
       </mesh>
+      <Pivot />
     </group>
   );
 }
 
 export function NeedleNose() {
+  const head = useFlatPart(NEEDLE_HEAD, 0.011);
   return (
     <group>
-      <Handles len={0.12} c1="#d42a2a" c2="#d42a2a" spread={0.03} x0={-0.01} />
-      <mesh castShadow position={[0.03, 0.012, 0]}>
-        <boxGeometry args={[0.03, 0.016, 0.03]} />
-        <meshStandardMaterial color={DARK_METAL} metalness={0.7} roughness={0.35} />
+      <PliersHandles len={0.13} spread={0.022} c1="#d42a2a" c2="#d42a2a" r={0.0075} />
+      <mesh castShadow geometry={head}>
+        <meshStandardMaterial {...STEEL} />
       </mesh>
-      <mesh castShadow position={[0.085, 0.012, 0]} rotation={[0, 0, -Math.PI / 2]}>
-        <coneGeometry args={[0.012, 0.09, 6]} />
-        <meshStandardMaterial color={METAL} metalness={0.8} roughness={0.3} />
+      <mesh position={[0.055, 0.0165, 0]}>
+        <boxGeometry args={[0.085, 0.001, 0.0012]} />
+        <meshStandardMaterial color="#1b1e22" />
       </mesh>
+      <Pivot />
     </group>
   );
 }
 
 export function Dikes() {
+  const head = useFlatPart(DIKES_HEAD, 0.014);
   return (
     <group>
-      <Handles len={0.11} c1="#e06a10" c2="#e06a10" spread={0.035} x0={-0.005} />
-      <mesh castShadow position={[0.04, 0.012, 0]} rotation={[0, 0.35, 0]}>
-        <boxGeometry args={[0.05, 0.016, 0.034]} />
-        <meshStandardMaterial color={DARK_METAL} metalness={0.7} roughness={0.35} />
+      <PliersHandles len={0.12} spread={0.026} c1="#e06a10" c2="#e06a10" />
+      <mesh castShadow geometry={head}>
+        <meshStandardMaterial {...STEEL} />
       </mesh>
-      <mesh castShadow position={[0.065, 0.012, 0.012]} rotation={[0, 0.35, 0]}>
-        <coneGeometry args={[0.018, 0.03, 4]} />
-        <meshStandardMaterial color={METAL} metalness={0.8} roughness={0.3} />
+      {/* angled cutting edge */}
+      <mesh position={[0.026, 0.0195, 0]} rotation={[0, 0.45, 0]}>
+        <boxGeometry args={[0.03, 0.001, 0.0018]} />
+        <meshStandardMaterial color="#e8eaec" metalness={0.9} roughness={0.15} />
       </mesh>
+      <Pivot />
     </group>
   );
 }
 
 export function Strippers() {
+  const head = useFlatPart(STRIPPER_HEAD, 0.009);
+  const marks = ['10', '12', '14', '16', '18'];
   return (
     <group>
-      <Handles len={0.1} c1="#e8c21a" c2="#c02020" spread={0.03} x0={-0.02} />
-      <mesh castShadow position={[0.05, 0.01, 0]}>
-        <boxGeometry args={[0.1, 0.012, 0.03]} />
-        <meshStandardMaterial color={DARK_METAL} metalness={0.7} roughness={0.35} />
+      <PliersHandles len={0.11} spread={0.024} c1="#e8c21a" c2="#c02020" r={0.0078} />
+      <mesh castShadow geometry={head}>
+        <meshStandardMaterial {...STEEL} />
       </mesh>
-      {[0, 1, 2, 3, 4, 5].map((i) => (
-        <mesh key={i} position={[0.015 + i * 0.012, 0.0165, 0]}>
-          <boxGeometry args={[0.004, 0.002, 0.03]} />
-          <meshStandardMaterial color={i % 2 ? '#ddd' : '#111'} />
-        </mesh>
+      {/* gauge holes with white stamped marks */}
+      {marks.map((m, i) => (
+        <group key={m} position={[0.022 + i * 0.013, 0.0145, 0]}>
+          <mesh>
+            <cylinderGeometry args={[0.0022 - i * 0.00025, 0.0022 - i * 0.00025, 0.0012, 10]} />
+            <meshStandardMaterial color="#111" />
+          </mesh>
+          <mesh position={[0, 0, 0.0065]}>
+            <boxGeometry args={[0.006, 0.0008, 0.0022]} />
+            <meshStandardMaterial color="#f2f2f2" />
+          </mesh>
+        </group>
       ))}
-      <mesh position={[0.11, 0.01, 0]} rotation={[0, 0, -Math.PI / 2]}>
-        <coneGeometry args={[0.012, 0.025, 4]} />
-        <meshStandardMaterial color={METAL} metalness={0.8} />
-      </mesh>
+      <Pivot x={0.005} />
     </group>
   );
 }

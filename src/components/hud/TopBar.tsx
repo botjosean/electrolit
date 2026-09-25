@@ -36,7 +36,7 @@ export function TopBar() {
   const canHint = step.type !== 'dialogue' && !done;
   return (
     <header className="topbar">
-      <button type="button" className="icon-btn" onClick={() => go(`/module/${mission.module}`)} aria-label={t('ui.back')} data-testid="back">
+      <button type="button" className="icon-btn back-btn" onClick={() => go(`/module/${mission.module}`)} aria-label={t('ui.back')} data-testid="back">
         ←
       </button>
       <div className="topbar-title">

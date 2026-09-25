@@ -7,7 +7,7 @@ import { useUi } from './ui';
 const TOKEN = /(\[\[[a-z0-9_-]+(?:\|[^\]]*)?\]\]|\*\*[^*]+\*\*|\n)/gi;
 
 /** interactive=false renders terms as highlighted text (use inside buttons). */
-export function RichText({ text, interactive = true }: { text: string; interactive?: boolean }) {
+export function RichText({ text, interactive = true, short = false }: { text: string; interactive?: boolean; short?: boolean }) {
   const lang = useSettings((s) => s.lang);
   const openTerm = useUi((s) => s.openTerm);
   const parts = text.split(TOKEN).filter((p) => p !== '');
@@ -22,7 +22,7 @@ export function RichText({ text, interactive = true }: { text: string; interacti
         return (
           <span key={i} className="term static">
             {display}
-            {lang === 'es' && term ? <span className="term-es"> ({shortEs(term)})</span> : null}
+            {lang === 'es' && term && !short ? <span className="term-es"> ({shortEs(term)})</span> : null}
           </span>
         );
       return (

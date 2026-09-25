@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getMission } from '../engine/content';
 import { useT } from '../engine/i18n';
 import { useMission } from '../engine/store';
@@ -17,6 +17,9 @@ export function MissionScreen({ id }: { id: string }) {
   const status = useMission((s) => s.status);
   const current = useMission((s) => s.mission);
   const [attempt, setAttempt] = useState(0);
+  const [scene, setScene] = useState(0);
+  const [lost, setLost] = useState(false);
+  const onContextLost = useCallback(() => setLost(true), []);
   const t = useT();
 
   useEffect(() => {
@@ -38,7 +41,19 @@ export function MissionScreen({ id }: { id: string }) {
   return (
     <div className="mission-screen" data-testid="mission" data-mission={mission.id} data-status={status}>
       <div className="stage">
-        <Stage key={`${mission.id}:${attempt}`} mission={mission} />
+        <Stage key={`${mission.id}:${attempt}:${scene}`} mission={mission} onContextLost={onContextLost} />
+        {lost ? (
+          <button
+            type="button"
+            className="scene-lost"
+            onClick={() => {
+              setLost(false);
+              setScene((n) => n + 1);
+            }}
+          >
+            🔄 {t('ui.sceneLost')}
+          </button>
+        ) : null}
         <Overlay key={`o:${mission.id}:${attempt}`} />
       </div>
       <TopBar />

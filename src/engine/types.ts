@@ -191,6 +191,8 @@ export interface TermDef {
   explanation_en: string;
   /** optional text sent to speech synthesis if different from term */
   say?: string;
+  /** procedural 3D model for the close-up viewer */
+  model?: { kind: string; params?: Record<string, string | number | boolean> };
 }
 
 export interface PhraseDef {

@@ -1,8 +1,10 @@
 import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
 import { useLayoutEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { dragSources, dragTargets, hintTargets, interactiveProps } from '../engine/logic';
+import { useT } from '../engine/i18n';
+import { dragSources, dragTargets, hintTargets, interactiveProps, termIds } from '../engine/logic';
 import { useMission } from '../engine/store';
+import { useUi } from '../engine/ui';
 import type { PropDef } from '../engine/types';
 import { propRegistry } from './props';
 
@@ -50,11 +52,15 @@ export function PropNode({ def }: { def: PropDef }) {
   });
   const selected = useMission((s) => s.step.selectedSource === def.id || s.dragging === def.id);
   const role = useRole(def.id);
+  // objects you already identified can be tapped to open the close-up 3D viewer
+  const identified = useMission((s) => s.identified.includes(def.id));
+  const viewable = role === 'none' && identified && !!def.label;
   const dispatch = useMission((s) => s.dispatch);
   const controls = useThree((s) => s.controls);
   const outer = useRef<THREE.Group>(null);
   const inner = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
+  const t = useT();
   const [box, setBox] = useState<{ size: THREE.Vector3; center: THREE.Vector3 } | null>(null);
   const mats = useRef<MatRec[]>([]);
   const lastLevel = useRef(-1);
@@ -121,6 +127,11 @@ export function PropNode({ def }: { def: PropDef }) {
     else if (role === 'target' && st.step.selectedSource) dispatch({ type: 'connect', src: st.step.selectedSource, tgt: def.id });
   };
   const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
+    if (viewable) {
+      e.stopPropagation();
+      tapStart = { id: def.id, x: e.clientX, y: e.clientY };
+      return;
+    }
     if (role === 'none') return;
     e.stopPropagation();
     tapStart = { id: def.id, x: e.clientX, y: e.clientY };
@@ -132,6 +143,15 @@ export function PropNode({ def }: { def: PropDef }) {
     }
   };
   const onPointerUp = (e: ThreeEvent<PointerEvent>) => {
+    if (viewable) {
+      const start = tapStart;
+      tapStart = null;
+      if (start && start.id === def.id && Math.hypot(e.clientX - start.x, e.clientY - start.y) < 12) {
+        e.stopPropagation();
+        useUi.getState().openViewer({ kind: def.kind, params: def.params, termId: termIds(t(def.label ?? ''))[0], labelKey: def.label });
+      }
+      return;
+    }
     if (role === 'none') return;
     const st = useMission.getState();
     const start = tapStart;
@@ -150,7 +170,7 @@ export function PropNode({ def }: { def: PropDef }) {
     }
   };
 
-  const interactive = role !== 'none';
+  const interactive = role !== 'none' || viewable;
   return (
     <group ref={outer} name={`prop:${def.id}`} position={def.pos}>
       <group
@@ -177,7 +197,7 @@ export function PropNode({ def }: { def: PropDef }) {
         <group ref={inner} rotation={def.rot ?? [0, 0, 0]} scale={def.scale ?? 1}>
           <Comp params={def.params ?? {}} />
         </group>
-        {interactive && box ? (
+        {role !== 'none' && box ? (
           <mesh name="hitbox" position={box.center} renderOrder={-1}>
             <boxGeometry args={[box.size.x, box.size.y, box.size.z]} />
             <meshBasicMaterial transparent opacity={0} depthWrite={false} />

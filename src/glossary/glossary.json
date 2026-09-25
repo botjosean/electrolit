@@ -33,14 +33,20 @@
     "term": "Hard hat",
     "es": "casco",
     "explanation_es": "Protege tu cabeza de golpes y cosas que caen. Se usa todo el tiempo en la obra.",
-    "explanation_en": "Protects your head from bumps and falling objects. Worn at all times on site."
+    "explanation_en": "Protects your head from bumps and falling objects. Worn at all times on site.",
+    "model": {
+      "kind": "hardhat"
+    }
   },
   {
     "id": "safety_glasses",
     "term": "Safety glasses",
     "es": "lentes de seguridad",
     "explanation_es": "Protegen tus ojos de pedazos de cable, polvo y chispas. Siempre puestos.",
-    "explanation_en": "Protect your eyes from wire clippings, dust and sparks. Always on."
+    "explanation_en": "Protect your eyes from wire clippings, dust and sparks. Always on.",
+    "model": {
+      "kind": "safety-glasses"
+    }
   },
   {
     "id": "hi_vis_vest",
@@ -48,35 +54,50 @@
     "es": "chaleco reflejante",
     "explanation_es": "Chaleco de color fuerte para que los operadores de máquinas y camiones te vean.",
     "explanation_en": "Bright vest so equipment and truck drivers can see you.",
-    "say": "high vis vest"
+    "say": "high vis vest",
+    "model": {
+      "kind": "vest"
+    }
   },
   {
     "id": "work_gloves",
     "term": "Work gloves",
     "es": "guantes de trabajo",
     "explanation_es": "Protegen tus manos de cortadas y astillas. NO sirven para tocar cables con corriente.",
-    "explanation_en": "Protect hands from cuts and splinters. NOT rated for live electrical work."
+    "explanation_en": "Protect hands from cuts and splinters. NOT rated for live electrical work.",
+    "model": {
+      "kind": "gloves"
+    }
   },
   {
     "id": "work_boots",
     "term": "Work boots",
     "es": "botas de trabajo (de casquillo)",
     "explanation_es": "Botas con punta dura y suela gruesa: te protegen de clavos y golpes.",
-    "explanation_en": "Hard-toe boots with thick soles: protect you from nails and impacts."
+    "explanation_en": "Hard-toe boots with thick soles: protect you from nails and impacts.",
+    "model": {
+      "kind": "boots"
+    }
   },
   {
     "id": "extension_cord",
     "term": "Extension cord",
     "es": "extensión",
     "explanation_es": "Cable con clavija y contacto para llevar corriente a tus herramientas. Se revisa antes de usarla.",
-    "explanation_en": "Cord with plug and outlet to power your tools. Inspect it before use."
+    "explanation_en": "Cord with plug and outlet to power your tools. Inspect it before use.",
+    "model": {
+      "kind": "extension-cord"
+    }
   },
   {
     "id": "ground_pin",
     "term": "Ground pin",
     "es": "pata de tierra",
     "explanation_es": "La pata redonda de la clavija. Es tu protección si hay una falla. Nunca se quita.",
-    "explanation_en": "The round prong on the plug. It protects you during a fault. Never remove it."
+    "explanation_en": "The round prong on the plug. It protects you during a fault. Never remove it.",
+    "model": {
+      "kind": "extension-cord"
+    }
   },
   {
     "id": "tag_out",
@@ -90,7 +111,10 @@
     "term": "Tool bag",
     "es": "bolsa de herramientas",
     "explanation_es": "Donde cargas tus herramientas de mano. Un electricista siempre la trae.",
-    "explanation_en": "Where you carry your hand tools. An electrician always has it."
+    "explanation_en": "Where you carry your hand tools. An electrician always has it.",
+    "model": {
+      "kind": "tool-bag"
+    }
   },
   {
     "id": "lineman_pliers",
@@ -98,42 +122,66 @@
     "es": "pinzas de electricista",
     "explanation_es": "Pinzas fuertes de punta plana: cortan, tuercen y jalan cable.",
     "explanation_en": "Heavy flat-nose pliers: cut, twist and pull wire.",
-    "say": "lineman's pliers"
+    "say": "lineman's pliers",
+    "model": {
+      "kind": "lineman-pliers"
+    }
   },
   {
     "id": "needle_nose",
     "term": "Needle-nose pliers",
     "es": "pinzas de punta",
     "explanation_es": "Pinzas de punta larga y delgada para hacer ganchos en el cable y trabajar en lugares chicos.",
-    "explanation_en": "Long thin-nose pliers to make wire hooks and work in tight spots."
+    "explanation_en": "Long thin-nose pliers to make wire hooks and work in tight spots.",
+    "model": {
+      "kind": "needle-nose"
+    }
   },
   {
     "id": "dikes",
     "term": "Dikes",
     "es": "pinzas de corte diagonal",
     "explanation_es": "Pinzas de corte (diagonal cutters). Solo sirven para cortar cable y cinchos.",
-    "explanation_en": "Diagonal cutters. Only for cutting wire and zip ties."
+    "explanation_en": "Diagonal cutters. Only for cutting wire and zip ties.",
+    "model": {
+      "kind": "dikes"
+    }
   },
   {
     "id": "wire_strippers",
     "term": "Wire strippers",
     "es": "peladora de cable",
     "explanation_es": "Pinzas con hoyitos marcados por calibre para quitar el aislante sin dañar el cobre.",
-    "explanation_en": "Pliers with gauge-marked holes to remove insulation without nicking the copper."
+    "explanation_en": "Pliers with gauge-marked holes to remove insulation without nicking the copper.",
+    "model": {
+      "kind": "strippers"
+    }
   },
   {
     "id": "flathead",
     "term": "Flathead",
     "es": "desarmador plano",
     "explanation_es": "Desarmador de punta plana.",
-    "explanation_en": "Slotted screwdriver."
+    "explanation_en": "Slotted screwdriver.",
+    "model": {
+      "kind": "screwdriver",
+      "params": {
+        "tip": "flat"
+      }
+    }
   },
   {
     "id": "phillips",
     "term": "Phillips",
     "es": "desarmador de cruz",
     "explanation_es": "Desarmador de punta en cruz.",
-    "explanation_en": "Cross-tip screwdriver."
+    "explanation_en": "Cross-tip screwdriver.",
+    "model": {
+      "kind": "screwdriver",
+      "params": {
+        "tip": "phillips"
+      }
+    }
   },
   {
     "id": "ncvt",
@@ -141,49 +189,70 @@
     "es": "probador sin contacto",
     "explanation_es": "Pluma que pita cerca de un cable con voltaje. Es solo una señal rápida: no confirma que está muerto.",
     "explanation_en": "Pen that beeps near live voltage. Quick check only: it does not prove dead.",
-    "say": "tick tester"
+    "say": "tick tester",
+    "model": {
+      "kind": "ncvt"
+    }
   },
   {
     "id": "multimeter",
     "term": "Multimeter",
     "es": "multímetro / meter",
     "explanation_es": "Aparato con puntas roja y negra para medir voltaje, resistencia y continuidad.",
-    "explanation_en": "Meter with red and black leads to measure voltage, resistance and continuity."
+    "explanation_en": "Meter with red and black leads to measure voltage, resistance and continuity.",
+    "model": {
+      "kind": "multimeter"
+    }
   },
   {
     "id": "tape_measure",
     "term": "Tape measure",
     "es": "cinta de medir / flexómetro",
     "explanation_es": "Para medir alturas de cajas y distancias. En EE.UU. se mide en pulgadas y pies.",
-    "explanation_en": "For box heights and distances. In the US: inches and feet."
+    "explanation_en": "For box heights and distances. In the US: inches and feet.",
+    "model": {
+      "kind": "tape-measure"
+    }
   },
   {
     "id": "torpedo_level",
     "term": "Torpedo level",
     "es": "nivel de torpedo",
     "explanation_es": "Nivel chico que cabe en la bolsa. Para que cajas y tubería queden derechas.",
-    "explanation_en": "Small pocket level to keep boxes and conduit straight."
+    "explanation_en": "Small pocket level to keep boxes and conduit straight.",
+    "model": {
+      "kind": "torpedo-level"
+    }
   },
   {
     "id": "fish_tape",
     "term": "Fish tape",
     "es": "guía / cinta pasacables",
     "explanation_es": "Cinta de acero enrollada para pasar cable por tubería o paredes cerradas.",
-    "explanation_en": "Coiled steel tape to pull wire through conduit or closed walls."
+    "explanation_en": "Coiled steel tape to pull wire through conduit or closed walls.",
+    "model": {
+      "kind": "fish-tape"
+    }
   },
   {
     "id": "cable_ripper",
     "term": "Cable ripper",
     "es": "pelacables de forro",
     "explanation_es": "Herramienta chica que abre el forro del cable NM-B sin cortar los cables de adentro.",
-    "explanation_en": "Small tool that slits NM-B jacket without cutting the wires inside."
+    "explanation_en": "Small tool that slits NM-B jacket without cutting the wires inside.",
+    "model": {
+      "kind": "cable-ripper"
+    }
   },
   {
     "id": "utility_knife",
     "term": "Utility knife",
     "es": "cúter / navaja",
     "explanation_es": "Navaja de uso general. Con cuidado: puede cortar el aislante de los conductores.",
-    "explanation_en": "General purpose knife. Careful: it can nick conductor insulation."
+    "explanation_en": "General purpose knife. Careful: it can nick conductor insulation.",
+    "model": {
+      "kind": "utility-knife"
+    }
   },
   {
     "id": "delivery_ticket",
@@ -212,14 +281,28 @@
     "es": "cable Romex / cable forrado",
     "explanation_es": "Cable de casa: varios conductores dentro de un forro de plástico. Se usa en paredes de madera secas.",
     "explanation_en": "House cable: several conductors inside a plastic jacket. Used in dry wood-framed walls.",
-    "say": "N M B"
+    "say": "N M B",
+    "model": {
+      "kind": "nm-cable",
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2 W/G    TYPE NM-B    600V"
+      }
+    }
   },
   {
     "id": "romex",
     "term": "Romex",
     "es": "cable NM-B (marca)",
     "explanation_es": "Marca famosa de cable NM-B. En la obra le dicen Romex a todo el NM-B.",
-    "explanation_en": "Famous NM-B brand. On site, everyone calls NM-B 'Romex'."
+    "explanation_en": "Famous NM-B brand. On site, everyone calls NM-B 'Romex'.",
+    "model": {
+      "kind": "nm-cable",
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2 W/G    TYPE NM-B    600V"
+      }
+    }
   },
   {
     "id": "thhn",
@@ -227,7 +310,14 @@
     "es": "cable THHN / cable suelto",
     "explanation_es": "Conductor individual con aislante y nylon. Va dentro de tubería. Muy usado en comercial.",
     "explanation_en": "Single insulated conductor with nylon coating. Goes in conduit. Common in commercial work.",
-    "say": "T H H N"
+    "say": "T H H N",
+    "model": {
+      "kind": "thhn-spool",
+      "params": {
+        "color": "#151515",
+        "text": "THHN 12"
+      }
+    }
   },
   {
     "id": "conduit",
@@ -257,7 +347,14 @@
     "term": "Jacket",
     "es": "forro",
     "explanation_es": "La cubierta de plástico de afuera del cable NM-B. Su color te dice el calibre.",
-    "explanation_en": "Outer plastic sheath of NM-B. Its color tells you the gauge."
+    "explanation_en": "Outer plastic sheath of NM-B. Its color tells you the gauge.",
+    "model": {
+      "kind": "nm-cable",
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2 W/G    TYPE NM-B    600V"
+      }
+    }
   },
   {
     "id": "conductor",
@@ -299,14 +396,26 @@
     "term": "Bare copper",
     "es": "cobre desnudo",
     "explanation_es": "Conductor sin aislante. En el NM-B es la tierra.",
-    "explanation_en": "Conductor with no insulation. In NM-B it's the ground."
+    "explanation_en": "Conductor with no insulation. In NM-B it's the ground.",
+    "model": {
+      "kind": "thhn-spool",
+      "params": {
+        "bare": true
+      }
+    }
   },
   {
     "id": "breaker",
     "term": "Breaker",
     "es": "breque / interruptor termomagnético",
     "explanation_es": "Corta la corriente si pasa más amperaje del que aguanta el cable.",
-    "explanation_en": "Cuts power if more current flows than the wire can handle."
+    "explanation_en": "Cuts power if more current flows than the wire can handle.",
+    "model": {
+      "kind": "breaker",
+      "params": {
+        "amps": "20"
+      }
+    }
   },
   {
     "id": "panel",
@@ -426,21 +535,40 @@
     "term": "Single-gang box",
     "es": "caja sencilla",
     "explanation_es": "Caja para un solo contacto o switch. Las azules de plástico son para casa.",
-    "explanation_en": "Box for one device. Blue plastic ones are for houses."
+    "explanation_en": "Box for one device. Blue plastic ones are for houses.",
+    "model": {
+      "kind": "box-single-gang"
+    }
   },
   {
     "id": "strip",
     "term": "Strip",
     "es": "pelar",
     "explanation_es": "Quitar el aislante de la punta del cable.",
-    "explanation_en": "Remove insulation from the wire end."
+    "explanation_en": "Remove insulation from the wire end.",
+    "model": {
+      "kind": "wire-piece",
+      "params": {
+        "color": "#151515",
+        "stripped": 0.75,
+        "ruler": true
+      }
+    }
   },
   {
     "id": "nick",
     "term": "Nick",
     "es": "mordida / raspón en el cobre",
     "explanation_es": "Cortada en el cobre al pelar mal. El cable se debilita y se calienta. Se corta y se vuelve a pelar.",
-    "explanation_en": "Cut in the copper from bad stripping. Weakens and heats the wire. Cut it off and re-strip."
+    "explanation_en": "Cut in the copper from bad stripping. Weakens and heats the wire. Cut it off and re-strip.",
+    "model": {
+      "kind": "wire-piece",
+      "params": {
+        "color": "#151515",
+        "stripped": 0.75,
+        "nick": true
+      }
+    }
   },
   {
     "id": "solid",
@@ -512,27 +640,52 @@
     "term": "Test leads",
     "es": "puntas del multímetro",
     "explanation_es": "Cables rojo y negro del multímetro. Se sujetan del mango, nunca de la punta de metal.",
-    "explanation_en": "Red and black meter leads. Hold the grips, never the metal tips."
+    "explanation_en": "Red and black meter leads. Hold the grips, never the metal tips.",
+    "model": {
+      "kind": "multimeter"
+    }
   },
   {
     "id": "strip_gauge",
     "term": "Strip gauge",
     "es": "guía de pelado",
     "explanation_es": "Marca en el dispositivo o breaker que te dice cuánto pelar.",
-    "explanation_en": "Mark on a device or breaker showing how much to strip."
+    "explanation_en": "Mark on a device or breaker showing how much to strip.",
+    "model": {
+      "kind": "wire-piece",
+      "params": {
+        "color": "#151515",
+        "stripped": 0.5,
+        "ruler": true
+      }
+    }
   },
   {
     "id": "coil",
     "term": "Roll / coil",
     "es": "rollo",
     "explanation_es": "Como viene el cable NM-B: 250 pies en un rollo.",
-    "explanation_en": "How NM-B comes: 250 ft in a coil."
+    "explanation_en": "How NM-B comes: 250 ft in a coil.",
+    "model": {
+      "kind": "nm-roll",
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2"
+      }
+    }
   },
   {
     "id": "spool",
     "term": "Spool / reel",
     "es": "carrete",
     "explanation_es": "Carrete de THHN. Se monta en un rack para jalar cable.",
-    "explanation_en": "THHN reel. Mounted on a rack to pull wire."
+    "explanation_en": "THHN reel. Mounted on a rack to pull wire.",
+    "model": {
+      "kind": "thhn-spool",
+      "params": {
+        "color": "#c21d1d",
+        "text": "THHN 12"
+      }
+    }
   }
 ]

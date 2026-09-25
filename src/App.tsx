@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { GlossaryScreen } from './components/GlossaryScreen';
+import { ObjectViewer } from './components/ObjectViewer';
 import { MainMenu } from './components/MainMenu';
 import { MissionScreen } from './components/MissionScreen';
 import { ModuleScreen } from './components/ModuleScreen';
@@ -22,6 +23,7 @@ export default function App() {
       {route.name === 'mission' ? <MissionScreen key={route.id} id={route.id} /> : null}
       {route.name === 'glossary' ? <GlossaryScreen /> : null}
       <TermCard />
+      <ObjectViewer />
     </>
   );
 }

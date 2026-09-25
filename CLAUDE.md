@@ -255,6 +255,15 @@ and missing `requires` flags.
   step; it never performs the action (the learner repeats it). It shares the hint cost (−5 once per step).
 - **Voice**: Web Speech narration, es-US voice for Rosa, en-US for foreman orders; off by default
   (toggle 🔈 in the top bar, persisted); 🔊 on each bubble reads it on demand.
+- **Close-up 3D viewer** (`ObjectViewer`): tapping an object you already identified, the
+  "🧊 Ver en 3D" button in term cards, or the glossary opens the model alone, big and auto-rotating
+  (drag to turn, pinch to zoom). Glossary entries carry `model: {kind, params}`.
+- **Readable on any host**: text color/font are pinned on `#root` (hosts like the artifact viewer
+  inject a dark default text color on `body`); the e2e checks this.
+- **WebGL contexts** are released when a Stage/viewer unmounts; a lost context shows "tap to reload
+  the 3D view" (remounts the Stage, mission progress kept). DPR capped at 1.6 on phones.
+- **Tool layouts**: compact 3-column grids (≈1.4 m wide) so objects look big on portrait phones;
+  scene labels show only the English name (Spanish is in the card).
 - **Testing**: vitest validates all content (keys exist in es+en, glossary ids, prop ids, prop kinds,
   step shape, solvability) + engine logic; `scripts/e2e.mjs` plays every mission in headless Chromium
   with real pointer events on the canvas (positions projected from 3D), including failure paths.

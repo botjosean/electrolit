@@ -268,14 +268,41 @@ function PropsLayer({ mission }: { mission: Mission }) {
   );
 }
 
-export function Stage({ mission }: { mission: Mission }) {
+/** Releases the WebGL context on unmount (phones cap live contexts; leaked ones turn the scene
+ *  black) and reports a lost context so the screen can offer to reload the scene. */
+function ContextGuard({ onLost }: { onLost?: () => void }) {
+  const gl = useThree((s) => s.gl);
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const lost = (e: Event) => {
+      e.preventDefault();
+      onLost?.();
+    };
+    canvas.addEventListener('webglcontextlost', lost);
+    return () => {
+      canvas.removeEventListener('webglcontextlost', lost);
+      // only when the canvas really left the page (StrictMode re-runs effects on a live canvas)
+      setTimeout(() => {
+        if (!canvas.isConnected) {
+          gl.dispose();
+          gl.forceContextLoss();
+        }
+      }, 0);
+    };
+  }, [gl, onLost]);
+  return null;
+}
+
+const isSmallScreen = () => typeof window !== 'undefined' && Math.min(window.innerWidth, window.innerHeight) < 600;
+
+export function Stage({ mission, onContextLost }: { mission: Mission; onContextLost?: () => void }) {
   const selectSource = useMission((s) => s.selectSource);
   return (
     <Canvas
       shadows
-      dpr={[1, 2]}
-      camera={{ position: [0, 1.6, 2.5], fov: 50, near: 0.05, far: 200 }}
-      gl={{ antialias: true, preserveDrawingBuffer: true }}
+      dpr={isSmallScreen() ? [1, 1.6] : [1, 2]}
+      camera={{ position: [0, 1.6, 2.5], fov: 50, near: 0.02, far: 200 }}
+      gl={{ antialias: true, powerPreference: 'high-performance' }}
       onPointerMissed={() => {
         if (useMission.getState().step.selectedSource) selectSource(null);
       }}
@@ -290,6 +317,7 @@ export function Stage({ mission }: { mission: Mission }) {
       <OrbitControls makeDefault enableDamping dampingFactor={0.12} minDistance={0.25} maxDistance={14} maxPolarAngle={Math.PI / 2 - 0.05} />
       <CameraRig />
       <DebugBridge />
+      <ContextGuard onLost={onContextLost} />
     </Canvas>
   );
 }
