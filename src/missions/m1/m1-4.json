@@ -1,0 +1,430 @@
+{
+  "id": "m1-4",
+  "module": "m1",
+  "title": "m1.m4.title",
+  "desc": "m1.m4.desc",
+  "env": "garage",
+  "parSeconds": 170,
+  "characters": {
+    "foreman": {
+      "pos": [
+        -1.45,
+        0,
+        -0.75
+      ]
+    },
+    "instructor": {
+      "pos": [
+        1.45,
+        0,
+        -0.7
+      ]
+    }
+  },
+  "camera": {
+    "pos": [
+      0.05,
+      1.3,
+      0.55
+    ],
+    "target": [
+      0.05,
+      0.9,
+      0.05
+    ],
+    "w": 0.75
+  },
+  "props": [
+    {
+      "id": "bench",
+      "kind": "workbench",
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "params": {
+        "w": 2.0,
+        "d": 0.8
+      }
+    },
+    {
+      "id": "peg",
+      "kind": "pegboard",
+      "pos": [
+        0,
+        0.9,
+        -0.43
+      ],
+      "params": {
+        "w": 2.0,
+        "h": 0.9
+      }
+    },
+    {
+      "id": "strippers",
+      "kind": "strippers",
+      "pos": [
+        -0.55,
+        0.9,
+        0.25
+      ],
+      "rot": [
+        0,
+        0.4,
+        0
+      ],
+      "scale": 1.3,
+      "label": "props.strippers"
+    },
+    {
+      "id": "meter",
+      "kind": "multimeter",
+      "pos": [
+        0.6,
+        0.9,
+        -0.25
+      ],
+      "scale": 1.3,
+      "label": "props.multimeter",
+      "params": {
+        "pose": "upright"
+      }
+    },
+    {
+      "id": "wire1",
+      "kind": "wire-piece",
+      "pos": [
+        0.0,
+        0.9,
+        0.05
+      ],
+      "scale": 1.5,
+      "params": {
+        "color": "#151515",
+        "gauge": 12,
+        "hold": true,
+        "ruler": true
+      }
+    },
+    {
+      "id": "wire2",
+      "kind": "wire-piece",
+      "pos": [
+        0.0,
+        0.9,
+        0.05
+      ],
+      "scale": 1.5,
+      "hidden": true,
+      "params": {
+        "color": "#eeeeee",
+        "gauge": 14,
+        "hold": true,
+        "ruler": true
+      }
+    },
+    {
+      "id": "wireNick",
+      "kind": "wire-piece",
+      "pos": [
+        -0.3,
+        0.9,
+        0.05
+      ],
+      "scale": 1.5,
+      "hidden": true,
+      "params": {
+        "color": "#151515",
+        "gauge": 12,
+        "stripped": 0.75,
+        "nick": true
+      }
+    },
+    {
+      "id": "wireGood",
+      "kind": "wire-piece",
+      "pos": [
+        0.25,
+        0.9,
+        0.05
+      ],
+      "scale": 1.5,
+      "hidden": true,
+      "params": {
+        "color": "#c21d1d",
+        "gauge": 12,
+        "stripped": 0.75
+      }
+    },
+    {
+      "id": "wire3",
+      "kind": "wire-piece",
+      "pos": [
+        0.0,
+        0.9,
+        0.0
+      ],
+      "scale": 2.0,
+      "hidden": true,
+      "params": {
+        "color": "#151515",
+        "gauge": 12,
+        "len": 0.36
+      }
+    },
+    {
+      "id": "wireOther",
+      "kind": "wire-piece",
+      "pos": [
+        0.0,
+        0.9,
+        0.2
+      ],
+      "scale": 2.0,
+      "hidden": true,
+      "params": {
+        "color": "#eeeeee",
+        "gauge": 12,
+        "len": 0.3
+      }
+    },
+    {
+      "id": "endA",
+      "kind": "probe-point",
+      "pos": [
+        -0.39,
+        0.9,
+        0.0
+      ],
+      "label": "props.wireEndA",
+      "hidden": true
+    },
+    {
+      "id": "endB",
+      "kind": "probe-point",
+      "pos": [
+        0.39,
+        0.9,
+        0.0
+      ],
+      "label": "props.wireEndB",
+      "hidden": true
+    },
+    {
+      "id": "endC",
+      "kind": "probe-point",
+      "pos": [
+        0.33,
+        0.9,
+        0.2
+      ],
+      "label": "props.wireOther",
+      "hidden": true
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m1.m4.s1"
+    },
+    {
+      "id": "s2",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m1.m4.s2",
+      "options": [
+        {
+          "text": "m1.m4.s2a",
+          "correct": true,
+          "feedback": "m1.m4.s2aFb"
+        },
+        {
+          "text": "m1.m4.s2b",
+          "feedback": "m1.m4.s2bFb"
+        },
+        {
+          "text": "m1.m4.s2c",
+          "feedback": "m1.m4.s2cFb"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "type": "hold-action",
+      "speaker": "instructor",
+      "action": "strip",
+      "target": "wire1",
+      "text": "m1.m4.s3",
+      "max": 1.5,
+      "unit": "in",
+      "zone": [
+        0.625,
+        0.875
+      ],
+      "durationMs": 3000,
+      "tooLow": "m1.m4.low",
+      "tooHigh": "m1.m4.high",
+      "success": "m1.m4.s3ok"
+    },
+    {
+      "id": "s4",
+      "type": "hold-action",
+      "speaker": "instructor",
+      "action": "strip",
+      "target": "wire2",
+      "show": [
+        "wire2"
+      ],
+      "hide": [
+        "wire1"
+      ],
+      "text": "m1.m4.s4",
+      "max": 1.5,
+      "unit": "in",
+      "zone": [
+        0.4375,
+        0.625
+      ],
+      "durationMs": 3000,
+      "tooLow": "m1.m4.low2",
+      "tooHigh": "m1.m4.high2",
+      "success": "m1.m4.s4ok"
+    },
+    {
+      "id": "s5",
+      "type": "inspect",
+      "speaker": "instructor",
+      "mode": "find",
+      "target": "wireNick",
+      "camera": {
+        "pos": [
+          -0.05,
+          1.3,
+          0.6
+        ],
+        "target": [
+          -0.05,
+          0.9,
+          0.05
+        ],
+        "w": 1.25
+      },
+      "show": [
+        "wireNick",
+        "wireGood"
+      ],
+      "hide": [
+        "wire2"
+      ],
+      "text": "m1.m4.s5",
+      "points": [
+        {
+          "id": "insul",
+          "pos": [
+            -0.12,
+            0.04,
+            0.0
+          ],
+          "label": "m1.m4.pInsul",
+          "info": "m1.m4.pInsulInfo"
+        },
+        {
+          "id": "nick",
+          "pos": [
+            0.19,
+            0.04,
+            0.0
+          ],
+          "defect": true,
+          "label": "m1.m4.pNick",
+          "info": "m1.m4.pNickInfo"
+        },
+        {
+          "id": "good",
+          "pos": [
+            0.78,
+            0.04,
+            0.0
+          ],
+          "label": "m1.m4.pGood",
+          "info": "m1.m4.pGoodInfo"
+        }
+      ],
+      "success": "m1.m4.s5ok"
+    },
+    {
+      "id": "s6",
+      "type": "measure",
+      "speaker": "instructor",
+      "camera": {
+        "pos": [
+          0,
+          1.72,
+          1.2
+        ],
+        "target": [
+          0,
+          0.92,
+          0.0
+        ],
+        "w": 1.95
+      },
+      "show": [
+        "wire3",
+        "wireOther",
+        "endA",
+        "endB",
+        "endC"
+      ],
+      "hide": [
+        "wireNick",
+        "wireGood"
+      ],
+      "text": "m1.m4.s6",
+      "points": [
+        "endA",
+        "endB",
+        "endC"
+      ],
+      "expect": {
+        "mode": "CONT",
+        "pair": [
+          "endA",
+          "endB"
+        ]
+      },
+      "readings": [
+        {
+          "mode": "CONT",
+          "pair": [
+            "endA",
+            "endB"
+          ],
+          "value": "0.3"
+        },
+        {
+          "mode": "OHM",
+          "pair": [
+            "endA",
+            "endB"
+          ],
+          "value": "0.3"
+        }
+      ],
+      "wrongMode": "m1.m4.wMode",
+      "wrongPoints": "m1.m4.wPoints",
+      "success": "m1.m4.s6ok",
+      "video": "continuity_test"
+    },
+    {
+      "id": "s7",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m1.m4.s7"
+    }
+  ],
+  "video": "strip_wire"
+}

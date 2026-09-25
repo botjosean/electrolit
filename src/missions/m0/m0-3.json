@@ -1,0 +1,407 @@
+{
+  "id": "m0-3",
+  "module": "m0",
+  "title": "m0.m3.title",
+  "desc": "m0.m3.desc",
+  "env": "yard",
+  "parSeconds": 210,
+  "characters": {
+    "foreman": {
+      "pos": [
+        -0.9,
+        0,
+        -3.6
+      ]
+    },
+    "instructor": {
+      "pos": [
+        1.1,
+        0,
+        -3.5
+      ]
+    }
+  },
+  "camera": {
+    "pos": [
+      0.15,
+      3.1,
+      3.4
+    ],
+    "target": [
+      0.15,
+      0.1,
+      0.25
+    ],
+    "w": 3.9
+  },
+  "props": [
+    {
+      "id": "truck",
+      "kind": "box-truck",
+      "pos": [
+        5.6,
+        0,
+        -3.4
+      ],
+      "rot": [
+        0,
+        -0.5,
+        0
+      ],
+      "params": {
+        "textKey": "props.sign.truck"
+      }
+    },
+    {
+      "id": "pallet",
+      "kind": "pallet",
+      "pos": [
+        -0.3,
+        0,
+        -0.3
+      ]
+    },
+    {
+      "id": "roll14",
+      "kind": "nm-roll",
+      "pos": [
+        -0.6,
+        0.11,
+        -0.52
+      ],
+      "label": "props.roll14",
+      "params": {
+        "color": "#f4f4f0",
+        "text": "14-2"
+      }
+    },
+    {
+      "id": "roll12a",
+      "kind": "nm-roll",
+      "pos": [
+        -0.2,
+        0.11,
+        -0.52
+      ],
+      "label": "props.roll12",
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2"
+      }
+    },
+    {
+      "id": "roll12b",
+      "kind": "nm-roll",
+      "pos": [
+        -0.6,
+        0.11,
+        -0.08
+      ],
+      "label": "props.roll12",
+      "params": {
+        "color": "#f2d024",
+        "text": "12-2"
+      }
+    },
+    {
+      "id": "roll10",
+      "kind": "nm-roll",
+      "pos": [
+        -0.2,
+        0.11,
+        -0.08
+      ],
+      "label": "props.roll10",
+      "params": {
+        "color": "#f07a10",
+        "text": "10-2"
+      }
+    },
+    {
+      "id": "pallet2",
+      "kind": "pallet",
+      "pos": [
+        0.95,
+        0,
+        -0.3
+      ],
+      "rot": [
+        0,
+        1.5708,
+        0
+      ]
+    },
+    {
+      "id": "boxes",
+      "kind": "carton",
+      "pos": [
+        0.95,
+        0.11,
+        -0.55
+      ],
+      "label": "props.cartonBoxes",
+      "params": {
+        "w": 0.4,
+        "h": 0.25,
+        "d": 0.3,
+        "textKey": "props.carton.boxes"
+      }
+    },
+    {
+      "id": "breakers",
+      "kind": "carton",
+      "pos": [
+        0.95,
+        0.11,
+        -0.05
+      ],
+      "label": "props.cartonBreakers",
+      "params": {
+        "w": 0.26,
+        "h": 0.18,
+        "d": 0.22,
+        "textKey": "props.carton.breakers"
+      }
+    },
+    {
+      "id": "ticketTable",
+      "kind": "table",
+      "pos": [
+        -2.1,
+        0,
+        -1.3
+      ],
+      "params": {
+        "w": 1.0,
+        "d": 0.6
+      }
+    },
+    {
+      "id": "ticket",
+      "kind": "clipboard",
+      "pos": [
+        -2.1,
+        0.74,
+        -1.3
+      ],
+      "label": "props.ticketLabel",
+      "params": {
+        "textKey": "props.ticket"
+      }
+    },
+    {
+      "id": "zoneWire",
+      "kind": "zone-pad",
+      "pos": [
+        -0.95,
+        0,
+        0.8
+      ],
+      "params": {
+        "color": "#2f6fdb",
+        "w": 1.15,
+        "d": 1.0,
+        "flat": true,
+        "labelH": 0.2,
+        "textKey": "props.sign.wire",
+        "spread": 0.37,
+        "dropY": 0.02
+      }
+    },
+    {
+      "id": "zoneBoxes",
+      "kind": "zone-pad",
+      "pos": [
+        0.4,
+        0,
+        0.8
+      ],
+      "params": {
+        "color": "#e0a800",
+        "w": 0.95,
+        "d": 0.8,
+        "flat": true,
+        "labelH": 0.2,
+        "textKey": "props.sign.boxes",
+        "dropY": 0.02
+      }
+    },
+    {
+      "id": "zoneBreakers",
+      "kind": "zone-pad",
+      "pos": [
+        1.55,
+        0,
+        0.8
+      ],
+      "params": {
+        "color": "#36c46b",
+        "w": 0.95,
+        "d": 0.8,
+        "flat": true,
+        "labelH": 0.2,
+        "textKey": "props.sign.breakers",
+        "dropY": 0.02
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "type": "dialogue",
+      "speaker": "foreman",
+      "order": "materials_here",
+      "text": "m0.m3.s1"
+    },
+    {
+      "id": "s2",
+      "type": "inspect",
+      "speaker": "instructor",
+      "target": "ticket",
+      "mode": "learn",
+      "camera": {
+        "pos": [
+          -2.1,
+          1.3,
+          -0.75
+        ],
+        "target": [
+          -2.1,
+          0.74,
+          -1.3
+        ],
+        "w": 0.45
+      },
+      "text": "m0.m3.s2",
+      "points": [
+        {
+          "id": "head",
+          "pos": [
+            0.0,
+            0.03,
+            -0.095
+          ],
+          "label": "m0.m3.pHead",
+          "info": "m0.m3.pHeadInfo"
+        },
+        {
+          "id": "list",
+          "pos": [
+            0.07,
+            0.03,
+            0.0
+          ],
+          "label": "m0.m3.pList",
+          "info": "m0.m3.pListInfo"
+        },
+        {
+          "id": "sign",
+          "pos": [
+            0.0,
+            0.03,
+            0.105
+          ],
+          "label": "m0.m3.pSign",
+          "info": "m0.m3.pSignInfo"
+        }
+      ],
+      "success": "m0.m3.s2ok"
+    },
+    {
+      "id": "s3",
+      "type": "click",
+      "speaker": "instructor",
+      "camera": {
+        "pos": [
+          -0.1,
+          1.9,
+          1.5
+        ],
+        "target": [
+          -0.1,
+          0.2,
+          -0.3
+        ],
+        "w": 1.6
+      },
+      "text": "m0.m3.s3",
+      "targets": [
+        "roll12a",
+        "roll12b"
+      ],
+      "wrong": {
+        "roll14": "m0.m3.w14",
+        "roll10": "m0.m3.w10"
+      },
+      "success": "m0.m3.s3ok"
+    },
+    {
+      "id": "s4",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m0.m3.s4",
+      "options": [
+        {
+          "text": "m0.m3.s4a",
+          "correct": true
+        },
+        {
+          "text": "m0.m3.s4b",
+          "feedback": "m0.m3.s4bFb"
+        },
+        {
+          "text": "m0.m3.s4c",
+          "feedback": "m0.m3.s4cFb"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "type": "dialogue",
+      "speaker": "foreman",
+      "order": "good_catch",
+      "text": "m0.m3.s5"
+    },
+    {
+      "id": "s6",
+      "type": "drag-connect",
+      "speaker": "foreman",
+      "order": "stage_it",
+      "style": "move",
+      "camera": {
+        "pos": [
+          0.15,
+          3.1,
+          3.4
+        ],
+        "target": [
+          0.15,
+          0.1,
+          0.25
+        ],
+        "w": 3.9
+      },
+      "text": "m0.m3.s6",
+      "pairs": {
+        "roll14": "zoneWire",
+        "roll12a": "zoneWire",
+        "roll12b": "zoneWire",
+        "roll10": "zoneWire",
+        "boxes": "zoneBoxes",
+        "breakers": "zoneBreakers"
+      },
+      "wrong": {
+        "breakers>zoneWire": "m0.m3.wBk",
+        "breakers>zoneBoxes": "m0.m3.wBk2"
+      },
+      "success": "m0.m3.s6ok"
+    },
+    {
+      "id": "s7",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m0.m3.s7"
+    }
+  ],
+  "video": "material_delivery"
+}

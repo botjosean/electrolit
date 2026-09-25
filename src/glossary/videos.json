@@ -1,0 +1,77 @@
+[
+  {
+    "id": "ppe_jobsite",
+    "en": "electrician PPE job site safety glasses gloves hard hat",
+    "es": "equipo de protección personal electricista obra"
+  },
+  {
+    "id": "cord_inspection",
+    "en": "how to inspect an extension cord before use OSHA",
+    "es": "cómo revisar una extensión eléctrica antes de usarla seguridad"
+  },
+  {
+    "id": "electrician_tools",
+    "en": "electrician hand tools explained apprentice",
+    "es": "herramientas de electricista nombres en inglés"
+  },
+  {
+    "id": "jobsite_first_day",
+    "en": "electrician apprentice first day on the job tips",
+    "es": "primer día de ayudante de electricista en Estados Unidos consejos"
+  },
+  {
+    "id": "material_delivery",
+    "en": "electrician checking material delivery job site staging",
+    "es": "electricista recibir material en la obra"
+  },
+  {
+    "id": "jobsite_english",
+    "en": "construction English phrases for Spanish speakers electrician",
+    "es": "inglés para la construcción frases para electricistas"
+  },
+  {
+    "id": "awg_sizes",
+    "en": "AWG wire sizes explained electrician",
+    "es": "calibre de cable AWG explicado electricista"
+  },
+  {
+    "id": "nm_vs_thhn",
+    "en": "NM-B vs THHN wire difference",
+    "es": "diferencia cable romex NM-B y THHN"
+  },
+  {
+    "id": "color_code",
+    "en": "US electrical wire color code black white red green",
+    "es": "código de colores cables eléctricos Estados Unidos"
+  },
+  {
+    "id": "three_phase_colors",
+    "en": "208Y/120 vs 480Y/277 wire color code brown orange yellow",
+    "es": "colores de cables trifásicos 208 y 480 voltios"
+  },
+  {
+    "id": "strip_wire",
+    "en": "how to strip wire properly electrician Klein strippers",
+    "es": "cómo pelar cable eléctrico correctamente pelacables"
+  },
+  {
+    "id": "continuity_test",
+    "en": "how to test wire continuity with a multimeter",
+    "es": "cómo medir continuidad de un cable con multímetro"
+  },
+  {
+    "id": "wire_breaker_size",
+    "en": "14 gauge 15 amp 12 gauge 20 amp wire size breaker",
+    "es": "calibre de cable y tamaño de breaker 12 AWG 20 amperios"
+  },
+  {
+    "id": "lockout_tagout",
+    "en": "lockout tagout live dead live test electrician",
+    "es": "bloqueo y etiquetado verificar ausencia de voltaje"
+  },
+  {
+    "id": "ncvt_use",
+    "en": "how to use a non contact voltage tester limitations",
+    "es": "cómo usar un probador de voltaje sin contacto"
+  }
+]

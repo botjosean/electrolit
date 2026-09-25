@@ -1,0 +1,312 @@
+{
+  "id": "m0-1",
+  "module": "m0",
+  "title": "m0.m1.title",
+  "desc": "m0.m1.desc",
+  "env": "yard",
+  "parSeconds": 150,
+  "characters": {
+    "foreman": {
+      "pos": [
+        -1.9,
+        0,
+        -1.0
+      ]
+    },
+    "instructor": {
+      "pos": [
+        1.9,
+        0,
+        -0.9
+      ]
+    }
+  },
+  "camera": {
+    "pos": [
+      0,
+      1.7,
+      1.45
+    ],
+    "target": [
+      0,
+      0.74,
+      0.05
+    ],
+    "w": 1.85
+  },
+  "props": [
+    {
+      "id": "table",
+      "kind": "table",
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "params": {
+        "w": 1.8,
+        "d": 0.9
+      }
+    },
+    {
+      "id": "hat",
+      "kind": "hardhat",
+      "pos": [
+        -0.58,
+        0.74,
+        -0.17
+      ],
+      "scale": 1.2,
+      "label": "props.hardhat"
+    },
+    {
+      "id": "vest",
+      "kind": "vest",
+      "pos": [
+        0.0,
+        0.74,
+        -0.2
+      ],
+      "label": "props.vest"
+    },
+    {
+      "id": "boots",
+      "kind": "boots",
+      "pos": [
+        0.58,
+        0.74,
+        -0.17
+      ],
+      "label": "props.boots"
+    },
+    {
+      "id": "glasses",
+      "kind": "safety-glasses",
+      "pos": [
+        -0.62,
+        0.74,
+        0.25
+      ],
+      "scale": 1.4,
+      "label": "props.glasses"
+    },
+    {
+      "id": "cap",
+      "kind": "cap",
+      "pos": [
+        -0.2,
+        0.74,
+        0.24
+      ],
+      "scale": 1.2,
+      "label": "props.cap"
+    },
+    {
+      "id": "gloves",
+      "kind": "gloves",
+      "pos": [
+        0.2,
+        0.74,
+        0.24
+      ],
+      "scale": 1.3,
+      "label": "props.gloves"
+    },
+    {
+      "id": "sneakers",
+      "kind": "sneakers",
+      "pos": [
+        0.62,
+        0.74,
+        0.25
+      ],
+      "rot": [
+        0,
+        1.3,
+        0
+      ],
+      "label": "props.sneakers"
+    },
+    {
+      "id": "cord",
+      "kind": "extension-cord",
+      "pos": [
+        -0.05,
+        0.74,
+        0.0
+      ],
+      "label": "props.cord",
+      "hidden": true,
+      "params": {
+        "damaged": true
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m0.m1.s1"
+    },
+    {
+      "id": "s2",
+      "type": "dialogue",
+      "speaker": "foreman",
+      "order": "suit_up",
+      "text": "m0.m1.s2"
+    },
+    {
+      "id": "s3",
+      "type": "click",
+      "speaker": "instructor",
+      "text": "m0.m1.s3",
+      "targets": [
+        "hat",
+        "glasses",
+        "vest",
+        "gloves",
+        "boots"
+      ],
+      "hideOnClick": true,
+      "wrong": {
+        "cap": "m0.m1.wrongCap",
+        "sneakers": "m0.m1.wrongSneakers"
+      },
+      "success": "m0.m1.s3ok"
+    },
+    {
+      "id": "s4",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m0.m1.s4",
+      "options": [
+        {
+          "text": "m0.m1.s4a",
+          "correct": true,
+          "feedback": "m0.m1.s4aFb"
+        },
+        {
+          "text": "m0.m1.s4b",
+          "feedback": "m0.m1.s4bFb"
+        },
+        {
+          "text": "m0.m1.s4c",
+          "feedback": "m0.m1.s4cFb"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "show": [
+        "cord"
+      ],
+      "hide": [
+        "cap",
+        "sneakers"
+      ],
+      "camera": {
+        "pos": [
+          0.05,
+          1.22,
+          0.8
+        ],
+        "target": [
+          0.05,
+          0.74,
+          0.08
+        ],
+        "w": 0.85
+      },
+      "text": "m0.m1.s5",
+      "video": "cord_inspection"
+    },
+    {
+      "id": "s6",
+      "type": "inspect",
+      "speaker": "instructor",
+      "target": "cord",
+      "mode": "find",
+      "text": "m0.m1.s6",
+      "points": [
+        {
+          "id": "plug",
+          "pos": [
+            0.37,
+            0.05,
+            0.13
+          ],
+          "defect": true,
+          "label": "m0.m1.pPlug",
+          "info": "m0.m1.pPlugInfo"
+        },
+        {
+          "id": "cut",
+          "pos": [
+            0.25,
+            0.045,
+            0.13
+          ],
+          "defect": true,
+          "label": "m0.m1.pCut",
+          "info": "m0.m1.pCutInfo"
+        },
+        {
+          "id": "female",
+          "pos": [
+            -0.25,
+            0.07,
+            0.13
+          ],
+          "label": "m0.m1.pFemale",
+          "info": "m0.m1.pFemaleInfo"
+        },
+        {
+          "id": "coil",
+          "pos": [
+            0.02,
+            0.05,
+            -0.1
+          ],
+          "label": "m0.m1.pCoil",
+          "info": "m0.m1.pCoilInfo"
+        }
+      ],
+      "missed": "m0.m1.s6missed",
+      "success": "m0.m1.s6ok",
+      "video": "cord_inspection"
+    },
+    {
+      "id": "s7",
+      "type": "choose-option",
+      "speaker": "foreman",
+      "order": "is_that_cord_good",
+      "text": "m0.m1.s7",
+      "options": [
+        {
+          "text": "m0.m1.s7a",
+          "correct": true,
+          "feedback": "m0.m1.s7aFb"
+        },
+        {
+          "text": "m0.m1.s7b",
+          "unsafe": "m0.m1.failCord"
+        },
+        {
+          "text": "m0.m1.s7c",
+          "feedback": "m0.m1.s7cFb"
+        }
+      ],
+      "video": "cord_inspection"
+    },
+    {
+      "id": "s8",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m0.m1.s8"
+    }
+  ],
+  "video": "ppe_jobsite"
+}

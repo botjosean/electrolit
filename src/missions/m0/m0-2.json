@@ -1,0 +1,345 @@
+{
+  "id": "m0-2",
+  "module": "m0",
+  "title": "m0.m2.title",
+  "desc": "m0.m2.desc",
+  "env": "yard",
+  "parSeconds": 120,
+  "characters": {
+    "foreman": {
+      "pos": [
+        -1.8,
+        0,
+        -0.9
+      ]
+    },
+    "instructor": {
+      "pos": [
+        1.9,
+        0,
+        -0.8
+      ]
+    }
+  },
+  "camera": {
+    "pos": [
+      0,
+      1.6,
+      1.15
+    ],
+    "target": [
+      0,
+      0.74,
+      0.04
+    ],
+    "w": 1.45
+  },
+  "props": [
+    {
+      "id": "table",
+      "kind": "table",
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "params": {
+        "w": 1.7,
+        "d": 0.95
+      }
+    },
+    {
+      "id": "lineman",
+      "kind": "lineman-pliers",
+      "pos": [
+        -0.4,
+        0.74,
+        -0.06
+      ],
+      "scale": 1.55,
+      "label": "props.lineman"
+    },
+    {
+      "id": "needle",
+      "kind": "needle-nose",
+      "pos": [
+        0.05,
+        0.74,
+        -0.06
+      ],
+      "scale": 1.55,
+      "label": "props.needle"
+    },
+    {
+      "id": "strippers",
+      "kind": "strippers",
+      "pos": [
+        0.5,
+        0.74,
+        -0.06
+      ],
+      "scale": 1.55,
+      "label": "props.strippers"
+    },
+    {
+      "id": "flat",
+      "kind": "screwdriver",
+      "pos": [
+        -0.4,
+        0.74,
+        0.14
+      ],
+      "scale": 1.55,
+      "label": "props.flat",
+      "params": {
+        "tip": "flat"
+      }
+    },
+    {
+      "id": "phillips",
+      "kind": "screwdriver",
+      "pos": [
+        0.05,
+        0.74,
+        0.14
+      ],
+      "scale": 1.55,
+      "label": "props.phillips",
+      "params": {
+        "tip": "phillips"
+      }
+    },
+    {
+      "id": "ncvt",
+      "kind": "ncvt",
+      "pos": [
+        0.5,
+        0.74,
+        0.14
+      ],
+      "scale": 1.55,
+      "label": "props.ncvt"
+    },
+    {
+      "id": "tape",
+      "kind": "tape-measure",
+      "pos": [
+        -0.45,
+        0.74,
+        0.34
+      ],
+      "scale": 1.55,
+      "label": "props.tape"
+    },
+    {
+      "id": "knife",
+      "kind": "utility-knife",
+      "pos": [
+        0.05,
+        0.74,
+        0.34
+      ],
+      "scale": 1.55,
+      "label": "props.knife"
+    },
+    {
+      "id": "meter",
+      "kind": "multimeter",
+      "pos": [
+        0.55,
+        0.74,
+        -0.3
+      ],
+      "rot": [
+        0,
+        1.5708,
+        0
+      ],
+      "scale": 1.55,
+      "label": "props.multimeter"
+    },
+    {
+      "id": "level",
+      "kind": "torpedo-level",
+      "pos": [
+        -0.5,
+        0.74,
+        -0.3
+      ],
+      "scale": 1.395,
+      "label": "props.level"
+    },
+    {
+      "id": "bag",
+      "kind": "tool-bag",
+      "pos": [
+        0.02,
+        0.74,
+        -0.3
+      ],
+      "label": "props.bag"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m0.m2.s1"
+    },
+    {
+      "id": "s2",
+      "type": "click",
+      "speaker": "foreman",
+      "order": "hand_me_linemans",
+      "text": "m0.m2.s2",
+      "targets": [
+        "lineman"
+      ],
+      "decoys": [
+        "needle",
+        "strippers",
+        "flat",
+        "phillips",
+        "ncvt",
+        "tape",
+        "knife",
+        "meter",
+        "level"
+      ],
+      "wrong": {
+        "needle": "m0.m2.w_needle"
+      },
+      "success": "m0.m2.s2ok"
+    },
+    {
+      "id": "s3",
+      "type": "click",
+      "speaker": "foreman",
+      "order": "grab_strippers",
+      "text": "m0.m2.s3",
+      "targets": [
+        "strippers"
+      ],
+      "decoys": [
+        "lineman",
+        "needle",
+        "flat",
+        "phillips",
+        "ncvt",
+        "tape",
+        "knife",
+        "meter",
+        "level"
+      ],
+      "wrong": {
+        "needle": "m0.m2.w_needle2"
+      },
+      "success": "m0.m2.s3ok"
+    },
+    {
+      "id": "s4",
+      "type": "click",
+      "speaker": "foreman",
+      "order": "need_flathead",
+      "text": "m0.m2.s4",
+      "targets": [
+        "flat"
+      ],
+      "decoys": [
+        "lineman",
+        "needle",
+        "strippers",
+        "phillips",
+        "ncvt",
+        "tape",
+        "knife",
+        "meter",
+        "level"
+      ],
+      "wrong": {
+        "phillips": "m0.m2.w_phillips"
+      },
+      "success": "m0.m2.s4ok"
+    },
+    {
+      "id": "s5",
+      "type": "click",
+      "speaker": "foreman",
+      "order": "wheres_tester",
+      "text": "m0.m2.s5",
+      "targets": [
+        "ncvt"
+      ],
+      "decoys": [
+        "lineman",
+        "needle",
+        "strippers",
+        "flat",
+        "phillips",
+        "tape",
+        "knife",
+        "meter",
+        "level"
+      ],
+      "wrong": {
+        "meter": "m0.m2.w_meter"
+      },
+      "success": "m0.m2.s5ok"
+    },
+    {
+      "id": "s6",
+      "type": "click",
+      "speaker": "foreman",
+      "order": "toss_tape",
+      "text": "m0.m2.s6",
+      "targets": [
+        "tape"
+      ],
+      "decoys": [
+        "lineman",
+        "needle",
+        "strippers",
+        "flat",
+        "phillips",
+        "ncvt",
+        "knife",
+        "meter",
+        "level"
+      ],
+      "wrong": {
+        "level": "m0.m2.w_level"
+      },
+      "success": "m0.m2.s6ok"
+    },
+    {
+      "id": "s7",
+      "type": "choose-option",
+      "speaker": "instructor",
+      "text": "m0.m2.s7",
+      "options": [
+        {
+          "text": "m0.m2.s7a",
+          "correct": true,
+          "feedback": "m0.m2.s7aFb"
+        },
+        {
+          "text": "m0.m2.s7b",
+          "unsafe": "m0.m2.failNcvt"
+        },
+        {
+          "text": "m0.m2.s7c",
+          "feedback": "m0.m2.s7cFb"
+        }
+      ],
+      "video": "ncvt_use"
+    },
+    {
+      "id": "s8",
+      "type": "dialogue",
+      "speaker": "instructor",
+      "text": "m0.m2.s8"
+    }
+  ],
+  "video": "electrician_tools"
+}
