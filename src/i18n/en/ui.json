@@ -34,7 +34,7 @@
     "wrong": "That's not it. Look closely and try again.",
     "order": "Right item, wrong order. What comes first?",
     "good": "Good!",
-    "found": "Good! Tap it again any time to see it up close in 3D 🔍.",
+    "found": "Good! Tap it again any time to see it up close 🔍.",
     "done": "Done!"
   },
   "click": {
@@ -121,10 +121,8 @@
     "engineering_mindset": "Whiteboard-style animations of how electricity works.",
     "neccicans": "In Spanish, for Latino electricians working under the NEC."
   },
-  "sceneLost": "The 3D view was reset. Tap to reload it (your progress is kept).",
   "viewer": {
-    "open": "View in 3D",
-    "hint": "It turns by itself so you can see every side"
+    "open": "See it up close"
   },
   "readAloud": "Listen",
   "voice": "Voice: read every step aloud",

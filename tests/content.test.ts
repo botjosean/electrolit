@@ -4,7 +4,7 @@ import { getPhrase, getTerm, glossary, phrases } from '../src/engine/glossary';
 import { allKeys, lookup } from '../src/engine/i18n';
 import { applyAction, emptyStepState, missionKeys, termIds, type Action, type StepState } from '../src/engine/logic';
 import type { Mission, Step } from '../src/engine/types';
-import { propRegistry } from '../src/three/props';
+import { spriteRegistry as propRegistry } from '../src/scene/art';
 import { getVideoTopic, videoTopics } from '../src/engine/videos';
 
 const langs = ['es', 'en'] as const;

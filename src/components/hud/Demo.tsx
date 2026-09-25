@@ -5,7 +5,7 @@ import { speakSequence, stopSpeech } from '../../engine/speech';
 import { useMission, useSettings } from '../../engine/store';
 import type { Step } from '../../engine/types';
 import { useUi } from '../../engine/ui';
-import { screenApi } from '../../three/screen';
+import { screenApi } from '../../scene/screen';
 
 // "Show me how": an animated hand performs the correct moves on screen (without doing them),
 // narrated by Rosa — an in-engine demo video generated from the mission data. Then you do it.
@@ -76,7 +76,13 @@ export function DemoLayer() {
       const step = mission?.steps[stepIndex];
       if (!step) return setDemo(null);
       const moves = demoMoves(step);
-      speakSequence([{ text: translate(lang, 'ui.demo.intro'), lang }, { text: translate(lang, step.text), lang }]);
+      speakSequence(
+        [
+          { text: translate(lang, 'ui.demo.intro'), lang },
+          { text: translate(lang, step.text), lang, voice: step.speaker === 'foreman' ? 'mike_es' : 'rosa' },
+        ],
+        'demo',
+      );
       let pos = { x: window.innerWidth / 2, y: window.innerHeight * 0.45 };
       const say = (k: string) => translate(lang, k);
       setHand({ ...pos, press: false, drag: null, caption: say('ui.demo.watch') });

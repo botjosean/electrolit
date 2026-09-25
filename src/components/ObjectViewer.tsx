@@ -1,34 +1,15 @@
-import { Bounds, Center, OrbitControls } from '@react-three/drei';
-import { Canvas, useThree } from '@react-three/fiber';
 import { useEffect } from 'react';
 import { getTerm } from '../engine/glossary';
 import { useT } from '../engine/i18n';
 import { RichText } from '../engine/richText';
-import { speakEnglish, speechSupported } from '../engine/speech';
 import { useSettings } from '../engine/store';
 import { useUi } from '../engine/ui';
 import { termQueries } from '../engine/videos';
-import { propRegistry } from '../three/props';
+import { spriteRegistry } from '../scene/art';
 import { VideoLinks } from './hud/VideoLinks';
+import { SpeakButton } from './SpeakButton';
 
-/** Frees the viewer's WebGL context as soon as it closes (phones have few contexts). */
-function Release() {
-  const gl = useThree((s) => s.gl);
-  useEffect(() => {
-    const canvas = gl.domElement;
-    return () => {
-      setTimeout(() => {
-        if (!canvas.isConnected) {
-          gl.dispose();
-          gl.forceContextLoss();
-        }
-      }, 0);
-    };
-  }, [gl]);
-  return null;
-}
-
-/** Close-up of a single object: big, auto-rotating, drag to turn, pinch/scroll to zoom. */
+/** Object "ficha": the illustration big and still, with name, audio, meaning and videos. */
 export function ObjectViewer() {
   const target = useUi((s) => s.viewer);
   const open = useUi((s) => s.openViewer);
@@ -41,42 +22,29 @@ export function ObjectViewer() {
     return () => window.removeEventListener('keydown', esc);
   }, [target, open]);
   if (!target) return null;
-  const Comp = propRegistry[target.kind];
-  if (!Comp) return null;
+  const sp = spriteRegistry[target.kind];
+  if (!sp) return null;
+  const Art = sp.draw;
+  const [x0, y0, x1, y1] = sp.bounds(target.params ?? {});
+  const pad = Math.max(x1 - x0, y1 - y0) * 0.12;
   const term = target.termId ? getTerm(target.termId) : undefined;
   return (
     <div className="modal-backdrop viewer-backdrop" onClick={() => open(null)} data-testid="viewer">
       <div className="viewer" onClick={(e) => e.stopPropagation()} role="dialog" aria-label={term?.term ?? t(target.labelKey ?? '')}>
         <div className="viewer-stage">
-          <Canvas dpr={[1, 2]} camera={{ fov: 35, near: 0.001, far: 50, position: [0.35, 0.28, 0.45] }}>
-            <color attach="background" args={['#262c33']} />
-            <hemisphereLight args={['#ffffff', '#3a3f46', 1.1]} />
-            <directionalLight position={[1, 2, 1.5]} intensity={2.2} />
-            <directionalLight position={[-1.5, 1, -1]} intensity={0.7} />
-            <Bounds fit clip observe margin={1.15}>
-              <Center>
-                <Comp params={target.params ?? {}} />
-              </Center>
-            </Bounds>
-            {/* hands-off turntable: it turns by itself, nothing to drag or pinch */}
-            <OrbitControls makeDefault autoRotate autoRotateSpeed={2.5} enableRotate={false} enableZoom={false} enablePan={false} />
-            <Release />
-          </Canvas>
+          <svg className="viewer-art" viewBox={`${x0 - pad} ${y0 - pad} ${x1 - x0 + pad * 2} ${y1 - y0 + pad * 2}`} preserveAspectRatio="xMidYMid meet">
+            <Art params={target.params ?? {}} />
+          </svg>
           <button type="button" className="icon-btn viewer-close" onClick={() => open(null)} aria-label={t('ui.close')} data-testid="viewer-close">
             ✕
           </button>
-          <div className="viewer-hint">{t('ui.viewer.hint')}</div>
         </div>
         <div className="viewer-info">
           {term ? (
             <>
               <div className="viewer-title">
                 <h2>{term.term}</h2>
-                {speechSupported() ? (
-                  <button type="button" className="icon-btn" onClick={() => speakEnglish(term.say ?? term.term)} aria-label={t('ui.term.listen')}>
-                    🔊
-                  </button>
-                ) : null}
+                <SpeakButton id={`viewer:${term.id}`} items={() => [{ text: term.say ?? term.term, lang: 'en' }]} />
               </div>
               <div className="viewer-es">{term.es}</div>
               <p>{lang === 'es' ? term.explanation_es : term.explanation_en}</p>
@@ -93,7 +61,7 @@ export function ObjectViewer() {
   );
 }
 
-/** Button that opens the viewer for a glossary term (renders nothing if it has no model). */
+/** Button that opens the ficha for a glossary term (renders nothing if it has no drawing). */
 export function View3DButton({ termId, className = 'btn small' }: { termId: string; className?: string }) {
   const term = getTerm(termId);
   const open = useUi((s) => s.openViewer);
@@ -101,7 +69,7 @@ export function View3DButton({ termId, className = 'btn small' }: { termId: stri
   if (!term?.model) return null;
   return (
     <button type="button" className={`${className} view3d-btn`} onClick={() => open({ kind: term.model!.kind, params: term.model!.params, termId })} data-view3d={termId}>
-      🧊 {t('ui.viewer.open')}
+      🔍 {t('ui.viewer.open')}
     </button>
   );
 }

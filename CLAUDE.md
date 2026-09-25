@@ -1,6 +1,6 @@
 # Electrician Sim US — CLAUDE.md
 
-An interactive 3D course that teaches **practical US electrical work (not theory)** to Spanish
+An interactive, illustrated (2D) course that teaches **practical US electrical work (not theory)** to Spanish
 speakers. It must feel like a realistic job site with an instructor guiding you step by step.
 
 > Work autonomously: do not stop to ask questions; make reasonable decisions and document them
@@ -53,9 +53,12 @@ speakers. It must feel like a realistic job site with an instructor guiding you 
 - ES/EN toggle switches the full UI. This is NOT an English course: keep language help short and practical.
 
 ### Stack
-Vite + React + TypeScript + React Three Fiber + drei + zustand. Progress saved in localStorage.
-Mobile + desktop controls (touch, drag). *Owner feedback after playtesting: no orbit/zoom/pan —
-the camera is fixed per step ("picture" framing) because manipulating the view was annoying.*
+Vite + React + TypeScript + zustand. Progress saved in localStorage. Mobile + desktop controls
+(tap, drag, tap-then-tap).
+**Owner decision after playtesting (supersedes the original "React Three Fiber + drei" spec):
+no 3D at all.** Scenes are flat 2D illustrations (inline SVG, drawn in code, no external assets):
+"less movement, more visuals". No camera handling: each step frames what matters automatically.
+Audio is pre-recorded (Piper TTS, open voices) because phone webviews have no speechSynthesis.
 
 ### Deploy
 GitHub Actions workflow that builds and deploys to GitHub Pages on every push to `main`
@@ -68,7 +71,7 @@ GitHub Actions workflow that builds and deploys to GitHub Pages on every push to
 - Instructor/foreman character with speech bubbles.
 - Safety system: skipping lockout/tagout or not verifying dead = fail with explanation.
 - Scoring: safety, correctness, speed. End-of-mission "lo que diría el jefe".
-- Low-poly procedural 3D (no external models), clean lighting, highlight interactive objects.
+- Flat 2D illustrations drawn in code (SVG), highlight interactive objects. *(was: low-poly 3D)*
 - Main menu showing all modules with progress.
 
 ### Modules (in this order)
@@ -98,7 +101,7 @@ GitHub Actions workflow that builds and deploys to GitHub Pages on every push to
 
 ## 2. PROGRESS
 
-- [x] CLAUDE.md + scaffold (Vite, React, TS, R3F, drei, zustand)
+- [x] CLAUDE.md + scaffold (Vite, React, TS, zustand) — 3D (R3F) replaced by 2D SVG after playtest
 - [x] GitHub Pages deploy workflow (`.github/workflows/deploy.yml`) + CI workflow
 - [x] Core engine (mission runner, 7 step types, i18n, glossary + term cards, speech,
       safety system, scoring, boss verdict, progress persistence, main menu)
@@ -125,12 +128,16 @@ npm install
 npm run dev        # local dev server (http://localhost:5173/electrician-sim-us/)
 npm run build      # typecheck + production build into dist/
 npm test           # vitest: engine logic + content validation (every mission, key, term, prop)
+node scripts/speech-export.mjs && python3 scripts/tts.py
+                   # (re)record audio clips after changing any spoken text (needs
+                   # `pip install piper-tts lameenc`; voices download from Hugging Face)
 npm run e2e        # needs a build first (npm run build). Plays EVERY mission step in headless
-                   # Chromium: desktop with real mouse clicks/drags on the 3D scene, then a phone
+                   # Chromium: desktop with real mouse clicks/drags on the scene, then a phone
                    # viewport with touch taps; plus failure paths (mistake, hint, term card, ES/EN,
                    # safety fail, retry). Screenshots → e2e-out/.  Options: --only m1-2,m1-3  --no-shots
 ```
 
+`npm test` fails if a spoken text has no recorded clip (tests/audio.test.ts).
 `npm run e2e` uses `playwright-core` pinned to the Chromium in `/opt/pw-browsers`
 (override with `CHROMIUM_PATH=...`).
 
@@ -149,7 +156,8 @@ src/
     i18n.ts                  t(key) with namespaced JSON files, useT() hook
     glossary.ts              glossary + phrases (foreman orders / boss lines) lookup
     richText.tsx             [[termId]] / [[termId|display]] / **bold** markup renderer
-    speech.ts                Web Speech API (en-US) pronunciation
+    speech.ts                recorded-clip playback (public/audio, src/audio/manifest.json) with
+                             Web Speech fallback; useSpeech() drives the animated 🔊 buttons
     content.ts               loads modules.json + all mission JSON (import.meta.glob)
     debug.ts                 window.__sim test hook (used by e2e)
   i18n/es/*.json, i18n/en/*.json   one file per namespace: ui, props, m0, m1, ...
@@ -157,11 +165,17 @@ src/
   glossary/phrases.json      foreman orders + boss lines [{id, en, es}]
   missions/modules.json      module list (all 11, `available` flag)
   missions/m0/*.json         missions of module 0 …
-  components/                MainMenu, ModuleScreen, MissionScreen, hud/*
-  three/                     Stage (Canvas, lights, camera rig), Interactable, characters,
-    env/                     environments (yard, garage)
-    props/                   procedural low-poly props + registry (kind → component)
+  components/                MainMenu, ModuleScreen, MissionScreen, ObjectViewer (ficha), hud/*
+  scene/
+    Scene2D.tsx              the 2D scene: auto framing per step, props, characters, taps/drags,
+                             hints, labels, wires, probes, inspection points
+    art/                     SVG illustrations in mm (ppe, tools, materials, site, characters)
+                             + registry kind → {draw, bounds}
+  audio/manifest.json        keys of the recorded clips (public/audio/<key>.mp3)
 scripts/e2e.mjs              headless end-to-end playthrough of every mission
+scripts/speech-export.mjs    lists every spoken text + its clip key
+scripts/tts.py               records the clips with Piper voices (Rosa es_MX-claude, Mike es_MX-ald,
+                             English en_US-ryan)
 tests/                       vitest suites
 ```
 
@@ -169,9 +183,9 @@ tests/                       vitest suites
 ```jsonc
 {
   "id": "m1-4", "module": "m1", "title": "m1.m4.title", "desc": "m1.m4.desc",
-  "env": "garage",                 // yard | garage
+  "env": "garage",                 // yard | garage (2D background)
   "parSeconds": 240,               // for the speed score
-  "characters": { "foreman": {"pos":[x,y,z], "rot": 0}, "instructor": {...} },
+  "characters": { "foreman": {"pos":[x,y,z]}, "instructor": {...} },  // drawn standing at (x, z)
   "props": [ { "id": "wire1", "kind": "wire-piece", "pos": [0,1,0], "rot": [0,0,0],
                "scale": 1, "params": { "color": "#222" }, "label": "props.wire" } ],
   "steps": [ { "id": "s1", "type": "dialogue", "speaker": "instructor", "text": "m1.m4.s1",
@@ -226,51 +240,41 @@ and missing `requires` flags.
   Recommended order is shown by numbering.
 - **Hints**: a 💡 button pulses the correct target(s); costs 5 correctness points.
   Interactive objects glow softly on hover/tap; the correct one is never revealed without a hint.
-- **3D labels**: rendered with CanvasTexture (no font downloads, works offline).
-- **Drag on touch**: drag-connect supports real drag (pointer down on source, release on target)
-  AND tap-source-then-tap-target, because precise dragging on small phones is frustrating.
-- **Base path**: `vite.config.ts` uses `/electrician-sim-us/` (spec) unless `BASE_PATH` is set.
-  The deploy workflow sets `BASE_PATH=/<repo-name>/` so Pages works even though this repo is
-  named `electrolit` (if the repo is renamed to `electrician-sim-us` it's identical to the spec).
-  GitHub Pages must be configured with **Source: GitHub Actions** in the repo settings.
-- **Router**: hash router (works on GitHub Pages without 404 tricks).
-- **3D labels/hotspots**: rendered as one DOM overlay positioned every frame by `<Projector/>`
-  (`src/three/Projector.tsx`), NOT drei `<Html>` (it creates a React root per label and throws
-  `removeChild` errors on unmount with React 19).
-- **HUD-aware camera**: the panel reports the area it covers (`panelInset`, measured on step change
-  only so feedback doesn't make the scene jump); the camera uses `setViewOffset` to center the scene
-  in the free area and backs off so `camera.w` meters stay visible (portrait phones included).
+- **2D scene coordinates**: mission positions stay in meters; the scene draws in mm with x → right
+  and z → down (y only orders drawing). A step's `camera` picks the framing: center = `target`
+  x/z, width = `w` meters; the view glides between steps (no user camera control).
+- **Art**: each prop kind is an SVG component drawn around the same origin as its mission position,
+  in its most recognizable view (side view for hard hat/boots, top view for coils/tools), with a
+  declared footprint (`bounds`) used for hit boxes, labels and the ficha.
+- **Hit testing** is done in scene coordinates (topmost interactive prop whose hit box — footprint
+  ×1.15, at least 44 px — contains the pointer), so taps and drags are reliable on phones.
 - **Terms inside answer buttons** are highlighted but not tappable (nested buttons broke answering).
-- **Layout rule for missions**: keep interactive props from being in front of each other from the
-  camera's view (hit boxes are enlarged ×1.15 for touch); the e2e test fails if a prop's center is
-  covered by another prop or the HUD.
-- **Taps** are detected as pointerdown + pointerup on the same prop (< 12 px), not R3F `onClick`,
-  which occasionally dropped touch taps.
+- **Layout rule for missions**: keep interactive props from overlapping in the framed view; the
+  e2e test fails if a prop's center is not the topmost prop there or is under the HUD.
+- **Taps** are pointerdown + pointerup on the same prop (< 12 px movement).
 - **Hold actions** compute the value at the exact release time (not the last frame), so slow phones
   aren't penalized.
 - **Content authoring**: mission JSON + i18n JSON are the source of truth (edit them directly). Keys
   follow `m<module>.m<mission>.<step>`; props labels live in the `props` namespace.
 - **Video links** are YouTube *search* URLs (`src/glossary/videos.json`, `video` on mission/step),
   never hard-coded video ids, so they can't go dead. Terms get automatic "<term> electrician" searches.
-- **Demo ("Muéstrame cómo")** plays an animated hand over the real UI/3D positions and narrates the
+- **Demo ("Muéstrame cómo")** plays an animated hand over the real UI/scene positions and narrates the
   step; it never performs the action (the learner repeats it). It shares the hint cost (−5 once per step).
-- **Voice**: Web Speech narration, es-US voice for Rosa, en-US for foreman orders; off by default
-  (toggle 🔈 in the top bar, persisted); 🔊 on each bubble reads it on demand.
-- **Fixed camera (owner playtest feedback)**: rotating/zooming/panning the view was annoying, so the
-  scene camera is locked; each step's `camera` shot frames what matters and the rig animates between
-  shots. Mission authors must make every step's shot show all its interactive props big enough.
-- **Close-up 3D viewer** (`ObjectViewer`): tapping an object you already identified, the
-  "🧊 Ver en 3D" button in term cards, or the glossary opens the model alone, big, on a hands-off
-  turntable (it rotates by itself; no drag/pinch). Glossary entries carry `model: {kind, params}`.
+- **Voice / audio**: every step narration (ES; Rosa or Big Mike's Spanish voice), every foreman
+  order and boss line, every glossary term (EN) and the demo prompts are pre-recorded MP3s (Piper,
+  ~3 MB total, 40 kbps). Playback reuses one `<audio>` element (phones allow it after the first
+  tap); the Web Speech API is only a fallback for texts without a clip (e.g. EN-mode narration).
+  🔊 buttons turn yellow with moving bars while playing (tap again to stop).
+- **Object ficha** (`ObjectViewer`): tapping an object you already identified, the "🔍 Ver de
+  cerca" button in term cards, or the glossary shows the illustration big and still, with name,
+  audio, meaning and videos. Glossary entries carry `model: {kind, params}` (the art to show).
 - **Readable on any host**: text color/font are pinned on `#root` (hosts like the artifact viewer
   inject a dark default text color on `body`); the e2e checks this.
-- **WebGL contexts** are released when a Stage/viewer unmounts; a lost context shows "tap to reload
-  the 3D view" (remounts the Stage, mission progress kept). DPR capped at 1.6 on phones.
 - **Tool layouts**: compact 3-column grids (≈1.4 m wide) so objects look big on portrait phones;
   scene labels show only the English name (Spanish is in the card).
 - **Testing**: vitest validates all content (keys exist in es+en, glossary ids, prop ids, prop kinds,
   step shape, solvability) + engine logic; `scripts/e2e.mjs` plays every mission in headless Chromium
-  with real pointer events on the canvas (positions projected from 3D), including failure paths.
+  with real pointer events at the props' screen positions, including failure paths.
 - **NM-B jacket colors** used as the US industry convention: white 14 AWG, yellow 12 AWG,
   orange 10 AWG, black 8/6 AWG, gray = UF-B.
 - **Phase colors** (convention, not NEC mandate except high-leg): 208Y/120 black-red-blue +

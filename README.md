@@ -1,9 +1,9 @@
 # Electrician Sim US ⚡
 
-Curso 3D interactivo para aprender **trabajo eléctrico práctico en EE.UU.**, en español.
+Curso interactivo e ilustrado para aprender **trabajo eléctrico práctico en EE.UU.**, en español.
 Se juega como en una obra de verdad: tu foreman, Big Mike, da órdenes en inglés, y tu instructora, Rosa, te guía paso a paso.
 
-*Interactive 3D course that teaches practical US electrical work to Spanish speakers.*
+*Interactive illustrated course that teaches practical US electrical work to Spanish speakers.*
 
 - 🦺 Módulo 0 — Primer día en la obra
 - 🧰 Módulo 1 — Herramientas y cable
@@ -18,7 +18,7 @@ npm test        # validación de contenido + lógica del motor
 npm run build && npm run e2e   # recorre todas las misiones en Chromium (mouse y touch)
 ```
 
-Stack: Vite + React + TypeScript + React Three Fiber + drei + zustand. Todo el 3D es procedural (sin modelos externos).
+Stack: Vite + React + TypeScript + zustand. Escenas 2D dibujadas en SVG (sin imágenes externas). Voces grabadas con Piper TTS (voces abiertas).
 El despliegue a GitHub Pages ocurre en cada push a `main` (Settings → Pages → Source: **GitHub Actions**).
 
 Ver [CLAUDE.md](CLAUDE.md) para la especificación completa, la arquitectura y el progreso.

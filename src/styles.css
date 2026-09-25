@@ -1455,9 +1455,8 @@ h3 {
 }
 .viewer-stage {
   position: relative;
-  height: min(52vh, 380px);
+  height: min(46vh, 340px);
   flex: none;
-  pointer-events: none;
 }
 .viewer-close {
   pointer-events: auto;
@@ -1521,4 +1520,162 @@ h3 {
 }
 .prop-label-3d {
   font-size: 11px;
+}
+
+/* ---------- speak buttons (recorded audio) ---------- */
+.speak-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.speak-btn.speaking {
+  background: var(--yellow) !important;
+  color: #111 !important;
+  border-color: #e0a800 !important;
+  box-shadow: 0 0 0 4px rgba(255, 194, 26, 0.35);
+}
+.speak-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.speak-bars i {
+  width: 3px;
+  background: currentColor;
+  border-radius: 2px;
+  animation: bars 0.8s ease-in-out infinite;
+}
+.speak-bars i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.speak-bars i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes bars {
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 14px;
+  }
+}
+.bubble-speak.speaking .speak-bars {
+  display: none;
+}
+
+/* ---------- 2D illustrated scene ---------- */
+.scene2d {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #cdb089;
+}
+.scene-svg {
+  display: block;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+.ink * {
+  vector-effect: non-scaling-stroke;
+}
+.prop {
+  transition: transform 0.45s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+.prop .art {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+  transition: filter 0.15s;
+}
+.prop.role-click .art,
+.prop.role-source .art,
+.prop.role-target .art,
+.prop.role-probe .art {
+  animation: glow-soft 2.4s ease-in-out infinite;
+}
+.prop.viewable .art {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+}
+.prop.hover .art {
+  animation: none;
+  filter: drop-shadow(0 0 5px #ffd84a) drop-shadow(0 0 2px #ffd84a);
+}
+.prop.selected .art {
+  animation: none;
+  filter: drop-shadow(0 0 6px #38d9ff) drop-shadow(0 0 3px #38d9ff);
+}
+.prop.hint .art {
+  animation: glow-hint 0.9s ease-in-out infinite;
+}
+@keyframes glow-soft {
+  0%,
+  100% {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 1px rgba(255, 242, 176, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 5px rgba(255, 242, 176, 0.95));
+  }
+}
+@keyframes glow-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 3px #ff8a1f) drop-shadow(0 0 2px #ff8a1f);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px #ffb300) drop-shadow(0 0 5px #ffb300);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prop .art {
+    animation: none !important;
+  }
+}
+.hotspot2d {
+  cursor: pointer;
+}
+.hotspot2d .hs-dot {
+  fill: #3aa0ff;
+  stroke: #fff;
+}
+.hotspot2d.find .hs-dot {
+  fill: #56606b;
+}
+.hotspot2d.on .hs-dot {
+  fill: #36c46b;
+}
+.hotspot2d.find.on .hs-dot {
+  fill: #ff4d4d;
+}
+.hotspot2d.hint .hs-dot {
+  stroke: #ffb300;
+}
+.hotspot2d:not(.on) .hs-dot {
+  animation: hs-pulse 1.6s ease-in-out infinite;
+}
+@keyframes hs-pulse {
+  50% {
+    opacity: 0.75;
+  }
+}
+.figure.speaking {
+  filter: drop-shadow(0 0 12px rgba(255, 216, 74, 0.8));
+}
+.viewer-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: radial-gradient(circle at 50% 45%, #f7f4ec 0%, #e3ddd0 70%);
+}
+.avatar {
+  overflow: hidden;
+  padding: 0;
+}
+.avatar svg {
+  display: block;
+}
+.bubble-speak.speak-btn {
+  position: absolute;
 }

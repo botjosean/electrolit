@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getMission } from '../engine/content';
 import { useT } from '../engine/i18n';
 import { useMission } from '../engine/store';
-import { Stage } from '../three/Stage';
+import { Scene2D } from '../scene/Scene2D';
 import { DemoLayer } from './hud/Demo';
-import { Overlay } from './hud/Overlay';
 import { Results } from './hud/Results';
 import { StepPanel } from './hud/StepPanel';
 import { TopBar } from './hud/TopBar';
@@ -17,9 +16,6 @@ export function MissionScreen({ id }: { id: string }) {
   const status = useMission((s) => s.status);
   const current = useMission((s) => s.mission);
   const [attempt, setAttempt] = useState(0);
-  const [scene, setScene] = useState(0);
-  const [lost, setLost] = useState(false);
-  const onContextLost = useCallback(() => setLost(true), []);
   const t = useT();
 
   useEffect(() => {
@@ -41,20 +37,7 @@ export function MissionScreen({ id }: { id: string }) {
   return (
     <div className="mission-screen" data-testid="mission" data-mission={mission.id} data-status={status}>
       <div className="stage">
-        <Stage key={`${mission.id}:${attempt}:${scene}`} mission={mission} onContextLost={onContextLost} />
-        {lost ? (
-          <button
-            type="button"
-            className="scene-lost"
-            onClick={() => {
-              setLost(false);
-              setScene((n) => n + 1);
-            }}
-          >
-            🔄 {t('ui.sceneLost')}
-          </button>
-        ) : null}
-        <Overlay key={`o:${mission.id}:${attempt}`} />
+        <Scene2D key={`${mission.id}:${attempt}`} mission={mission} />
       </div>
       <TopBar />
       {status === 'playing' ? <StepPanel /> : null}

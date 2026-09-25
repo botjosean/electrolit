@@ -4,7 +4,9 @@ import { useT } from '../../engine/i18n';
 import { dragSources, termIds } from '../../engine/logic';
 import { RichText } from '../../engine/richText';
 import { getPhrase as phraseOf } from '../../engine/glossary';
-import { speakEnglish, speakSequence, stopSpeech } from '../../engine/speech';
+import { speakSequence, stopSpeech } from '../../engine/speech';
+import { SpeakButton } from '../SpeakButton';
+import { Portrait } from '../../scene/art/characters';
 import { getVideoTopic } from '../../engine/videos';
 import { VideoLinks } from './VideoLinks';
 import { useMission, useSettings } from '../../engine/store';
@@ -17,8 +19,7 @@ import { TermLine } from './TermCard';
 export function Avatar({ who, small }: { who: Speaker; small?: boolean }) {
   return (
     <div className={`avatar ${who} ${small ? 'small' : ''}`} aria-hidden>
-      <span className="avatar-hat" />
-      <span className="avatar-face">{who === 'foreman' ? '👷‍♂️' : '👷‍♀️'}</span>
+      <Portrait who={who} size={small ? 36 : 48} />
     </div>
   );
 }
@@ -26,15 +27,12 @@ export function Avatar({ who, small }: { who: Speaker; small?: boolean }) {
 export function OrderBox({ id }: { id: string }) {
   const phrase = getPhrase(id);
   const lang = useSettings((s) => s.lang);
-  const t = useT();
   if (!phrase) return null;
   return (
     <div className="order" data-order={id}>
       <div className="order-en">
         <span className="order-quote">“{phrase.en}”</span>
-        <button type="button" className="icon-btn" onClick={() => speakEnglish(phrase.en)} aria-label={t('ui.term.listen')}>
-          🔊
-        </button>
+        <SpeakButton id={`order:${id}`} items={() => [{ text: phrase.en, lang: 'en' }]} />
       </div>
       {lang === 'es' ? <div className="order-es">→ {phrase.es}</div> : null}
     </div>
@@ -224,13 +222,17 @@ export function StepPanel() {
   }, [stepIndex, setFocus]);
 
   // Rosa reads each step aloud when the voice is on (the foreman's order is spoken in English first)
-  const readAloud = () => {
+  const bubbleItems = () => {
     const m = useMission.getState().mission;
     const s = m?.steps[useMission.getState().stepIndex];
-    if (!s) return;
+    if (!s) return [];
     const order = s.order ? phraseOf(s.order) : undefined;
-    speakSequence([...(order ? [{ text: order.en, lang: 'en' as const }] : []), { text: t(s.text), lang }]);
+    return [
+      ...(order ? [{ text: order.en, lang: 'en' as const }] : []),
+      { text: t(s.text), lang, voice: s.speaker === 'foreman' ? ('mike_es' as const) : ('rosa' as const) },
+    ];
   };
+  const readAloud = () => speakSequence(bubbleItems(), 'bubble');
   useEffect(() => {
     if (voice && status === 'playing') readAloud();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -281,9 +283,7 @@ export function StepPanel() {
         {step.order ? <OrderBox id={step.order} /> : null}
         <div className="bubble">
           <RichText text={text} />
-          <button type="button" className="bubble-speak" onClick={readAloud} aria-label={t('ui.readAloud')} title={t('ui.readAloud')} data-testid="read-aloud">
-            🔊
-          </button>
+          <SpeakButton id="bubble" className="bubble-speak" items={bubbleItems} />
         </div>
         {terms.length ? (
           <div className="terms">

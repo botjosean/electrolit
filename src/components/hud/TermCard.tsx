@@ -1,6 +1,6 @@
 import { getTerm } from '../../engine/glossary';
 import { useT } from '../../engine/i18n';
-import { speakEnglish, speechSupported } from '../../engine/speech';
+import { SpeakButton } from '../SpeakButton';
 import { useSettings } from '../../engine/store';
 import { useUi } from '../../engine/ui';
 import { termQueries } from '../../engine/videos';
@@ -27,11 +27,7 @@ export function TermCard() {
             ✕
           </button>
         </div>
-        {speechSupported() ? (
-          <button type="button" className="btn speak" onClick={() => speakEnglish(term.say ?? term.term)}>
-            🔊 {t('ui.term.listen')}
-          </button>
-        ) : null}
+        <SpeakButton id={`term:${term.id}`} className="btn speak" label={t('ui.term.listen')} items={() => [{ text: term.say ?? term.term, lang: 'en' }]} />
         <div className="term-card-row">
           <div className="term-card-kicker">{t('ui.term.spanish')}</div>
           <div className="term-card-es">{term.es}</div>

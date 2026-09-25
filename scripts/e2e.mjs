@@ -44,17 +44,19 @@ async function camSettled(page) {
   await sleep(250); // damping
 }
 
-/** Screen position of a prop; asserts it's on screen and not covered by the HUD. */
+/** Screen position of a prop; asserts it's on screen, on top at that point, and not under the HUD. */
 async function propPoint(page, id) {
   const p = await page.evaluate((pid) => {
     const r = window.__sim.project(pid);
     if (!r) return null;
     const el = document.elementFromPoint(r.x, r.y);
-    return { ...r, onCanvas: el?.tagName === 'CANVAS', el: el ? el.tagName + '.' + el.className : null };
+    const inScene = !!el?.closest('[data-testid=scene]');
+    return { ...r, inScene, top: window.__sim.topProp(r.x, r.y), el: el ? el.tagName + '.' + (el.getAttribute('class') ?? '') : null };
   }, id);
   if (!p) throw new Error(`prop ${id} not found in scene`);
   if (!p.visible) throw new Error(`prop ${id} is off-screen`);
-  if (!p.onCanvas) throw new Error(`prop ${id} is covered by HUD (${p.el})`);
+  if (!p.inScene) throw new Error(`prop ${id} is covered by HUD (${p.el})`);
+  if (p.top !== id) throw new Error(`prop ${id} is covered by ${p.top}`);
   return p;
 }
 
@@ -157,7 +159,7 @@ async function solveStep(page, step, mobile) {
           if (!b) return 'missing';
           const r = b.getBoundingClientRect();
           const el = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
-          return el === b ? null : el ? el.tagName + '.' + el.className : 'nothing';
+          return el && b.contains(el) ? null : el ? el.tagName + '.' + el.getAttribute('class') : 'nothing';
         }, sel);
         if (covered) throw new Error(`hotspot ${id} not clickable (${covered})`);
         await page.click(sel);
@@ -293,7 +295,7 @@ async function main() {
       // real-life video links
       const href = await page.getAttribute('.step-help [data-video=es]', 'href');
       if (!href?.startsWith('https://www.youtube.com/results?search_query=')) fail(`video link wrong: ${href}`);
-      await page.click('[data-testid=read-aloud]');
+      await page.click('[data-speak=bubble]');
       // term card + language
       await page.click('.bubble .term');
       await page.waitForSelector('[data-testid=term-card]');
@@ -366,7 +368,7 @@ async function main() {
       await page.waitForSelector('[data-label=lineman]');
       await sleep(300);
       await clickProp(page, 'lineman'); // tapping an identified object opens the close-up viewer
-      await page.waitForSelector('[data-testid=viewer] canvas');
+      await page.waitForSelector('[data-testid=viewer] svg');
       await sleep(1500);
       if (SHOTS) await page.screenshot({ path: `${OUT}/zz-viewer.png` });
       const viewerTitle = await page.textContent('[data-testid=viewer] h2');
@@ -375,7 +377,7 @@ async function main() {
       await page.waitForSelector('[data-testid=viewer]', { state: 'detached' });
       await page.click('.bubble .term');
       await page.click('[data-testid=term-card] .view3d-btn');
-      await page.waitForSelector('[data-testid=viewer] canvas');
+      await page.waitForSelector('[data-testid=viewer] svg');
       await page.keyboard.press('Escape');
       await page.waitForSelector('[data-testid=viewer]', { state: 'detached' });
       log('  ✓ readable HUD on host defaults, 3D viewer from label + term card');

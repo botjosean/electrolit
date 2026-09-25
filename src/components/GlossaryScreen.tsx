@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { glossary } from '../engine/glossary';
 import { useT } from '../engine/i18n';
-import { speakEnglish } from '../engine/speech';
+import { SpeakButton } from './SpeakButton';
 import { useSettings } from '../engine/store';
 import { LangToggle } from './LangToggle';
 import { View3DButton } from './ObjectViewer';
@@ -32,9 +32,7 @@ export function GlossaryScreen() {
       <ul className="glossary-list">
         {list.map((g) => (
           <li key={g.id}>
-            <button type="button" className="icon-btn" onClick={() => speakEnglish(g.say ?? g.term)} aria-label={t('ui.term.listen')}>
-              🔊
-            </button>
+            <SpeakButton id={`gloss:${g.id}`} items={() => [{ text: g.say ?? g.term, lang: 'en' }]} />
             <div>
               <strong>{g.term}</strong> <span className="term-line-es">({g.es})</span>
               <div className="term-line-exp">{lang === 'es' ? g.explanation_es : g.explanation_en}</div>

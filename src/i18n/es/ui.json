@@ -34,7 +34,7 @@
     "wrong": "Eso no es. Fíjate bien y vuelve a intentar.",
     "order": "Buen objeto, pero no en ese orden. ¿Qué va primero?",
     "good": "¡Bien!",
-    "found": "¡Bien! Tócalo otra vez cuando quieras para verlo de cerca en 3D 🔍.",
+    "found": "¡Bien! Tócalo otra vez cuando quieras para verlo de cerca 🔍.",
     "done": "¡Listo!"
   },
   "click": {
@@ -121,10 +121,8 @@
     "engineering_mindset": "Animaciones tipo pizarra que explican cómo funciona la electricidad.",
     "neccicans": "En español, para electricistas latinos que trabajan con el NEC en EE.UU."
   },
-  "sceneLost": "La vista 3D se reinició. Toca aquí para volver a cargarla (no pierdes tu avance).",
   "viewer": {
-    "open": "Ver en 3D",
-    "hint": "Gira solo para que lo veas por todos lados"
+    "open": "Ver de cerca"
   },
   "readAloud": "Escuchar a Rosa",
   "voice": "Voz: Rosa lee cada paso en voz alta",
