@@ -314,7 +314,9 @@ export function Stage({ mission, onContextLost }: { mission: Mission; onContextL
       <Wires />
       <Probes />
       <Projector />
-      <OrbitControls makeDefault enableDamping dampingFactor={0.12} minDistance={0.25} maxDistance={14} maxPolarAngle={Math.PI / 2 - 0.05} />
+      {/* Fixed "picture" camera: learners never rotate/zoom/pan. Each step's shot frames what matters;
+          the controls object only exists so the camera rig can animate its target. */}
+      <OrbitControls makeDefault enableRotate={false} enableZoom={false} enablePan={false} enableDamping dampingFactor={0.12} />
       <CameraRig />
       <DebugBridge />
       <ContextGuard onLost={onContextLost} />

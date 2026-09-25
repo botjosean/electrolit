@@ -54,7 +54,8 @@ speakers. It must feel like a realistic job site with an instructor guiding you 
 
 ### Stack
 Vite + React + TypeScript + React Three Fiber + drei + zustand. Progress saved in localStorage.
-Mobile + desktop controls (touch, drag, orbit camera).
+Mobile + desktop controls (touch, drag). *Owner feedback after playtesting: no orbit/zoom/pan —
+the camera is fixed per step ("picture" framing) because manipulating the view was annoying.*
 
 ### Deploy
 GitHub Actions workflow that builds and deploys to GitHub Pages on every push to `main`
@@ -255,9 +256,12 @@ and missing `requires` flags.
   step; it never performs the action (the learner repeats it). It shares the hint cost (−5 once per step).
 - **Voice**: Web Speech narration, es-US voice for Rosa, en-US for foreman orders; off by default
   (toggle 🔈 in the top bar, persisted); 🔊 on each bubble reads it on demand.
+- **Fixed camera (owner playtest feedback)**: rotating/zooming/panning the view was annoying, so the
+  scene camera is locked; each step's `camera` shot frames what matters and the rig animates between
+  shots. Mission authors must make every step's shot show all its interactive props big enough.
 - **Close-up 3D viewer** (`ObjectViewer`): tapping an object you already identified, the
-  "🧊 Ver en 3D" button in term cards, or the glossary opens the model alone, big and auto-rotating
-  (drag to turn, pinch to zoom). Glossary entries carry `model: {kind, params}`.
+  "🧊 Ver en 3D" button in term cards, or the glossary opens the model alone, big, on a hands-off
+  turntable (it rotates by itself; no drag/pinch). Glossary entries carry `model: {kind, params}`.
 - **Readable on any host**: text color/font are pinned on `#root` (hosts like the artifact viewer
   inject a dark default text color on `body`); the e2e checks this.
 - **WebGL contexts** are released when a Stage/viewer unmounts; a lost context shows "tap to reload

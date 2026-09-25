@@ -124,7 +124,7 @@
   "sceneLost": "The 3D view was reset. Tap to reload it (your progress is kept).",
   "viewer": {
     "open": "View in 3D",
-    "hint": "Drag to rotate · pinch to zoom"
+    "hint": "It turns by itself so you can see every side"
   },
   "readAloud": "Listen",
   "voice": "Voice: read every step aloud",

@@ -124,7 +124,7 @@
   "sceneLost": "La vista 3D se reinició. Toca aquí para volver a cargarla (no pierdes tu avance).",
   "viewer": {
     "open": "Ver en 3D",
-    "hint": "Arrastra para girar · pellizca para acercar"
+    "hint": "Gira solo para que lo veas por todos lados"
   },
   "readAloud": "Escuchar a Rosa",
   "voice": "Voz: Rosa lee cada paso en voz alta",

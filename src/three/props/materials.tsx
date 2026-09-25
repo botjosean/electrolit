@@ -326,7 +326,17 @@ export function ZonePad({ params }: PropProps) {
         <meshStandardMaterial color={color} transparent opacity={flat ? 0.85 : 0.55} roughness={0.9} />
       </mesh>
       {flat ? (
-        <LabelPlane text={text} w={w * 0.9} h={Math.min(d * 0.35, 0.09)} position={[0, 0.011, d / 2 - Math.min(d * 0.35, 0.09) / 2 - 0.01]} rotation={[-Math.PI / 2, 0, 0]} bg="#ffffff" fg="#111" font={0.62} px={1600} />
+        <LabelPlane
+          text={text}
+          w={w * 0.9}
+          h={num(params, 'labelH', Math.min(d * 0.35, 0.09))}
+          position={[0, 0.011, d / 2 - num(params, 'labelH', Math.min(d * 0.35, 0.09)) / 2 - 0.01]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          bg="#ffffff"
+          fg="#111"
+          font={0.62}
+          px={num(params, 'labelH', 0) > 0.12 ? 600 : 1600}
+        />
       ) : (
         <>
           <mesh position={[0, 0.011, 0]} rotation={[-Math.PI / 2, 0, 0]}>

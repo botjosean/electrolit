@@ -53,12 +53,13 @@ export function ObjectViewer() {
             <hemisphereLight args={['#ffffff', '#3a3f46', 1.1]} />
             <directionalLight position={[1, 2, 1.5]} intensity={2.2} />
             <directionalLight position={[-1.5, 1, -1]} intensity={0.7} />
-            <Bounds fit clip observe margin={1.3}>
+            <Bounds fit clip observe margin={1.15}>
               <Center>
                 <Comp params={target.params ?? {}} />
               </Center>
             </Bounds>
-            <OrbitControls makeDefault autoRotate autoRotateSpeed={2} enablePan={false} enableDamping />
+            {/* hands-off turntable: it turns by itself, nothing to drag or pinch */}
+            <OrbitControls makeDefault autoRotate autoRotateSpeed={2.5} enableRotate={false} enableZoom={false} enablePan={false} />
             <Release />
           </Canvas>
           <button type="button" className="icon-btn viewer-close" onClick={() => open(null)} aria-label={t('ui.close')} data-testid="viewer-close">
