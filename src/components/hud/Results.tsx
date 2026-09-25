@@ -38,13 +38,18 @@ export function Results({ onRetry }: { onRetry: () => void }) {
     const url = `${location.origin}${location.pathname}#/mission/${mission.id}`;
     const text = t('ui.results.shareText', { title: t(mission.title), score: result.scores.total, stars: '★'.repeat(result.scores.stars) });
     try {
-      if (navigator.share) await navigator.share({ title: 'Electrician Sim US', text, url });
-      else {
-        await navigator.clipboard.writeText(`${text} ${url}`);
-        setCopied(true);
+      if (navigator.share) {
+        await navigator.share({ title: 'Electrician Sim US', text, url });
+        return;
       }
+    } catch (e) {
+      if ((e as Error)?.name === 'AbortError') return; // user closed the share sheet
+    }
+    try {
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      setCopied(true);
     } catch {
-      /* user cancelled */
+      /* clipboard blocked: nothing else to do */
     }
   };
   const next = nextMissionId(mission.id);
